@@ -14,7 +14,7 @@
 <meta property="og:description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.  1. Output streamsoutput stream std::cout is an output stream. It has type std::ostr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-23T11:28:22.000Z">
-<meta property="article:modified_time" content="2022-07-23T13:39:07.589Z">
+<meta property="article:modified_time" content="2022-07-23T14:29:36.569Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -129,7 +129,9 @@
 <p>You must initialize your own ofstream object linked to your file.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ifstream <span class="title">in</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;<span class="comment">// in is now an iftream that reads from out.txt</span></span><br><span class="line">string str;</span><br><span class="line">in&gt;&gt;str; <span class="comment">// first word in out.txt goes into str.</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-String-streams"><a href="#3-String-streams" class="headerlink" title="3. String streams"></a>3. String streams</h1><h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
+<h1 id="3-String-streams"><a href="#3-String-streams" class="headerlink" title="3. String streams"></a>3. String streams</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sstream&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
 <p>Input stream <code>std::istringstream</code>. Give any data type to the istringstream, it’ll store it as a string.</p>
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter;</span><br><span class="line">converter&gt;&gt;name&gt;&gt;age;</span><br></pre></td></tr></table></figure>
