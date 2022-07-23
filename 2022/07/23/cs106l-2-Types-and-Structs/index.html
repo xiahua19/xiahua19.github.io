@@ -14,7 +14,7 @@
 <meta property="og:description" content="1. Types C++ is a statically typed language, which means that everything with a name(variabels, functions, etc) is given a type before tuntime. Static typing can help us to prevent errors before our c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-23T09:20:54.000Z">
-<meta property="article:modified_time" content="2022-07-23T10:32:53.369Z">
+<meta property="article:modified_time" content="2022-07-23T11:02:42.069Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -116,7 +116,7 @@
 <h2 id="std-pair"><a href="#std-pair" class="headerlink" title="std::pair"></a><code>std::pair</code></h2><blockquote>
 <p><code>std::pair</code> is an STL build-in struct with two fields of any type. It is a template, you can specify the types of the fields inside <code>&lt;&gt;</code> for each pair object you make. The fields in <code>std::pair</code> are named <code>first</code> and <code>second</code>.</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;pair&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line">std::cout&lt;&lt;numSuffix.first &lt;&lt;numSuffix.second&lt;&lt;std::endl;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;utility&gt;</span> <span class="comment">// std::pair, std::make_pair</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line">std::cout&lt;&lt;numSuffix.first &lt;&lt;numSuffix.second&lt;&lt;std::endl;</span><br></pre></td></tr></table></figure>
 
 <p>To avoid specifying the types of a pair, use<code>std::make_pair(field1, field2)</code>.</p>
 <h2 id="Aside-Type-deduction-with-auto"><a href="#Aside-Type-deduction-with-auto" class="headerlink" title="Aside: Type deduction with auto"></a>Aside: Type deduction with <code>auto</code></h2><blockquote>
