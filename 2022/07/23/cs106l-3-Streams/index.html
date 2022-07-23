@@ -14,7 +14,7 @@
 <meta property="og:description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.  1. Output streamsoutput stream std::cout is an output stream. It has type std::ostr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-23T11:28:22.000Z">
-<meta property="article:modified_time" content="2022-07-23T14:29:36.569Z">
+<meta property="article:modified_time" content="2022-07-23T14:39:39.349Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
 <h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
 <p>Input stream <code>std::istringstream</code>. Give any data type to the istringstream, it’ll store it as a string.</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter;</span><br><span class="line">converter&gt;&gt;name&gt;&gt;age;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get from instream</span></span><br><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter1;</span><br><span class="line">converter1&gt;&gt;name&gt;&gt;age;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get from a variable.</span></span><br><span class="line"><span class="type">int</span> get_age;</span><br><span class="line"><span class="function">std::istringstream <span class="title">converter2</span><span class="params">(get_age)</span></span>;</span><br><span class="line">converter2&gt;&gt;<span class="string">&quot;23&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>Output stream <code>std::ostringstream</code>. Make an ostringstream out of a string, read from it word&#x2F;type by word&#x2F;type.</p>
