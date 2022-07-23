@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>cs106l-3.Streams | 夏花的博客小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.  1. Output streamsoutput stream std::cout is an output stream. It has type std::ostr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs106l-3.Streams">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/index.html">
+<meta property="og:site_name" content="夏花的博客小站">
+<meta property="og:description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.  1. Output streamsoutput stream std::cout is an output stream. It has type std::ostr">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-23T11:28:22.000Z">
+<meta property="article:modified_time" content="2022-07-23T13:39:07.589Z">
+<meta property="article:author" content="夏花">
+<meta property="article:tag" content="CS106L">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏花的博客小站</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">xiahua blog.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiahua19.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-cs106l-3-Streams" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/23/cs106l-3-Streams/" class="article-date">
+  <time class="dt-published" datetime="2022-07-23T11:28:22.000Z" itemprop="datePublished">2022-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      cs106l-3.Streams
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.</p>
+</blockquote>
+<h1 id="1-Output-streams"><a href="#1-Output-streams" class="headerlink" title="1. Output streams"></a>1. Output streams</h1><h2 id="output-stream"><a href="#output-stream" class="headerlink" title="output stream"></a>output stream</h2><blockquote>
+<p><code>std::cout</code> is an output stream. It has type <code>std::ostream</code>, which can only send data using <code>&lt;&lt;</code> operator to convert any type into string and sends it to the stream. </p>
+</blockquote>
+<p>So <code>std::cout</code> is the output stream that goes to the console, and it’s a global constant object that you can get from <code>#include&lt;iostream&gt;</code>. To use any other output stream, you must first initialize it.</p>
+<h2 id="output-file-stream"><a href="#output-file-stream" class="headerlink" title="output file stream"></a>output file stream</h2><blockquote>
+<p><code>std::ofstream</code> only uses the <code>&lt;&lt;</code> operator to convert data of any type into a string and sends it to the file stream. </p>
+</blockquote>
+<p>Before sending data, you must initialize your own ofstream object linked to your file.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ofstram <span class="title">out</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;</span><br><span class="line">out&lt;&lt;<span class="string">&quot;Some thing you want to write into out.txt&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Input-streams"><a href="#2-Input-streams" class="headerlink" title="2. Input streams"></a>2. Input streams</h1><h2 id="Input-stream"><a href="#Input-stream" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
+<p><code>std::cin</code> is an input stream. It has type <code>std::istream</code>, which can only use the <code>&gt;&gt;</code> operator to  receive strings from the stream and converts it to data. </p>
+</blockquote>
+<p>First call to <code>std::cin&gt;&gt;</code> creates a command line prompt(提示) that allows the user to type until they hit <code>enter</code>.</p>
+<p>Each <code>&gt;&gt;</code> only reads until the next <code>whitespace</code>(include tab, space, neline…). Everything after the first whitespace gets saved into a buffer and used the next time <code>std::cin&gt;&gt;</code> is called. If there iis nothing waiting in the buffer, <code>std::cin&gt;&gt;</code> creates a new command line prompt. So, don’t show up a whitespace in output.</p>
+<p>Once an error(such you input an string, while cin can only get an int), the input stream’s fail bit is set, and it will no longer accept any input.</p>
+<p><code>std::cin</code> is dangerous to use on its own, it uses <code>&gt;&gt;</code> to extract a single word or type including for strings. If you want to read a whole line, just use <code>std::getline(istream&amp; stream, string&amp; line)</code>, it takes in both parameters by reference and reads up to the next delimiter(by default, ‘\n’) and does go past that delimiter.</p>
+<p><code>std::cin</code> is a global constant object that you get from <code>#include&lt;iostream&gt;</code>. To use any other input stream, you must first initialize it!</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::string line;</span><br><span class="line">std::<span class="built_in">getline</span>(cin, line);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Input-file-stream"><a href="#Input-file-stream" class="headerlink" title="Input file stream"></a>Input file stream</h2><blockquote>
+<p>Input file stream have type <code>std::ifstream</code>. It only receives strings using the <code>&gt;&gt;</code> operator which receives strings from a file and converts it to data of any type.</p>
+</blockquote>
+<p>You must initialize your own ofstream object linked to your file.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ifstream <span class="title">in</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;<span class="comment">// in is now an iftream that reads from out.txt</span></span><br><span class="line">string str;</span><br><span class="line">in&gt;&gt;str; <span class="comment">// first word in out.txt goes into str.</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-String-streams"><a href="#3-String-streams" class="headerlink" title="3. String streams"></a>3. String streams</h1><h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
+<p>Input stream <code>std::istringstream</code>. Give any data type to the istringstream, it’ll store it as a string.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter;</span><br><span class="line">converter&gt;&gt;name&gt;&gt;age;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Output stream <code>std::ostringstream</code>. Make an ostringstream out of a string, read from it word&#x2F;type by word&#x2F;type.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::ostringstream formatter;</span><br><span class="line">formatter&lt;&lt;<span class="string">&quot;age: &quot;</span>&lt;&lt; <span class="number">100</span>&lt;&lt;;</span><br><span class="line">string result = formatter.<span class="built_in">str</span>();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/" data-id="cl5xxtnl70000puiy8i5g73yp" data-title="cs106l-3.Streams" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/23/cs106l-2-Types-and-Structs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cs106l-2.Types and Structs</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LATEX/" rel="tag">LATEX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT-MISSING-SEMISTER/" rel="tag">MIT-MISSING SEMISTER</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CS106L/" style="font-size: 20px;">CS106L</a> <a href="/tags/LATEX/" style="font-size: 10px;">LATEX</a> <a href="/tags/MIT-MISSING-SEMISTER/" style="font-size: 10px;">MIT-MISSING SEMISTER</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-3-Streams/">cs106l-3.Streams</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-2-Types-and-Structs/">cs106l-2.Types and Structs</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-1-Welcome/">cs106l-1.Welcome</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/16/latex/">Latex使用指北</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/16/shell/">1. Shell的用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 夏花<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
