@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>cs106l-2.Types and Structs | 夏花的博客小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. Types C++ is a statically typed language, which means that everything with a name(variabels, functions, etc) is given a type before tuntime. Static typing can help us to prevent errors before our c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs106l-2.Types and Structs">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/23/cs106l-2-Types-and-Structs/index.html">
+<meta property="og:site_name" content="夏花的博客小站">
+<meta property="og:description" content="1. Types C++ is a statically typed language, which means that everything with a name(variabels, functions, etc) is given a type before tuntime. Static typing can help us to prevent errors before our c">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-23T09:20:54.000Z">
+<meta property="article:modified_time" content="2022-07-23T10:32:53.369Z">
+<meta property="article:author" content="夏花">
+<meta property="article:tag" content="CS106L">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏花的博客小站</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">xiahua blog.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiahua19.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-cs106l-2-Types-and-Structs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/23/cs106l-2-Types-and-Structs/" class="article-date">
+  <time class="dt-published" datetime="2022-07-23T09:20:54.000Z" itemprop="datePublished">2022-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      cs106l-2.Types and Structs
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Types"><a href="#1-Types" class="headerlink" title="1. Types"></a>1. Types</h1><blockquote>
+<p>C++ is a statically typed language, which means that everything with a name(variabels, functions, etc) is given a type before tuntime. Static typing can help us to prevent errors before our code runs.</p>
+</blockquote>
+<p>Overloading(重载): Define two functions with the same name but different types.</p>
+<h2 id="C-fundamental-types"><a href="#C-fundamental-types" class="headerlink" title="C++ fundamental types"></a>C++ fundamental types</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> val = <span class="number">5</span>; <span class="comment">// 3 2bits</span></span><br><span class="line"><span class="type">char</span> ch = <span class="string">&#x27;F&#x27;</span>;<span class="comment">// 8 bits(usually)</span></span><br><span class="line"><span class="type">float</span> decimalVal1 = <span class="number">5.0</span>;<span class="comment">// 32 bits (usually)</span></span><br><span class="line"><span class="type">double</span> decimalVal2 = <span class="number">5.0</span>;<span class="comment">// 64 bits (usually)</span></span><br><span class="line"><span class="type">bool</span> bVal = <span class="literal">true</span>; <span class="comment">// 1 bit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="C-fundamental-types-1"><a href="#C-fundamental-types-1" class="headerlink" title="C++ fundamental types++"></a>C++ fundamental types++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line">std::string str = <span class="string">&quot;Frankie&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Intro-to-structs"><a href="#2-Intro-to-structs" class="headerlink" title="2. Intro to structs"></a>2. Intro to structs</h1><h2 id="struct"><a href="#struct" class="headerlink" title="struct"></a><code>struct</code></h2><blockquote>
+<p><code>struct</code> is a group of named variables each with their own types. A way to bundle different types together.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="comment">// these are called fields, separate these by semicolons.</span></span><br><span class="line">    std::string name;</span><br><span class="line">    std::string state;</span><br><span class="line">    <span class="type">int</span> age; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// use . to access fields.</span></span><br><span class="line">    Student s;</span><br><span class="line">    s.name = <span class="string">&quot;Frankie&quot;</span>;</span><br><span class="line">    s.state = <span class="string">&quot;MN&quot;</span>;</span><br><span class="line">    s.age = <span class="number">12</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="std-pair"><a href="#std-pair" class="headerlink" title="std::pair"></a><code>std::pair</code></h2><blockquote>
+<p><code>std::pair</code> is an STL build-in struct with two fields of any type. It is a template, you can specify the types of the fields inside <code>&lt;&gt;</code> for each pair object you make. The fields in <code>std::pair</code> are named <code>first</code> and <code>second</code>.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;pair&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line">std::cout&lt;&lt;numSuffix.first &lt;&lt;numSuffix.second&lt;&lt;std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>To avoid specifying the types of a pair, use<code>std::make_pair(field1, field2)</code>.</p>
+<h2 id="Aside-Type-deduction-with-auto"><a href="#Aside-Type-deduction-with-auto" class="headerlink" title="Aside: Type deduction with auto"></a>Aside: Type deduction with <code>auto</code></h2><blockquote>
+<p><code>auto</code>: a keyword used in lieu(替代) of type whrn declaring a variable, tells the compiler to deduce the type.</p>
+</blockquote>
+<p><code>auto</code> does not mean that the variable doesn’t have a type. It means that the type is deduced by the compiler.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> int_x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">auto</span> str_x = <span class="string">&quot;Frank&quot;</span>;</span><br><span class="line"><span class="keyword">auto</span> float_x = <span class="number">1.1</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Sneak-peek-at-streams"><a href="#3-Sneak-peek-at-streams" class="headerlink" title="3. Sneak peek at streams"></a>3. Sneak peek at streams</h1><blockquote>
+<p>Stream is an abstraction for input&#x2F;output. Streams convert between data and the string representation of data.</p>
+</blockquote>
+<h2 id="std-cout-is-a-stream"><a href="#std-cout-is-a-stream" class="headerlink" title="std::cout is a stream"></a><code>std::cout</code> is a stream</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::cour&lt;&lt;<span class="string">&quot;Frank is &quot;</span>&lt;&lt;<span class="number">5</span> &lt;&lt;<span class="string">&quot;age.&quot;</span>&lt;&lt;std::endl; <span class="comment">// use a stream to print any primitive type!</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiahua19.github.io/2022/07/23/cs106l-2-Types-and-Structs/" data-id="cl5xr699i0000f4iyh9uchwl3" data-title="cs106l-2.Types and Structs" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/23/cs106l-1-Welcome/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cs106l-1.Welcome</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LATEX/" rel="tag">LATEX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT-MISSING-SEMISTER/" rel="tag">MIT-MISSING SEMISTER</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CS106L/" style="font-size: 20px;">CS106L</a> <a href="/tags/LATEX/" style="font-size: 10px;">LATEX</a> <a href="/tags/MIT-MISSING-SEMISTER/" style="font-size: 10px;">MIT-MISSING SEMISTER</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-2-Types-and-Structs/">cs106l-2.Types and Structs</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-1-Welcome/">cs106l-1.Welcome</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/16/latex/">Latex使用指北</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/16/shell/">1. Shell的用法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 夏花<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
