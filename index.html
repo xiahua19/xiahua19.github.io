@@ -102,14 +102,39 @@
         <h1 id="1-The-Standard-Templete-Library-STL"><a href="#1-The-Standard-Templete-Library-STL" class="headerlink" title="1. The Standard Templete Library(STL)"></a>1. The Standard Templete Library(STL)</h1><blockquote>
 <p>STL is the core of modern C++. There are “Containers”, “Iterators”, “Functions” and “Algorithms” in it.</p>
 </blockquote>
-<p>All containers can hold almost all elements. Sequence containers are adaptors and they are simple.</p>
+<h1 id="2-Containers-Standford-v-s-STL"><a href="#2-Containers-Standford-v-s-STL" class="headerlink" title="2. Containers(Standford v.s. STL)"></a>2. Containers(Standford v.s. STL)</h1><blockquote>
+<p>All containers can hold almost all elements. There two types of containers, one is <code>sequence containers</code>, the other is <code>associative containers</code>.</p>
+</blockquote>
+<p>Sequence containers can be divide into <code>simple sequence containers</code> and <code>adaptors</code>. </p>
 <ul>
-<li><code>vector</code> adding or removing elements at end.</li>
-<li><code>deque</code> adding or removing elements anywhere but end.</li>
-<li><code>list</code> adding or removing elements anywhere, but no random access.</li>
+<li>simple sequence containers:<ul>
+<li><code>vector</code> adding and removing elements at end.</li>
+<li><code>deque</code> adding and removing elements anywhere but end.</li>
+<li><code>list</code> adding and removing elements anywhere, but no random access.</li>
 <li><code>tuple</code> can contain different data type, but immutable(不可变)</li>
 </ul>
-<h1 id="2-Containers-Standford-v-s-STL"><a href="#2-Containers-Standford-v-s-STL" class="headerlink" title="2. Containers(Standford v.s. STL)"></a>2. Containers(Standford v.s. STL)</h1><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><table>
+</li>
+<li>adaptors:<ul>
+<li><code>stack</code> adding or removing elements from the front.</li>
+<li><code>queue</code> adding elements from the front, removing from the back.</li>
+<li><code>priority_queue</code> adding elements with a priority, always removing the highest priority-element.</li>
+</ul>
+</li>
+</ul>
+<p>Accociative Containers can be divide into <code>ordered associative containers</code> and <code>unordered associative containers</code>.</p>
+<ul>
+<li>ordered associative containers<ul>
+<li><code>set</code> unique elements</li>
+<li><code>map</code> key-value pairs</li>
+</ul>
+</li>
+<li>Unordered associative containers<ul>
+<li><code>unordered_set</code></li>
+<li><code>unordered_map</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><table>
 <thead>
 <tr>
 <th>What you want to do.</th>
