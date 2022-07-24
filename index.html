@@ -199,7 +199,84 @@
 <li><code>size</code>: number of elements in a vector.</li>
 <li><code>capacity</code>: amount of space saved for a vector.</li>
 </ul>
-<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2>
+<blockquote>
+<p>Wrapper(封装): a wrapper on an object changes how external users can interact with that object. Containter adaptors provide a different interface for sequence containers.</p>
+</blockquote>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><table>
+<thead>
+<tr>
+<th>What do you want to do</th>
+<th>std::set<int></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create an empty set</td>
+<td>std::set<int> s</td>
+</tr>
+<tr>
+<td>Add value k to the set</td>
+<td>s.insert(k)</td>
+</tr>
+<tr>
+<td>Remove value k from the set</td>
+<td>s.erase(k)</td>
+</tr>
+<tr>
+<td>Check if value is in the set</td>
+<td>if(s.count(k))</td>
+</tr>
+<tr>
+<td>Check if set is empty</td>
+<td>if(s.empty())</td>
+</tr>
+</tbody></table>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><table>
+<thead>
+<tr>
+<th>What do you want to do</th>
+<th>std::map&lt;int,char&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create an empty map</td>
+<td>std::map&lt;int,char&gt;m</td>
+</tr>
+<tr>
+<td>Add key k with value v into the map</td>
+<td>m.insert({k,v}); m[k]&#x3D;v;</td>
+</tr>
+<tr>
+<td>Remove key k from the map</td>
+<td>m.erase(k)</td>
+</tr>
+<tr>
+<td>Check if key k is in the map</td>
+<td>if(m.count(k))</td>
+</tr>
+<tr>
+<td>Check if the map is empty</td>
+<td>if(m.empty())</td>
+</tr>
+<tr>
+<td>Retrieve or overwrite value associated with key k(error if key isn’t in map)</td>
+<td>char c &#x3D; m.at(k);m.at(k)&#x3D;v;</td>
+</tr>
+<tr>
+<td>Retrive or overwrite value associated with key k(auto-insert if key isn’t in map)</td>
+<td>char c &#x3D; m[k]; m[k]&#x3D;v;</td>
+</tr>
+</tbody></table>
+<p>STL maps actyally store pairs. Every <code>std::map&lt;k,v&gt;</code> is actually backed by <code>std::pair&lt;const k, v&gt;</code>. By default, the type(for sets) or key’s type(for maps) must have a comparison operator(&lt;) defined.</p>
+<h2 id="unordered-map-and-unordered-set"><a href="#unordered-map-and-unordered-set" class="headerlink" title="unordered_map and unordered_set"></a>unordered_map and unordered_set</h2><p>Each STL set&#x2F;map comes with an unordered sibling. They’re almost the same, except:</p>
+<ul>
+<li>Instend of a comparison operator, the set&#x2F;map type must have a hash function defined for it.<ul>
+<li>Simple types, like int, char, bool, double, and even std::string are already supported.</li>
+<li>Any containers&#x2F;collections need you to provide a hash function to use them.</li>
+</ul>
+</li>
+<li>unordered_map&#x2F;unordered_set are generally faster than map&#x2F;set.</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
