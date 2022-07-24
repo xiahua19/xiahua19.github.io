@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>cs106l-4.Initialization and References | 夏花的博客小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. Initialization Initialization means providing initial values to variables.  Initialize a struct12345678&#x2F;&#x2F; one way to initialize a structStudent s;s.name &#x3D; &quot;Frankie&quot;;s.state &#x3D; &quot;MN&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs106l-4.Initialization and References">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/24/cs106l-4-Initialization-and-References/index.html">
+<meta property="og:site_name" content="夏花的博客小站">
+<meta property="og:description" content="1. Initialization Initialization means providing initial values to variables.  Initialize a struct12345678&#x2F;&#x2F; one way to initialize a structStudent s;s.name &#x3D; &quot;Frankie&quot;;s.state &#x3D; &quot;MN&amp;quo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-24T01:48:21.000Z">
+<meta property="article:modified_time" content="2022-07-24T02:14:36.976Z">
+<meta property="article:author" content="夏花">
+<meta property="article:tag" content="CS106L">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏花的博客小站</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">xiahua blog.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiahua19.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-cs106l-4-Initialization-and-References" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/24/cs106l-4-Initialization-and-References/" class="article-date">
+  <time class="dt-published" datetime="2022-07-24T01:48:21.000Z" itemprop="datePublished">2022-07-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      cs106l-4.Initialization and References
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Initialization"><a href="#1-Initialization" class="headerlink" title="1. Initialization"></a>1. Initialization</h1><blockquote>
+<p>Initialization means providing initial values to variables.</p>
+</blockquote>
+<h2 id="Initialize-a-struct"><a href="#Initialize-a-struct" class="headerlink" title="Initialize a struct"></a>Initialize a struct</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way to initialize a struct</span></span><br><span class="line">Student s;</span><br><span class="line">s.name = <span class="string">&quot;Frankie&quot;</span>;</span><br><span class="line">s.state = <span class="string">&quot;MN&quot;</span>;</span><br><span class="line">s.age = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">Student s = &#123;<span class="string">&quot;Frankie&quot;</span>, <span class="string">&quot;MN&quot;</span>, <span class="number">21</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Initialize-a-pair"><a href="#Initialize-a-pair" class="headerlink" title="Initialize a pair"></a>Initialize a pair</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix1 = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2;</span><br><span class="line">numSuffix2.first = <span class="number">1</span>;</span><br><span class="line">numSuffix2.second = <span class="string">&quot;st&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way using make_pair</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2 = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, <span class="string">&quot;st&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Initialize-a-vector"><a href="#Initialize-a-vector" class="headerlink" title="Initialize a vector"></a>Initialize a vector</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way.</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec1&#123;<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way.</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec2;</span><br><span class="line">vec2 = &#123;<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>Be careful! If you use<code>std::vector&lt;int&gt;vec(3,5)</code> means initialize the vector using three ‘5’(that is {5,5,5}).</p>
+<h2 id="Uniform-initialization"><a href="#Uniform-initialization" class="headerlink" title="Uniform initialization"></a>Uniform initialization</h2><blockquote>
+<p>Uniform Initialization: Use curly bracket(花括号) to initialize any types!</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix&#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line">Student s&#123;<span class="string">&quot;Framkie&quot;</span>, <span class="string">&quot;MN&quot;</span>, <span class="number">21</span>&#125;;</span><br><span class="line"><span class="type">int</span> x&#123;<span class="number">5</span>&#125;;</span><br><span class="line">string f&#123;<span class="string">&quot;Frankie&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Structed-binding"><a href="#2-Structed-binding" class="headerlink" title="2. Structed binding"></a>2. Structed binding</h1><blockquote>
+<p>Structed binding lets you initialize directly from the contents of a struct.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> person = std::<span class="built_in">make_pair</span>(<span class="string">&quot;Frankie&quot;</span>, <span class="number">21</span>);</span><br><span class="line"><span class="keyword">auto</span> [name, age] = person; <span class="comment">// name is a string, age is a int.</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-References"><a href="#3-References" class="headerlink" title="3. References"></a>3. References</h1><blockquote>
+<p>Reference is an alias(别名) for a named variable.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; original&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; copy = original;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; ref = &amp; original;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">shift</span><span class="params">(vector&lt;std::pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt;&amp;nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; [num1, num2] : nums)&#123;</span><br><span class="line">        num1++;</span><br><span class="line">        num2++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">auto</span> my_nums = &#123;&#123;<span class="number">1</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="built_in">shift</span>(my_nums);</span><br></pre></td></tr></table></figure>
+
+<h2 id="left-values-and-right-values"><a href="#left-values-and-right-values" class="headerlink" title="left-values and right-values"></a>left-values and right-values</h2><blockquote>
+<p>Left-values can appear on the left or right of an ‘&#x3D;’. They have names, and are not temporary.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// x is an left-value.</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> y = x;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Right-values can only appear on the right of an ‘&#x3D;’. They don’t have names, and are trmporary.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3 is a right-value.</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> y = x;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Const-and-Const-References"><a href="#Const-and-Const-References" class="headerlink" title="Const and Const References"></a>Const and Const References</h2><blockquote>
+<p><code>const</code> indicates a variavle can’t be modified!</p>
+</blockquote>
+<p>If you use a const reference to a variable, then you can’t modify this variale by the reference!</p>
+<p>You cant declare a non-const reference to a const variable!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiahua19.github.io/2022/07/24/cs106l-4-Initialization-and-References/" data-id="cl5yot8m70000iriy92nyfhhe" data-title="cs106l-4.Initialization and References" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/23/cs106l-3-Streams/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cs106l-3.Streams</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LATEX/" rel="tag">LATEX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT-MISSING-SEMISTER/" rel="tag">MIT-MISSING SEMISTER</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CS106L/" style="font-size: 20px;">CS106L</a> <a href="/tags/LATEX/" style="font-size: 10px;">LATEX</a> <a href="/tags/MIT-MISSING-SEMISTER/" style="font-size: 10px;">MIT-MISSING SEMISTER</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/24/cs106l-4-Initialization-and-References/">cs106l-4.Initialization and References</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-3-Streams/">cs106l-3.Streams</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-2-Types-and-Structs/">cs106l-2.Types and Structs</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/23/cs106l-1-Welcome/">cs106l-1.Welcome</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/16/latex/">Latex使用指北</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 夏花<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

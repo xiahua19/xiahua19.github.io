@@ -77,6 +77,87 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cs106l-4-Initialization-and-References" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/24/cs106l-4-Initialization-and-References/" class="article-date">
+  <time class="dt-published" datetime="2022-07-24T01:48:21.000Z" itemprop="datePublished">2022-07-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/24/cs106l-4-Initialization-and-References/">cs106l-4.Initialization and References</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Initialization"><a href="#1-Initialization" class="headerlink" title="1. Initialization"></a>1. Initialization</h1><blockquote>
+<p>Initialization means providing initial values to variables.</p>
+</blockquote>
+<h2 id="Initialize-a-struct"><a href="#Initialize-a-struct" class="headerlink" title="Initialize a struct"></a>Initialize a struct</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way to initialize a struct</span></span><br><span class="line">Student s;</span><br><span class="line">s.name = <span class="string">&quot;Frankie&quot;</span>;</span><br><span class="line">s.state = <span class="string">&quot;MN&quot;</span>;</span><br><span class="line">s.age = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">Student s = &#123;<span class="string">&quot;Frankie&quot;</span>, <span class="string">&quot;MN&quot;</span>, <span class="number">21</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Initialize-a-pair"><a href="#Initialize-a-pair" class="headerlink" title="Initialize a pair"></a>Initialize a pair</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix1 = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2;</span><br><span class="line">numSuffix2.first = <span class="number">1</span>;</span><br><span class="line">numSuffix2.second = <span class="string">&quot;st&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way using make_pair</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2 = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, <span class="string">&quot;st&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Initialize-a-vector"><a href="#Initialize-a-vector" class="headerlink" title="Initialize a vector"></a>Initialize a vector</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way.</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec1&#123;<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way.</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec2;</span><br><span class="line">vec2 = &#123;<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>Be careful! If you use<code>std::vector&lt;int&gt;vec(3,5)</code> means initialize the vector using three ‘5’(that is {5,5,5}).</p>
+<h2 id="Uniform-initialization"><a href="#Uniform-initialization" class="headerlink" title="Uniform initialization"></a>Uniform initialization</h2><blockquote>
+<p>Uniform Initialization: Use curly bracket(花括号) to initialize any types!</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>&#125;;</span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix&#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line">Student s&#123;<span class="string">&quot;Framkie&quot;</span>, <span class="string">&quot;MN&quot;</span>, <span class="number">21</span>&#125;;</span><br><span class="line"><span class="type">int</span> x&#123;<span class="number">5</span>&#125;;</span><br><span class="line">string f&#123;<span class="string">&quot;Frankie&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Structed-binding"><a href="#2-Structed-binding" class="headerlink" title="2. Structed binding"></a>2. Structed binding</h1><blockquote>
+<p>Structed binding lets you initialize directly from the contents of a struct.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> person = std::<span class="built_in">make_pair</span>(<span class="string">&quot;Frankie&quot;</span>, <span class="number">21</span>);</span><br><span class="line"><span class="keyword">auto</span> [name, age] = person; <span class="comment">// name is a string, age is a int.</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-References"><a href="#3-References" class="headerlink" title="3. References"></a>3. References</h1><blockquote>
+<p>Reference is an alias(别名) for a named variable.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; original&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; copy = original;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; ref = &amp; original;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">shift</span><span class="params">(vector&lt;std::pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt;&amp;nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; [num1, num2] : nums)&#123;</span><br><span class="line">        num1++;</span><br><span class="line">        num2++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">auto</span> my_nums = &#123;&#123;<span class="number">1</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="built_in">shift</span>(my_nums);</span><br></pre></td></tr></table></figure>
+
+<h2 id="left-values-and-right-values"><a href="#left-values-and-right-values" class="headerlink" title="left-values and right-values"></a>left-values and right-values</h2><blockquote>
+<p>Left-values can appear on the left or right of an ‘&#x3D;’. They have names, and are not temporary.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// x is an left-value.</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> y = x;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Right-values can only appear on the right of an ‘&#x3D;’. They don’t have names, and are trmporary.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3 is a right-value.</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> y = x;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Const-and-Const-References"><a href="#Const-and-Const-References" class="headerlink" title="Const and Const References"></a>Const and Const References</h2><blockquote>
+<p><code>const</code> indicates a variavle can’t be modified!</p>
+</blockquote>
+<p>If you use a const reference to a variable, then you can’t modify this variale by the reference!</p>
+<p>You cant declare a non-const reference to a const variable!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiahua19.github.io/2022/07/24/cs106l-4-Initialization-and-References/" data-id="cl5yot8m70000iriy92nyfhhe" data-title="cs106l-4.Initialization and References" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS106L/" rel="tag">CS106L</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-cs106l-3-Streams" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/07/23/cs106l-3-Streams/" class="article-date">
@@ -528,6 +609,10 @@
       <ul>
         
           <li>
+            <a href="/2022/07/24/cs106l-4-Initialization-and-References/">cs106l-4.Initialization and References</a>
+          </li>
+        
+          <li>
             <a href="/2022/07/23/cs106l-3-Streams/">cs106l-3.Streams</a>
           </li>
         
@@ -541,10 +626,6 @@
         
           <li>
             <a href="/2022/07/16/latex/">Latex使用指北</a>
-          </li>
-        
-          <li>
-            <a href="/2022/07/16/shell/">1. Shell的用法</a>
           </li>
         
       </ul>
