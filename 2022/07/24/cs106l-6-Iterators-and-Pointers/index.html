@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>cs106l-5.Containers | 夏花的博客小站</title>
+  <title>cs106l-6.Iterators and Pointers | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. The Standard Templete Library(STL) STL is the core of modern C++. There are “Containers”, “Iterators”, “Functions” and “Algorithms” in it.">
+  <meta name="description" content="1. Iterator Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs106l-5.Containers">
-<meta property="og:url" content="http://xiahua19.github.io/2022/07/24/cs106l-5-Containers/index.html">
+<meta property="og:title" content="cs106l-6.Iterators and Pointers">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/24/cs106l-6-Iterators-and-Pointers/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="1. The Standard Templete Library(STL) STL is the core of modern C++. There are “Containers”, “Iterators”, “Functions” and “Algorithms” in it.">
+<meta property="og:description" content="1. Iterator Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-24T02:17:04.000Z">
-<meta property="article:modified_time" content="2022-07-24T13:49:39.679Z">
+<meta property="article:published_time" content="2022-07-24T13:59:54.000Z">
+<meta property="article:modified_time" content="2022-07-24T14:17:07.469Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -233,22 +233,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cs106l-5-Containers" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cs106l-6-Iterators-and-Pointers" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      cs106l-5.Containers
+      cs106l-6.Iterators and Pointers
     </h1>
   
 
 
   
   
-<a href="/2022/07/24/cs106l-5-Containers/" class="archive-article-date">
-        <time datetime="2022-07-24T02:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
+<a href="/2022/07/24/cs106l-6-Iterators-and-Pointers/" class="archive-article-date">
+        <time datetime="2022-07-24T13:59:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
 </a>
 
   
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">734字</span>
+      <span class="post-count">23字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -281,185 +281,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-The-Standard-Templete-Library-STL"><a href="#1-The-Standard-Templete-Library-STL" class="headerlink" title="1. The Standard Templete Library(STL)"></a>1. The Standard Templete Library(STL)</h1><blockquote>
-<p>STL is the core of modern C++. There are “Containers”, “Iterators”, “Functions” and “Algorithms” in it.</p>
+    <h1 id="1-Iterator"><a href="#1-Iterator" class="headerlink" title="1. Iterator"></a>1. Iterator</h1><blockquote>
+<p>Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!</p>
 </blockquote>
-<span id="more"></span>
-<h1 id="2-Containers-Standford-v-s-STL"><a href="#2-Containers-Standford-v-s-STL" class="headerlink" title="2. Containers(Standford v.s. STL)"></a>2. Containers(Standford v.s. STL)</h1><blockquote>
-<p>All containers can hold almost all elements. There two types of containers, one is <code>sequence containers</code>, the other is <code>associative containers</code>.</p>
-</blockquote>
-<p>Sequence containers can be divide into <code>simple sequence containers</code> and <code>adaptors</code>. </p>
-<ul>
-<li>simple sequence containers:<ul>
-<li><code>vector</code> adding and removing elements at end.</li>
-<li><code>deque</code>(double-ended queue) is an indexed sequence container that allows fast insertion and deletion at both its beginning and its end. </li>
-<li><code>list</code> adding and removing elements anywhere, but no random access.</li>
-<li><code>tuple</code> can contain different data type, but immutable(不可变)</li>
-</ul>
-</li>
-<li>adaptors:<ul>
-<li><code>stack</code> adding or removing elements from the front.</li>
-<li><code>queue</code> adding elements from the front, removing from the back.</li>
-<li><code>priority_queue</code> adding elements with a priority, always removing the highest priority-element.</li>
-</ul>
-</li>
-</ul>
-<p>Accociative Containers can be divide into <code>ordered associative containers</code> and <code>unordered associative containers</code>.</p>
-<ul>
-<li>ordered associative containers<ul>
-<li><code>set</code> unique elements</li>
-<li><code>map</code> key-value pairs</li>
-</ul>
-</li>
-<li>Unordered associative containers<ul>
-<li><code>unordered_set</code></li>
-<li><code>unordered_map</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><table>
-<thead>
-<tr>
-<th>What you want to do.</th>
-<th>std::vector<int></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Create a new, empty vector.</td>
-<td>std::vector<int>vec</td>
-</tr>
-<tr>
-<td>Create a vector with n copies of 0</td>
-<td>std::vector<int>vec(n)</td>
-</tr>
-<tr>
-<td>Create a vector with n copies of a value k</td>
-<td>std::vector<int>vec(n, k)</td>
-</tr>
-<tr>
-<td>Add a value k to the end of a vector</td>
-<td>vec.push_back(k)</td>
-</tr>
-<tr>
-<td>Remove all elements of a vector</td>
-<td>vec.clear()</td>
-</tr>
-<tr>
-<td>Get thr element at index i</td>
-<td>int k &#x3D; vec[i]</td>
-</tr>
-<tr>
-<td>Check size of vector</td>
-<td>vec.size()</td>
-</tr>
-<tr>
-<td>Loop through vector by index i</td>
-<td>for(std::size_t i &#x3D; 0; i &lt; vec.size();++i)</td>
-</tr>
-<tr>
-<td>Replace the element at index i</td>
-<td>vec[i] &#x3D; k</td>
-</tr>
-<tr>
-<td>Insert k at some index i</td>
-<td>vec.insert(vec.begin()+i, k)</td>
-</tr>
-<tr>
-<td>Remove the element at index i</td>
-<td>vec.erase(vec.begin()+i)</td>
-</tr>
-<tr>
-<td>Get the sublist in range[i,j)</td>
-<td>std::vector<int> sublist (vec.(vec.begin()+i, vec.begin()+j))</td>
-</tr>
-<tr>
-<td>Add k to the fromt of a vector</td>
-<td>vec.insert(vec.begin(), k)</td>
-</tr>
-</tbody></table>
-<p>Internally, a <code>std::vector</code> consists of a fixed-sized array. It automatically resizes for you!</p>
-<ul>
-<li><code>size</code>: number of elements in a vector.</li>
-<li><code>capacity</code>: amount of space saved for a vector.</li>
-</ul>
-<blockquote>
-<p>Wrapper(封装): a wrapper on an object changes how external users can interact with that object. Containter adaptors provide a different interface for sequence containers.</p>
-</blockquote>
-<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p>As opposed to <code>std::vector</code>, the elements of a deque are not stored contiguously(连续的). The storage of a deque is automatically expanded and constracted as needed. Expansion of a deque is cheaper than the expansion of a <code>std::vector</code>, because it does not involve copying of the existing elements to a new memory location.</p>
-<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><table>
-<thead>
-<tr>
-<th>What do you want to do</th>
-<th>std::set<int></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Create an empty set</td>
-<td>std::set<int> s</td>
-</tr>
-<tr>
-<td>Add value k to the set</td>
-<td>s.insert(k)</td>
-</tr>
-<tr>
-<td>Remove value k from the set</td>
-<td>s.erase(k)</td>
-</tr>
-<tr>
-<td>Check if value is in the set</td>
-<td>if(s.count(k))</td>
-</tr>
-<tr>
-<td>Check if set is empty</td>
-<td>if(s.empty())</td>
-</tr>
-</tbody></table>
-<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><table>
-<thead>
-<tr>
-<th>What do you want to do</th>
-<th>std::map&lt;int,char&gt;</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Create an empty map</td>
-<td>std::map&lt;int,char&gt;m</td>
-</tr>
-<tr>
-<td>Add key k with value v into the map</td>
-<td>m.insert({k,v}); m[k]&#x3D;v;</td>
-</tr>
-<tr>
-<td>Remove key k from the map</td>
-<td>m.erase(k)</td>
-</tr>
-<tr>
-<td>Check if key k is in the map</td>
-<td>if(m.count(k))</td>
-</tr>
-<tr>
-<td>Check if the map is empty</td>
-<td>if(m.empty())</td>
-</tr>
-<tr>
-<td>Retrieve or overwrite value associated with key k(error if key isn’t in map)</td>
-<td>char c &#x3D; m.at(k);m.at(k)&#x3D;v;</td>
-</tr>
-<tr>
-<td>Retrive or overwrite value associated with key k(auto-insert if key isn’t in map)</td>
-<td>char c &#x3D; m[k]; m[k]&#x3D;v;</td>
-</tr>
-</tbody></table>
-<p>STL maps actyally store pairs. Every <code>std::map&lt;k,v&gt;</code> is actually backed by <code>std::pair&lt;const k, v&gt;</code>. By default, the type(for sets) or key’s type(for maps) must have a comparison operator(&lt;) defined.</p>
-<h2 id="unordered-map-and-unordered-set"><a href="#unordered-map-and-unordered-set" class="headerlink" title="unordered_map and unordered_set"></a>unordered_map and unordered_set</h2><p>Each STL set&#x2F;map comes with an unordered sibling. They’re almost the same, except:</p>
-<ul>
-<li>Instend of a comparison operator, the set&#x2F;map type must have a hash function defined for it.<ul>
-<li>Simple types, like int, char, bool, double, and even std::string are already supported.</li>
-<li>Any containers&#x2F;collections need you to provide a hash function to use them.</li>
-</ul>
-</li>
-<li>unordered_map&#x2F;unordered_set are generally faster than map&#x2F;set.</li>
-</ul>
 
     
 
@@ -474,7 +298,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/07/24/cs106l-5-Containers/" title="cs106l-5.Containers" target="_blank">http://xiahua19.github.io/2022/07/24/cs106l-5-Containers/</a>
+          <a href="http://xiahua19.github.io/2022/07/24/cs106l-6-Iterators-and-Pointers/" title="cs106l-6.Iterators and Pointers" target="_blank">http://xiahua19.github.io/2022/07/24/cs106l-6-Iterators-and-Pointers/</a>
         </li>
         
         <li>
@@ -552,7 +376,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/24/cs106l-5-Containers/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/24/cs106l-6-Iterators-and-Pointers/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -567,18 +391,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/07/24/cs106l-6-Iterators-and-Pointers/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          cs106l-6.Iterators and Pointers
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/24/cs106l-4-Initialization-and-References/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cs106l-4.Initialization and References</div>
+    <a href="/2022/07/24/cs106l-5-Containers/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cs106l-5.Containers</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -605,7 +420,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-The-Standard-Templete-Library-STL"><span class="toc-number">1.</span> <span class="toc-text">1. The Standard Templete Library(STL)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Containers-Standford-v-s-STL"><span class="toc-number">2.</span> <span class="toc-text">2. Containers(Standford v.s. STL)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector"><span class="toc-number">2.1.</span> <span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque"><span class="toc-number">2.2.</span> <span class="toc-text">deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">2.3.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map"><span class="toc-number">2.4.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered-map-and-unordered-set"><span class="toc-number">2.5.</span> <span class="toc-text">unordered_map and unordered_set</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Iterator"><span class="toc-number">1.</span> <span class="toc-text">1. Iterator</span></a></li></ol>
                     </div>
                 </span>
             </div>
