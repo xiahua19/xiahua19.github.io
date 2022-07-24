@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. Initialization Initialization means providing initial values to variables.  Initialize a struct12345678&#x2F;&#x2F; one way to initialize a structStudent s;s.name &#x3D; &quot;Frankie&quot;;s.state &#x3D; &quot;MN&amp;quo">
+  <meta name="description" content="1. Initialization Initialization means providing initial values to variables.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cs106l-4.Initialization and References">
 <meta property="og:url" content="http://xiahua19.github.io/2022/07/24/cs106l-4-Initialization-and-References/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="1. Initialization Initialization means providing initial values to variables.  Initialize a struct12345678&#x2F;&#x2F; one way to initialize a structStudent s;s.name &#x3D; &quot;Frankie&quot;;s.state &#x3D; &quot;MN&amp;quo">
+<meta property="og:description" content="1. Initialization Initialization means providing initial values to variables.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-24T01:48:21.000Z">
-<meta property="article:modified_time" content="2022-07-24T10:24:28.906Z">
+<meta property="article:modified_time" content="2022-07-24T11:47:56.016Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -79,26 +79,22 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/" target="_blank">主页</a></li>
+				<li><a href="/main" >Main</a></li>
 			
-				<li><a href="/" target="_blank">技术笔记</a></li>
+				<li><a href="/gallery" >Gallery</a></li>
 			
-				<li><a href="/" target="_blank">随笔</a></li>
+				<li><a href="/about" >About</a></li>
 			
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
 			
 				
-					<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+					<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">All Articles</a>
 				
 			
 				
-					<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-				
 			
-				
-					<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
 				
 			
 		</nav>
@@ -106,26 +102,38 @@
 			<div class="social">
 				
 					
-						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" rel="noopener" href="https://github.com/zjx-pku" 
+												title="GitHub" ><i class="icon-github"></i></a>
 					
 				
 					
-						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+						<a class="facebook" href="#" 
+												title="Facebook" ><i class="icon-facebook"></i></a>
 					
 				
 					
-						<a class="gitee" href="#" 
-												title="gitee" target="_blank"><i class="icon-gitee"></i></a>
+						<a class="google" href="#" 
+												title="Google" ><i class="icon-google"></i></a>
 					
 				
 					
-						<a class="jianshu" href="#" 
-												title="jianshu" target="_blank"><i class="icon-jianshu"></i></a>
+						<a class="twitter" href="#" 
+												title="twitter" ><i class="icon-twitter"></i></a>
 					
 				
 			</div>
+		
+			
+			
+			
+			
+			<div>
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="240" height="86" src="//music.163.com/outchain/player?type=2&id=1422992406&auto=0&height=66"></iframe>
+			</div>
+			
+				
+				<p style="font-size: 12px;">请尽情的欣赏它吧！<p>
+			
 		
 		</nav>
 	</header>		
@@ -174,22 +182,22 @@
 					
 						
 						<a class="github" target="_blank" 
-							href="#" title="GitHub"><i class="icon-github"></i></a>
+							href="https://github.com/zjx-pku" title="GitHub"><i class="icon-github"></i></a>
 						
 					
 						
-						<a class="github" target="_blank" 
-							href="#" title="GitHub"><i class="icon-github"></i></a>
+						<a class="facebook" target="_blank" 
+							href="#" title="Facebook"><i class="icon-facebook"></i></a>
 						
 					
 						
-						<a class="gitee" target="_blank" 
-							href="#" title="gitee"><i class="icon-gitee"></i></a>
+						<a class="google" target="_blank" 
+							href="#" title="Google"><i class="icon-google"></i></a>
 						
 					
 						
-						<a class="jianshu" target="_blank" 
-							href="#" title="jianshu"><i class="icon-jianshu"></i></a>
+						<a class="twitter" target="_blank" 
+							href="#" title="twitter"><i class="icon-twitter"></i></a>
 						
 					
 				</div>
@@ -199,11 +207,11 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/main">Main</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/">技术笔记</a></li>
+					<li style="width: 33.333333333333336%"><a href="/gallery">Gallery</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/about">About</a></li>
 		        
 				</ul>
 			</nav>
@@ -233,11 +241,6 @@
 
   
   
-        
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
 <a href="/2022/07/24/cs106l-4-Initialization-and-References/" class="archive-article-date">
         <time datetime="2022-07-24T01:48:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
 </a>
@@ -275,6 +278,7 @@
     <h1 id="1-Initialization"><a href="#1-Initialization" class="headerlink" title="1. Initialization"></a>1. Initialization</h1><blockquote>
 <p>Initialization means providing initial values to variables.</p>
 </blockquote>
+<span id="more"></span>
 <h2 id="Initialize-a-struct"><a href="#Initialize-a-struct" class="headerlink" title="Initialize a struct"></a>Initialize a struct</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way to initialize a struct</span></span><br><span class="line">Student s;</span><br><span class="line">s.name = <span class="string">&quot;Frankie&quot;</span>;</span><br><span class="line">s.state = <span class="string">&quot;MN&quot;</span>;</span><br><span class="line">s.age = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">Student s = &#123;<span class="string">&quot;Frankie&quot;</span>, <span class="string">&quot;MN&quot;</span>, <span class="number">21</span>&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Initialize-a-pair"><a href="#Initialize-a-pair" class="headerlink" title="Initialize a pair"></a>Initialize a pair</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// one way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix1 = &#123;<span class="number">1</span>, <span class="string">&quot;st&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way...</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2;</span><br><span class="line">numSuffix2.first = <span class="number">1</span>;</span><br><span class="line">numSuffix2.second = <span class="string">&quot;st&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// another way using make_pair</span></span><br><span class="line">std::pair&lt;<span class="type">int</span>, string&gt; numSuffix2 = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, <span class="string">&quot;st&quot;</span>);</span><br></pre></td></tr></table></figure>
@@ -498,18 +502,6 @@
   </div>
   
   
-	<script src="/lib/busuanzi.pure.js"></script>
-	
-  
-  
-	
-	<span id="busuanzi_container_site_pv" style="display:none">
-		本站总访问量<span id="busuanzi_value_site_pv"></span>次	
-	        <span class="post-meta-divider" >|</span>
-	</span>
-  	<span id="busuanzi_container_site_uv" style='display:none'>
-  		本站访客数<span id="busuanzi_value_site_uv"></span>人
-  	</span>
   
 </footer>
 
@@ -522,7 +514,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -564,11 +556,7 @@
       
     
       
-      
-      
     
-      
-      
       
     
     
@@ -577,15 +565,11 @@
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 100%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">All Articles</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
-      
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -661,32 +645,7 @@
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="/" target="_blank" 
-                class="search-title" >
-                
-                  <i class="icon-link icon"></i>
-                
-                0
-              </a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
-    
-    	<section class="tools-section tools-section-me" q-show="aboutme">
-        
-          
-  	  		<div class="aboutme-wrap" id="aboutme">/</div>
-  	  	
-    	</section>
     
   </div>
   
