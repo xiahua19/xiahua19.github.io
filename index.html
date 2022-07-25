@@ -237,6 +237,132 @@
             
 
   
+    <article id="post-cs106l-8-Template-Functions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/07/25/cs106l-8-Template-Functions/">cs106l-8.Template Functions</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/07/25/cs106l-8-Template-Functions/" class="archive-article-date">
+        <time datetime="2022-07-25T10:37:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-Generic-通用的-programming"><a href="#1-Generic-通用的-programming" class="headerlink" title="1. Generic(通用的) programming"></a>1. Generic(通用的) programming</h1><blockquote>
+<p>Generic programming: writing reusable, unique code with no duplication! One way is to allow data types to be parameterized(C++ entitied that work on any datatypes).</p>
+</blockquote>
+<h1 id="2-Template-functions"><a href="#2-Template-functions" class="headerlink" title="2. Template functions"></a>2. Template functions</h1><p>Normal functions are created during compile time, and used in runtime. Template functions are not compiled until used by the code.</p>
+<p>The compiler deduces(推断) the parameter types and generates a unique function specifically for each time the template function is called. After compilation, the compiled code looks as if you had written each instantiated(实例化) version of the function yourself.</p>
+<h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">T <span class="title">myMain</span><span class="params">(T a, T b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &lt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Where <code>template</code> declare that the next function declaration is a template. <code>typename</code> specifies that ‘T’ is some generic type(such as int, char…). Scope of template arguments(<code>T</code>) is limited to just this one function.</p>
+<h2 id="Template-type-deduction"><a href="#Template-type-deduction" class="headerlink" title="Template type deduction"></a>Template type deduction</h2><p>If the template function parameters are regular, pass-by-value parameters:</p>
+<ul>
+<li>Ignore the ‘&amp;’</li>
+<li>After Ignore the ‘&amp;’, igonre ‘const’ too.</li>
+</ul>
+<p>If the template function parameters are references or pointers, this is how type are deduced:</p>
+<ul>
+<li>Ignore the ‘&amp;’</li>
+<li>Match the type of parameters to inputted arguments</li>
+<li>Add on const after</li>
+</ul>
+<h1 id="3-Template-Metaprogramming-TMP"><a href="#3-Template-Metaprogramming-TMP" class="headerlink" title="3. Template Metaprogramming(TMP)"></a>3. Template Metaprogramming(TMP)</h1><blockquote>
+<p>Template Metaprogramming: Writing code that runs during compilation(insted of run time).</p>
+</blockquote>
+<h2 id="What-is-TMP"><a href="#What-is-TMP" class="headerlink" title="What is TMP"></a>What is TMP</h2><p>Normal code runs during run time, while TMP runs code during compile time. TMP can make compiled code packages smaller and speed up code when it’s actually running.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="type">unsigned</span> n&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Factorial</span>&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;value = n * Factorial&lt;n<span class="number">-1</span>&gt;::value&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Factorial</span>&lt;<span class="number">0</span>&gt;&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;value = <span class="number">1</span>&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::cout&lt;&lt;Factorial&lt;<span class="number">10</span>&gt;::value&lt;&lt;endl;<span class="comment">// print 3628800,but run during compile time!</span></span><br></pre></td></tr></table></figure>
+<h2 id="How-can-TMP-actually-be-used"><a href="#How-can-TMP-actually-be-used" class="headerlink" title="How can TMP actually be used?"></a>How can TMP actually be used?</h2><p>TMP was actually discovered(not invented,discovered) recently! TMP can be applied in many situations:</p>
+<ul>
+<li>Ensuring dimensional unit correctness.</li>
+<li>Optimizing matrix poerations.</li>
+<li>Generating custom design pattern implementation.<ul>
+<li>policy-based design: templates generating their own templates.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Why-write-generic-functions"><a href="#Why-write-generic-functions" class="headerlink" title="Why write generic functions?"></a>Why write generic functions?</h2><p>An example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> InputIter, <span class="keyword">typename</span> DataType&gt;</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">count_occurrences</span><span class="params">(InputIter begin, InputIter end, DataType target)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> iter = begin; iter != end; ++iter)&#123;</span><br><span class="line">        <span class="keyword">if</span>(*iter == target)&#123;</span><br><span class="line">            ++count;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>By using generic functions, we can solve each of these problems with the function above!</p>
+<ul>
+<li>count the times <code>3</code> appears in a <code>std::vector&lt;int&gt;</code></li>
+<li>count the times <code>Y</code> appears in a <code>std::istream</code></li>
+<li>count the times <code>5</code> appears in the second half of a <code>std::deque&lt;int&gt;</code></li>
+<li>count the times <code>x</code> appear in the second half of a <code>std::string</code></li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/07/25/cs106l-8-Template-Functions/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cs106l-7-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -332,7 +458,7 @@
 
 <h3 id="Template-class"><a href="#Template-class" class="headerlink" title="Template class:"></a>Template class:</h3><p>Decleration and defination are in one .h file:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.h</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">First</span>, <span class="keyword">class</span> <span class="title class_">Second</span>&gt; <span class="keyword">class</span> <span class="title class_">MyPair</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">First <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setFirst</span><span class="params">(First first)</span></span>;</span><br><span class="line">    <span class="function">Second <span class="title">getSecond</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setSecond</span><span class="params">(Second second)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    First first;</span><br><span class="line">    Second second;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> First, <span class="keyword">class</span> Second&gt;</span></span><br><span class="line"><span class="function">First <span class="title">MyPair::getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> first;</span><br><span class="line">&#125;<span class="comment">// must announce every member function is templated.</span></span><br></pre></td></tr></table></figure>
-<p>Decleration is in .h file, while defination in .cpp file:</p>
+<p>Declaration is in .h file, while defination in .cpp file:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.h</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">First</span>, <span class="keyword">class</span> <span class="title class_">Second</span>&gt; <span class="keyword">class</span> <span class="title class_">MyPair</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">First <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setFirst</span><span class="params">(First first)</span></span>;</span><br><span class="line">    <span class="function">Second <span class="title">getSecond</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setSecond</span><span class="params">(Second second)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    First first;</span><br><span class="line">    Second second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.cpp</span></span><br><span class="line"><span class="meta">#inculde<span class="string">&lt;myPair.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> First, <span class="keyword">class</span> Second&gt;</span></span><br><span class="line"><span class="function">First <span class="title">MyPair::getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> first;</span><br><span class="line">&#125;<span class="comment">// must announce every member function is templated.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// implementation of other functions...</span></span><br></pre></td></tr></table></figure>
@@ -1193,83 +1319,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
   
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/07/10/hello-world/">Hello World</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/07/10/hello-world/" class="archive-article-date">
-        <time datetime="2022-07-10T10:39:25.003Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-    
-    <a class="article-more-a" href="/2022/07/10/hello-world/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/07/10/hello-world/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
