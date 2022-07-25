@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. Iterator Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!">
+  <meta name="description" content="1. Iterator Iterator is a way to access all containers programmatically!. It’s an object that point to elements inside containers.  It allows iterating over any container, whether ordered, unordered,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cs106l-6.Iterators and Pointers">
 <meta property="og:url" content="http://xiahua19.github.io/2022/07/24/cs106l-6-Iterators-and-Pointers/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="1. Iterator Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!">
+<meta property="og:description" content="1. Iterator Iterator is a way to access all containers programmatically!. It’s an object that point to elements inside containers.  It allows iterating over any container, whether ordered, unordered,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-24T13:59:54.000Z">
-<meta property="article:modified_time" content="2022-07-24T14:17:07.469Z">
+<meta property="article:modified_time" content="2022-07-25T07:53:44.953Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">23字</span>
+      <span class="post-count">474字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -282,8 +282,80 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="1-Iterator"><a href="#1-Iterator" class="headerlink" title="1. Iterator"></a>1. Iterator</h1><blockquote>
-<p>Iterator is a way to access all containers programmatically!. It allows iterating over any container, whether ordered, unordered, sequence, or associative!</p>
+<p>Iterator is a way to access all containers programmatically!. It’s an object that point to elements inside containers.</p>
 </blockquote>
+<p>It allows iterating over any container, whether ordered, unordered, sequence, or associative! Each STL container has its own iterator, but all of these iterators exhibit a similar behavior!</p>
+<p>Generally, STL iterators support the following operations. Take set for example<code>std::set&lt;type&gt; s = &#123;0,1,2,3&#125;</code>:</p>
+<ul>
+<li>Get the iterator of the first element: <code>std::set::iterator iter = s.begin()</code>;</li>
+<li>Get the iterator of the next element:<code>++iter</code>;</li>
+<li>Get the element which <code>iter</code> point to: <code>*iter</code>;</li>
+<li>Compare iterator equality: <code>(iter != s.end())</code>;</li>
+<li>Copy construction: <code>auto second_iter = iter</code>;</li>
+</ul>
+<blockquote>
+<p>Why <code>++iter</code>? <code>++iter</code> returns the value after being incremented, while <code>iter++</code> returns the previous value and then increments it.</p>
+</blockquote>
+<p>There are a few different types of iterators, since containers are different. All iterators can be incremented(++). Input iterators can be on the RHS(Right hand side) of an <code>=</code> sign(for example: <code>auto elem = *it</code>). Output iterators can be on the LHS of an <code>=</code> sign(for example: <code>*elem = value</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Container</th>
+<th>Type of Iterator</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vector</td>
+<td>Random-Access</td>
+</tr>
+<tr>
+<td>Deque</td>
+<td>Random-Access</td>
+</tr>
+<tr>
+<td>List</td>
+<td>Bidirectional(双向的)</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>Bidirectional</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>Bidirectional</td>
+</tr>
+<tr>
+<td>Stack</td>
+<td>No Iterator</td>
+</tr>
+<tr>
+<td>Queue</td>
+<td>No Iterator</td>
+</tr>
+<tr>
+<td>Priority Queue</td>
+<td>No Iterator</td>
+</tr>
+</tbody></table>
+<p>Random access iterators support indexing by integers!</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iter += <span class="number">3</span>; <span class="comment">// move forward by 3</span></span><br><span class="line">iter -= <span class="number">70</span>; <span class="comment">// move backwards by 70</span></span><br><span class="line"><span class="keyword">auto</span> elem = iter[<span class="number">5</span>]; <span class="comment">// offset by 5</span></span><br></pre></td></tr></table></figure>
+
+<p>Using <code>iterator</code> for looping over collections.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">std::set&lt;<span class="type">int</span>&gt; set&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; elem: set)&#123;</span><br><span class="line">    std::cout&lt;&lt;elem&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(std::set::iterator iter = set.<span class="built_in">begin</span>(); iter!= set.<span class="built_in">end</span>(); ++iter)&#123;</span><br><span class="line">    std::cout&lt;&lt;(*iter)&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Pointers"><a href="#2-Pointers" class="headerlink" title="2. Pointers"></a>2. Pointers</h1><p>These are equivalent(等价的), but why?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; my_pair&#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">auto</span> iter = my_pair.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> key = (*iter).first;</span><br><span class="line"><span class="keyword">auto</span> key = iter-&gt;first;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Pointer is one of the main strengths of C++: accessing objects by address!</p>
+</blockquote>
+<p>When variables are created, they’re given an address in memory. Pointers are objects that store an address and type of a variable. Adding a <code>&amp;</code> before a variable returns its address, just like passing by reference!</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> * p = &amp; x;</span><br></pre></td></tr></table></figure>
+<p>To get the value of a pointer, we can dereference it(get the object referenced by the pointer) using <code>*</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> y = *(p);</span><br></pre></td></tr></table></figure>
+<p>A shorthand for deferencing a pointer and then accessing a member variable(doing <code>someObject.variableName</code>) is using the <code>-&gt;</code> operator.</p>
+<p>Iterators are a form of pointers! Pointers are more generic(通用的) iterators, because they can point to any object, not just elements in a container!</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::string lands = <span class="string">&quot;xadia&quot;</span>;</span><br><span class="line"><span class="keyword">auto</span> iter = lands.<span class="built_in">begin</span>();  <span class="comment">// iterator.</span></span><br><span class="line"><span class="type">char</span>* firstChar = &amp;lands[<span class="number">0</span>];<span class="comment">// syntax for a pointer.</span></span><br></pre></td></tr></table></figure>
 
     
 
@@ -420,7 +492,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Iterator"><span class="toc-number">1.</span> <span class="toc-text">1. Iterator</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Iterator"><span class="toc-number">1.</span> <span class="toc-text">1. Iterator</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Pointers"><span class="toc-number">2.</span> <span class="toc-text">2. Pointers</span></a></li></ol>
                     </div>
                 </span>
             </div>
