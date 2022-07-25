@@ -237,6 +237,172 @@
             
 
   
+    <article id="post-cs106l-7-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/07/25/cs106l-7-Class/">cs106l-7.Class</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/07/25/cs106l-7-Class/" class="archive-article-date">
+        <time datetime="2022-07-25T07:56:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <blockquote>
+<p>Containers are all classes defined in the STL!</p>
+</blockquote>
+<h1 id="1-Struct"><a href="#1-Struct" class="headerlink" title="1. Struct"></a>1. Struct</h1><blockquote>
+<p>A struct simply feels like an open pile of bits with very little in the way of encapsulation(封装) or functionality. A class feels like a living and responsible member of society with intelligent services, a strong encapsulation barrier, and a well defined interface. —Bjarne Stroustrup</p>
+</blockquote>
+<p>Issues of struct</p>
+<ul>
+<li>Pubilc access to all internal state data by default.</li>
+<li>Users of struct need to explicitly(明确的) initialize each data member.</li>
+</ul>
+<h1 id="2-Class"><a href="#2-Class" class="headerlink" title="2. Class"></a>2. Class</h1><blockquote>
+<p>Class is a programmer-defined custom type, an abstraction of an object or data type. It provides their users with a public interface and spearate this from a private implementation.</p>
+</blockquote>
+<h2 id="Header-file"><a href="#Header-file" class="headerlink" title="Header file"></a>Header file</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// student.h</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Studet</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">std::string <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setName</span><span class="params">(std::string name)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getAge</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setAge</span><span class="params">(<span class="type">int</span> age)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string name;</span><br><span class="line">    std::string state;</span><br><span class="line">    <span class="type">int</span> age;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Private section:</p>
+<ul>
+<li>Usually contains all member variavles.</li>
+<li>Users can’t access or modify anything in the private section.</li>
+</ul>
+<p>Public section:</p>
+<ul>
+<li>Users of the Student object can directly access anything here!</li>
+<li>Defines interface for interacting with the private member variavles.</li>
+</ul>
+<h2 id="cpp-file"><a href="#cpp-file" class="headerlink" title=".cpp file"></a>.cpp file</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;student.h&quot;</span></span></span><br><span class="line"><span class="function">std::string <span class="title">Student::getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// implementation here.</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+<p>Namespaces</p>
+<ul>
+<li>Put code into logical groups, to avoid name clashes(冲突).</li>
+<li>Each class has its own namespace.</li>
+<li>Syntax for calling&#x2F;using something in a namespace is <code>namespace_name::name</code></li>
+</ul>
+<p>Function definitions with namespaces! <code>std::string Student::getName()&#123;...&#125;</code></p>
+<ul>
+<li><code>namespace_name::name</code> in s function prototype(原型) means “this is the implementation for an interface function in <code>namespace_name</code>“.</li>
+<li>Inside the <code>&#123;...&#125;</code> the private member variables for <code>namespace_name</code> will be in scope(范围)!</li>
+</ul>
+<p>The <code>this</code> keyword! <code>this-&gt;element_name</code> means “the item in this Student object with name element_name”. Use <code>this</code> can avoid for naming conflicts.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::setName</span><span class="params">(string name)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Constructors"><a href="#Constructors" class="headerlink" title="Constructors"></a>Constructors</h2><blockquote>
+<p>Constructors define how the member variavles of an object is initialized. It gets called when you first create a Student object. And it is overloadable!</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Student::<span class="built_in">Student</span>()&#123;...&#125;</span><br><span class="line">Student::<span class="built_in">Student</span>(string name, <span class="type">int</span> age, string state)&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">    <span class="keyword">this</span>-&gt;age = age;</span><br><span class="line">    <span class="keyword">this</span>-&gt;state = state;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Destructors"><a href="#Destructors" class="headerlink" title="Destructors"></a>Destructors</h2><blockquote>
+<p>Destructors define how to deallocate the memory we allocate. The destructor is defined using <code>Class_name::~Class_name()</code>. No one ever explicitly calls it! It’s called when <code>Class_name</code> object go out of scope.</p>
+</blockquote>
+<h1 id="3-Template-classes"><a href="#3-Template-classes" class="headerlink" title="3. Template classes"></a>3. Template classes</h1><blockquote>
+<p>Fundamental Theorem of Software Engineering: Any problem can be solved by adding enough layers of indirection.</p>
+</blockquote>
+<p>What if we don’t want to write a class for every type we can think of? The solution is using Template Classes!</p>
+<blockquote>
+<p>Template Class: A class that is parametrized(参数化) over some number of types. A class that is comprised(包括) of member variables of a general type&#x2F;types.</p>
+</blockquote>
+<h2 id="Template-classes-you’ve-used"><a href="#Template-classes-you’ve-used" class="headerlink" title="Template classes you’ve used!"></a>Template classes you’ve used!</h2><p>Vectors: <code>vector&lt;int&gt; intVec</code> and <code>vector&lt;string&gt; strVec;</code></p>
+<p>Maps: <code>map&lt;int, string&gt; int2Str</code> and <code>map&lt;int, int&gt; int2Int</code></p>
+<p>Pretty much all containers!</p>
+<h2 id="Syntax-writing-a-template-class"><a href="#Syntax-writing-a-template-class" class="headerlink" title="Syntax writing a template class"></a>Syntax writing a template class</h2><blockquote>
+<p>Use generic typenames as placeholders!</p>
+</blockquote>
+<h3 id="Template-struct"><a href="#Template-struct" class="headerlink" title="Template struct:"></a>Template struct:</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">struct</span> <span class="title class_">First</span>, <span class="keyword">struct</span> <span class="title class_">Second</span>&gt; <span class="keyword">struct</span> <span class="title class_">MyPair</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">First <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Second <span class="title">getSecond</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    First first;</span><br><span class="line">    Second second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Template-class"><a href="#Template-class" class="headerlink" title="Template class:"></a>Template class:</h3><p>Decleration and defination are in one .h file:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.h</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">First</span>, <span class="keyword">class</span> <span class="title class_">Second</span>&gt; <span class="keyword">class</span> <span class="title class_">MyPair</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">First <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setFirst</span><span class="params">(First first)</span></span>;</span><br><span class="line">    <span class="function">Second <span class="title">getSecond</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setSecond</span><span class="params">(Second second)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    First first;</span><br><span class="line">    Second second;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> First, <span class="keyword">class</span> Second&gt;</span></span><br><span class="line"><span class="function">First <span class="title">MyPair::getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> first;</span><br><span class="line">&#125;<span class="comment">// must announce every member function is templated.</span></span><br></pre></td></tr></table></figure>
+<p>Decleration is in .h file, while defination in .cpp file:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.h</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">First</span>, <span class="keyword">class</span> <span class="title class_">Second</span>&gt; <span class="keyword">class</span> <span class="title class_">MyPair</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">First <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setFirst</span><span class="params">(First first)</span></span>;</span><br><span class="line">    <span class="function">Second <span class="title">getSecond</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setSecond</span><span class="params">(Second second)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    First first;</span><br><span class="line">    Second second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myPair.cpp</span></span><br><span class="line"><span class="meta">#inculde<span class="string">&lt;myPair.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> First, <span class="keyword">class</span> Second&gt;</span></span><br><span class="line"><span class="function">First <span class="title">MyPair::getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> first;</span><br><span class="line">&#125;<span class="comment">// must announce every member function is templated.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// implementation of other functions...</span></span><br></pre></td></tr></table></figure>
+<p>However, when we want to declare a <code>MyPair&lt;int,int&gt;</code> in main.cpp, and use the below command to compile and link these files, we get a comile error: <code>undefined reference to MyPair&lt;int,int&gt;::setFirst(int)</code>. WHY??</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;myPair.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MyPair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; myIntPair;</span><br><span class="line">    myIntPair.<span class="built_in">setFirst</span>(<span class="type">int</span> <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -c myPair.cpp main.cpp</span><br><span class="line">g++ myPair.o main.o -o output</span><br></pre></td></tr></table></figure>
+
+<p><code>g++ -c myPair.cpp main.cpp</code> compile and create all the code in myPair.cpp and main.cpp. All the functions in myPair.h have implementations that have been compiled now, and main can access them because it included myPair.h.</p>
+<p>In main.cpp, when compiler comes into code <code>MyPair&lt;int,int&gt;</code>, it will conpile all that code and can access to myPair.h right now! However, all it have access to is vector.h, there is no implementation for the interface in that file! And it can’t go looking for myPair.cpp.</p>
+<p>So we should put the implementation of functions in the myPair.h, but can’t simply use <code>#include &quot;myPair.cpp&quot;</code> in myPair.h. Because in myPair.cpp, we have already include the myPair.h.</p>
+<blockquote>
+<p>Templates don’t emit code until instantiated(实例化), so include the implementation of functions in .h file. </p>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/07/25/cs106l-7-Class/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cs106l-6-Iterators-and-Pointers" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
