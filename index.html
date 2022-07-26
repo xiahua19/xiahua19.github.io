@@ -237,6 +237,94 @@
             
 
   
+    <article id="post-cs106l-11-Special-Member-Function" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/07/26/cs106l-11-Special-Member-Function/">cs106l-11.Special Member Function</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/07/26/cs106l-11-Special-Member-Function/" class="archive-article-date">
+        <time datetime="2022-07-26T01:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-The-6-Special-Member-Functions"><a href="#1-The-6-Special-Member-Functions" class="headerlink" title="1. The 6 Special Member Functions"></a>1. The 6 Special Member Functions</h1><p>These functions are generated only when they’re called(and before any are explicitly defined by you):</p>
+    
+    <a class="article-more-a" href="/2022/07/26/cs106l-11-Special-Member-Function/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/07/26/cs106l-11-Special-Member-Function/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cs106l-10-Operators" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -273,35 +361,9 @@
 <li>Objects store private state through instance variavles.</li>
 <li>Objects expose private state to other through public instance methods.</li>
 </ul>
-<h1 id="2-Function-Overloading"><a href="#2-Function-Overloading" class="headerlink" title="2. Function Overloading"></a>2. Function Overloading</h1><blockquote>
-<p>Function overloading allow for calling the same function with different parameters.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-Operator-Overloading"><a href="#3-Operator-Overloading" class="headerlink" title="3. Operator Overloading"></a>3. Operator Overloading</h1><p>Two ways to overload operators: member functions, non-member functions.</p>
-<h2 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h2><p>Add a function called <code>operator_</code> to your class:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// header file</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Time</span>&#123;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Time&amp; rhs) <span class="type">const</span>;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>+ (<span class="type">const</span> Time&amp; rhs) <span class="type">const</span>;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>! () <span class="type">const</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>const</code> means this is a const function, which can’t modify any variables.</li>
-<li><code>rhs</code> means it’s a right-hand-side. For each operator, <code>this</code> is the lhs(left-hand-side).</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cpp file</span></span><br><span class="line"><span class="type">bool</span> Time::<span class="keyword">operator</span>&lt;(<span class="type">const</span> Time&amp; rhs) <span class="type">const</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.hours &lt; rhs.hours)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Non-Member-Functions"><a href="#Non-Member-Functions" class="headerlink" title="Non-Member Functions"></a>Non-Member Functions</h2><p>Add a function called <code>operator_</code> outside of your class. Instead of taking only rhs, it takes both the left hand side and right hand side.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs);</span><br><span class="line">Time <span class="keyword">operator</span>+ (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs);</span><br><span class="line">Time&amp; <span class="keyword">operator</span>+= (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs);</span><br><span class="line">Time <span class="keyword">operator</span>! (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs);</span><br></pre></td></tr></table></figure>
-
-<p>The STL prefers using non-member functions for operator overloading, because it not only allows the LHS to be a non-class type, but also allows us to overload operations with a LHS class that we don’t own.</p>
-<p>But how non-member functions can access private member variables? The answer is using friend function.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Time</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>== (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> hours, minutes, seconds;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>== (<span class="type">const</span> Time&amp; lhs, <span class="type">const</span> Time&amp; rhs)&#123;</span><br><span class="line">    <span class="built_in">return</span> (lhs.hours == rhs.hours) &amp;&amp;</span><br><span class="line">           (lhs.minutes == rhs.minutes) &amp;&amp;</span><br><span class="line">           (lhs.seconds == rhs.seconds);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="lt-lt-operator-overloading"><a href="#lt-lt-operator-overloading" class="headerlink" title="&lt;&lt;operator overloading"></a>&lt;&lt;operator overloading</h2><p>We can use &lt;&lt; to output something to an <code>std::ostream&amp;</code>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::ostream&amp; <span class="keyword">operator</span>&lt;&lt; (std::ostream&amp; out, <span class="type">const</span> Time&amp; time)&#123;</span><br><span class="line">    out&lt;&lt; time.hours&lt;&lt;<span class="string">&quot;:&quot;</span>&lt;&lt;time.minutes&lt;&lt;<span class="string">&quot;:&quot;</span>&lt;&lt;time.seconds;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Rules-of-operator-overloading"><a href="#Rules-of-operator-overloading" class="headerlink" title="Rules of operator overloading"></a>Rules of operator overloading</h2><ol>
-<li>Meaning should be obvious when you see it.</li>
-<li>Should be reasonably similar to corresponding arithmetic(算术) operations.</li>
-<li>When the meaning isn’t obvious, give it a normal name instead.</li>
-</ol>
-
+    
+    <a class="article-more-a" href="/2022/07/26/cs106l-10-Operators/#more">more >></a>
+    
     
 
     
@@ -1049,98 +1111,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/07/23/cs106l-2-Types-and-Structs/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cs106l-1-Welcome" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/07/23/cs106l-1-Welcome/">cs106l-1.Welcome</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/07/23/cs106l-1-Welcome/" class="archive-article-date">
-        <time datetime="2022-07-23T08:44:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="1-Why-CS106L"><a href="#1-Why-CS106L" class="headerlink" title="1. Why CS106L"></a>1. Why CS106L</h1><ul>
-<li>Focus is on code: what makes it good, what powerful and elegent code looks like.</li>
-<li>The real deal: No Standford libraries, only STL.</li>
-<li>Understand how and why C++ was made.</li>
-</ul>
-    
-    <a class="article-more-a" href="/2022/07/23/cs106l-1-Welcome/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/07/23/cs106l-1-Welcome/">展开全文 >></a>
     </p>
     
 
