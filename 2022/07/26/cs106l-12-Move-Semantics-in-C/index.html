@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>Archives | 夏花的博客小站</title>
+  <title>cs106l-12.Move Semantics in C++ | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="记录、分享、交流">
-<meta property="og:type" content="website">
-<meta property="og:title" content="夏花的博客小站">
-<meta property="og:url" content="http://xiahua19.github.io/archives/index.html">
+  <meta name="description" content="1. Definition: l-values vs r-valuesl-values l-values can appear on the left or right of an &#x3D;. l-values have names, and are not temporary. l-values live until the end of the scope.  r-values r-val">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs106l-12.Move Semantics in C++">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/26/cs106l-12-Move-Semantics-in-C/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="记录、分享、交流">
+<meta property="og:description" content="1. Definition: l-values vs r-valuesl-values l-values can appear on the left or right of an &#x3D;. l-values have names, and are not temporary. l-values live until the end of the scope.  r-values r-val">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-26T12:41:15.000Z">
+<meta property="article:modified_time" content="2022-07-26T13:41:22.634Z">
 <meta property="article:author" content="夏花">
+<meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
@@ -230,41 +233,139 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-cs106l-12-Move-Semantics-in-C" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      cs106l-12.Move Semantics in C++
+    </h1>
+  
+
+
+  
+  
 <a href="/2022/07/26/cs106l-12-Move-Semantics-in-C/" class="archive-article-date">
         <time datetime="2022-07-26T12:41:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-26</time>
 </a>
 
-        </div>
-    	 
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/26/cs106l-12-Move-Semantics-in-C/">cs106l-12.Move Semantics in C++</a>
-	
-    </h1>
   
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">690字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
 
 
-        <div class="article-info info-on-right">
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-Definition-l-values-vs-r-values"><a href="#1-Definition-l-values-vs-r-values" class="headerlink" title="1. Definition: l-values vs r-values"></a>1. Definition: l-values vs r-values</h1><h2 id="l-values"><a href="#l-values" class="headerlink" title="l-values"></a>l-values</h2><blockquote>
+<p>l-values can appear on the left or right of an &#x3D;. l-values have names, and are not temporary. l-values live until the end of the scope.</p>
+</blockquote>
+<h2 id="r-values"><a href="#r-values" class="headerlink" title="r-values"></a>r-values</h2><blockquote>
+<p>r-values can only appear on the right of an &#x3D;. r-values don’t have names, and are temporary. r-values live until the end of the line.</p>
+</blockquote>
+<p>Only l-values can be referenced using <code>&amp;</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">change</span>(<span class="number">7</span>);<span class="comment">// this will compile error</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(<span class="type">int</span>&amp; v)</span></span>&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+<p>How many arrays will be allocated, copied and destroyed here?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">    vec = <span class="built_in">make_me_a_vec</span>(<span class="number">123</span>); <span class="comment">// make_me_a_vec(123) is an r-value.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vec is created using the default constructor.</li>
+<li>make_me_a_vec creates a vector using the default constructor and returns it.</li>
+<li>vec is reassigned to a copy of that return value using copy assignment.</li>
+<li>copy assignment creates a new array and copies the contents of the old one.</li>
+<li>the original return value’s lifetime ends and it calls its destructor.</li>
+<li>vec’s lifetime ends and it calls it destructor.</li>
+</ul>
+<h1 id="2-Move-Assignment"><a href="#2-Move-Assignment" class="headerlink" title="2. Move Assignment"></a>2. Move Assignment</h1><p>Copy assignment creates a new array and copies the contents of the old one…what if it didn’t? Let’s call this move assignment.</p>
+<blockquote>
+<p>When the item on the right of the &#x3D; is an r-value, we should use move assignment. Why? r-values are always about to die, so we can steal their resources. How? using <code>&amp;&amp;</code> for r-value reference.</p>
+</blockquote>
+<h2 id="Overloading-with-amp-amp"><a href="#Overloading-with-amp-amp" class="headerlink" title="Overloading with &amp;&amp;"></a>Overloading with <code>&amp;&amp;</code></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(<span class="type">int</span>&amp;&amp; num)</span></span>&#123;...&#125; <span class="comment">// version 1 takes r-values</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(<span class="type">int</span>&amp; num)</span></span>&#123;...&#125;  <span class="comment">// version 2 takes l-values</span></span><br></pre></td></tr></table></figure>
+<p>We can steal the array:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;T&gt;&amp; <span class="keyword">operator</span>=(vector&lt;T&gt;&amp;&amp; other)&#123;</span><br><span class="line">    <span class="keyword">if</span>(&amp;other == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    _size = other._size;</span><br><span class="line">    _capacity = other._capacity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// we can steal the array</span></span><br><span class="line">    <span class="keyword">delete</span>[] _elems;</span><br><span class="line">    _elems = other._elems;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Also, we can force move assginment rather than copy assignment of these ints by using <code>std::move(x)</code>, it doesn’t do anything except cast x as an r-value. </p>
+<p>The compiler will pick which version(copy or move) to use based on whether the RHS is an l-value or an r-value. <code>std::move(x)</code> is a way to force C++ to choose the &amp;&amp; version of a function.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;T&gt;&amp; <span class="keyword">operator</span>=(vector&lt;T&gt;&amp;&amp; other)&#123;</span><br><span class="line">    <span class="keyword">if</span>(&amp;other == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    _size = std::<span class="built_in">move</span>(other._size);</span><br><span class="line">    _capacity = std::<span class="built_in">move</span>(other._capacity);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// we can steal the array</span></span><br><span class="line">    <span class="keyword">delete</span>[] _elems;</span><br><span class="line">    _elems = std::<span class="built_in">move</span>(other._elems);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Where-else-should-we-use-std-move"><a href="#Where-else-should-we-use-std-move" class="headerlink" title="Where else should we use std::move?"></a>Where else should we use <code>std::move</code>?</h2><blockquote>
+<p>Rule of thumb: wherever we take in a <code>const&amp;</code> parameter in a class member function and assign it to something else in our function.</p>
+</blockquote>
+<p>Copy push_back:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">const</span> T&amp; element)</span></span>&#123;</span><br><span class="line">    elems[_size++] = element; <span class="comment">// this is copy assignment.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Move push_back:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(T&amp;&amp; element)</span></span>&#123;</span><br><span class="line">    elems[_size++] = std::<span class="built_in">move</span>(element); <span class="comment">// this forces T&#x27;s move assignment.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Be careful with <code>std::move</code>, after a variable is moved via <code>std::move</code>, it should never be used until it is reassigned to a new variable!</p>
+<blockquote>
+<p>Don’t use <code>std::move</code> outside of class definitions, never use it in application code!</p>
+</blockquote>
+<h2 id="TLDR-Move-Semantics-语义"><a href="#TLDR-Move-Semantics-语义" class="headerlink" title="TLDR: Move Semantics(语义)"></a>TLDR: Move Semantics(语义)</h2><ul>
+<li>If your class has copy constructor and copy assignment defined, you should also define a move constructor and move assignment.</li>
+<li>Define these by overloading your copy constructor and assignment to be defined for <code>Type&amp;&amp; other</code> as well as <code>Type&amp; other</code>.</li>
+<li>Use <code>std::move</code> to force the use of other types’ move assignments and constructors.</li>
+<li>All <code>std::move(x)</code> does is cast x as an r-value.</li>
+<li>Be wary of <code>std::move(x)</code> in main function code!</li>
+</ul>
+<h2 id="std-move-and-RAII"><a href="#std-move-and-RAII" class="headerlink" title="std::move and RAII"></a><code>std::move</code> and RAII</h2><ul>
+<li>RAII means all resources required by an object are acquired in its constructor and destroyed in its destructor.</li>
+<li>To be sonsistent with RAII, you should have no half-ready resources, such as a vector whose underlying array has been deallocated.</li>
+<li><code>std::move</code> doesn’t consistent with RAII.</li>
+</ul>
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          夏花
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://xiahua19.github.io/2022/07/26/cs106l-12-Move-Semantics-in-C/" title="cs106l-12.Move Semantics in C++" target="_blank">http://xiahua19.github.io/2022/07/26/cs106l-12-Move-Semantics-in-C/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -276,410 +377,120 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/26/cs106l-12-Move-Semantics-in-C/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/26/cs106l-11-Special-Member-Function/" class="archive-article-date">
-        <time datetime="2022-07-26T01:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-26</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/26/cs106l-11-Special-Member-Function/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cs106l-11.Special Member Function</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/26/cs106l-11-Special-Member-Function/">cs106l-11.Special Member Function</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Definition-l-values-vs-r-values"><span class="toc-number">1.</span> <span class="toc-text">1. Definition: l-values vs r-values</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#l-values"><span class="toc-number">1.1.</span> <span class="toc-text">l-values</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#r-values"><span class="toc-number">1.2.</span> <span class="toc-text">r-values</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Move-Assignment"><span class="toc-number">2.</span> <span class="toc-text">2. Move Assignment</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overloading-with-amp-amp"><span class="toc-number">2.1.</span> <span class="toc-text">Overloading with &amp;&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-else-should-we-use-std-move"><span class="toc-number">2.2.</span> <span class="toc-text">Where else should we use std::move?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TLDR-Move-Semantics-%E8%AF%AD%E4%B9%89"><span class="toc-number">2.3.</span> <span class="toc-text">TLDR: Move Semantics(语义)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#std-move-and-RAII"><span class="toc-number">2.4.</span> <span class="toc-text">std::move and RAII</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/26/cs106l-10-Operators/" class="archive-article-date">
-        <time datetime="2022-07-26T00:30:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-26</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/26/cs106l-10-Operators/">cs106l-10.Operators</a>
-	
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/25/cs106l-9-Functions-and-Algorithms/" class="archive-article-date">
-        <time datetime="2022-07-25T11:45:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/25/cs106l-9-Functions-and-Algorithms/">cs106l-9.Functions and Algorithms</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/25/cs106l-8-Template-Functions/" class="archive-article-date">
-        <time datetime="2022-07-25T10:37:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/25/cs106l-8-Template-Functions/">cs106l-8.Template Functions</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/25/cs106l-7-Class/" class="archive-article-date">
-        <time datetime="2022-07-25T07:56:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/25/cs106l-7-Class/">cs106l-7.Class</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/24/cs106l-6-Iterators-and-Pointers/" class="archive-article-date">
-        <time datetime="2022-07-24T13:59:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/24/cs106l-6-Iterators-and-Pointers/">cs106l-6.Iterators and Pointers</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/24/cs106l-5-Containers/" class="archive-article-date">
-        <time datetime="2022-07-24T02:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/24/cs106l-5-Containers/">cs106l-5.Containers</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/24/cs106l-4-Initialization-and-References/" class="archive-article-date">
-        <time datetime="2022-07-24T01:48:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/24/cs106l-4-Initialization-and-References/">cs106l-4.Initialization and References</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/23/cs106l-3-Streams/" class="archive-article-date">
-        <time datetime="2022-07-23T11:28:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-23</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/23/cs106l-3-Streams/">cs106l-3.Streams</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -708,8 +519,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
