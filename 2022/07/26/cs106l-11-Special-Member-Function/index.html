@@ -18,7 +18,7 @@
 <meta property="og:description" content="1. The 6 Special Member FunctionsThese functions are generated only when they’re called(and before any are explicitly defined by you):">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-26T01:58:20.000Z">
-<meta property="article:modified_time" content="2022-07-26T02:17:14.284Z">
+<meta property="article:modified_time" content="2022-07-26T03:17:16.774Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">110字</span>
+      <span class="post-count">206字</span>
     </span>
   </span>
 
@@ -292,7 +292,22 @@
 <li>Move Assignment Operator</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Widget</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Widget</span>();<span class="comment">// default constructor</span></span><br><span class="line">    <span class="built_in">Widget</span>(<span class="type">const</span> Widget&amp; w);<span class="comment">// copy constructor</span></span><br><span class="line">    Widget&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Widget&amp; w);<span class="comment">// copy assignment operator</span></span><br><span class="line">    ~<span class="built_in">Widget</span>();<span class="comment">// destructor</span></span><br><span class="line">    <span class="built_in">Widget</span>(Widget&amp;&amp; rhs);<span class="comment">// move constructor</span></span><br><span class="line">    Widget&amp; <span class="keyword">operator</span>=(Widget&amp;&amp; rhs);<span class="comment">// move assignment operator</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="Default-Constructor"><a href="#Default-Constructor" class="headerlink" title="Default Constructor"></a>Default Constructor</h2><ul>
+<li>Object is created with no parameters.</li>
+<li>Constructor also has no parameters.</li>
+<li>All SMFs are public and inline function, meaning that wherever it’s used is replaced with the generated code in the function.</li>
+</ul>
+<h2 id="Copy-Constructor"><a href="#Copy-Constructor" class="headerlink" title="Copy Constructor"></a>Copy Constructor</h2><ul>
+<li>Another type of constructor that creates an instance of a class.</li>
+<li>Constructs a member-wise copy of an object(deep copy).</li>
+</ul>
+<h2 id="Copy-Assignment-Operator"><a href="#Copy-Assignment-Operator" class="headerlink" title="Copy Assignment Operator"></a>Copy Assignment Operator</h2><ul>
+<li>Very similar to copy constructor, expect called when trying to set one object equal to another.</li>
+</ul>
+<h2 id="Descrutor"><a href="#Descrutor" class="headerlink" title="Descrutor"></a>Descrutor</h2><ul>
+<li>Called whenever object goes out of scope.</li>
+<li>Cann be used for deallocating member variables and avoiding memory leaks.</li>
+</ul>
 <h1 id="2-Copy-Constructors-Copy-Assignment-Operators"><a href="#2-Copy-Constructors-Copy-Assignment-Operators" class="headerlink" title="2. Copy Constructors, Copy Assignment Operators"></a>2. Copy Constructors, Copy Assignment Operators</h1><h1 id="3-Default-and-Delete"><a href="#3-Default-and-Delete" class="headerlink" title="3. Default and Delete"></a>3. Default and Delete</h1><h1 id="4-Rules-of-3-and-0"><a href="#4-Rules-of-3-and-0" class="headerlink" title="4. Rules of 3 and 0"></a>4. Rules of 3 and 0</h1><h1 id="5-Move-Constructors-and-Move-Assignment-Operators"><a href="#5-Move-Constructors-and-Move-Assignment-Operators" class="headerlink" title="5. Move Constructors and Move Assignment Operators"></a>5. Move Constructors and Move Assignment Operators</h1><h1 id="6-Moving-away-from-C-98-t0-C-11-Rule-of-5"><a href="#6-Moving-away-from-C-98-t0-C-11-Rule-of-5" class="headerlink" title="6. Moving away from C++98 t0 C++11: Rule of 5"></a>6. Moving away from C++98 t0 C++11: Rule of 5</h1>
     
 
@@ -429,7 +444,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-The-6-Special-Member-Functions"><span class="toc-number">1.</span> <span class="toc-text">1. The 6 Special Member Functions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Copy-Constructors-Copy-Assignment-Operators"><span class="toc-number">2.</span> <span class="toc-text">2. Copy Constructors, Copy Assignment Operators</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Default-and-Delete"><span class="toc-number">3.</span> <span class="toc-text">3. Default and Delete</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Rules-of-3-and-0"><span class="toc-number">4.</span> <span class="toc-text">4. Rules of 3 and 0</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Move-Constructors-and-Move-Assignment-Operators"><span class="toc-number">5.</span> <span class="toc-text">5. Move Constructors and Move Assignment Operators</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Moving-away-from-C-98-t0-C-11-Rule-of-5"><span class="toc-number">6.</span> <span class="toc-text">6. Moving away from C++98 t0 C++11: Rule of 5</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-The-6-Special-Member-Functions"><span class="toc-number">1.</span> <span class="toc-text">1. The 6 Special Member Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Default-Constructor"><span class="toc-number">1.1.</span> <span class="toc-text">Default Constructor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-Constructor"><span class="toc-number">1.2.</span> <span class="toc-text">Copy Constructor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-Assignment-Operator"><span class="toc-number">1.3.</span> <span class="toc-text">Copy Assignment Operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Descrutor"><span class="toc-number">1.4.</span> <span class="toc-text">Descrutor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Copy-Constructors-Copy-Assignment-Operators"><span class="toc-number">2.</span> <span class="toc-text">2. Copy Constructors, Copy Assignment Operators</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Default-and-Delete"><span class="toc-number">3.</span> <span class="toc-text">3. Default and Delete</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Rules-of-3-and-0"><span class="toc-number">4.</span> <span class="toc-text">4. Rules of 3 and 0</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Move-Constructors-and-Move-Assignment-Operators"><span class="toc-number">5.</span> <span class="toc-text">5. Move Constructors and Move Assignment Operators</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Moving-away-from-C-98-t0-C-11-Rule-of-5"><span class="toc-number">6.</span> <span class="toc-text">6. Moving away from C++98 t0 C++11: Rule of 5</span></a></li></ol>
                     </div>
                 </span>
             </div>
