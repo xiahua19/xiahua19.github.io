@@ -18,7 +18,7 @@
 <meta property="og:description" content="1. Function pointers and lambdasPredicate Functions Any function that returns a boolean is a predicate function, including unary(一元) predicate and binary(二元) predicate.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-25T11:45:44.000Z">
-<meta property="article:modified_time" content="2022-07-25T23:38:51.364Z">
+<meta property="article:modified_time" content="2022-07-26T00:27:59.104Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">134字</span>
+      <span class="post-count">352字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -288,9 +288,39 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// unary predicate</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isLowercaseA</span><span class="params">(<span class="type">char</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> c == <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// binary predicate</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isMoreThan</span><span class="params">(<span class="type">int</span> num, <span class="type">int</span> limit)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &gt; limit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Function-pointers-for-generalization"><a href="#Function-pointers-for-generalization" class="headerlink" title="Function pointers for generalization"></a>Function pointers for generalization</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> InputIter, <span class="keyword">typename</span> UniPred&gt;</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">count_occurrences</span><span class="params">(InputIter begin, InputIter end, UniPred pred)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> iter = begin; iter != end; ++iter)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pred</span>(*iter))&#123;</span><br><span class="line">            ++count;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Unary predicate function</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isVoewl</span><span class="params">(<span class="type">char</span> c)</span></span>&#123;</span><br><span class="line">    std::string vowels = <span class="string">&quot;aeiou&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> vowels.<span class="built_in">find</span>(c) != std::string::npos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Usage</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::string str = <span class="string">&quot;Xadia&quot;</span>;</span><br><span class="line">    <span class="built_in">count_occurrences</span>(str.<span class="built_in">begin</span>(), str.<span class="built_in">end</span>(), isVowel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Lambdas"><a href="#Lambdas" class="headerlink" title="Lambdas"></a>Lambdas</h2><h1 id="2-STL-algorithms"><a href="#2-STL-algorithms" class="headerlink" title="2. STL algorithms"></a>2. STL algorithms</h1><blockquote>
-<p>STL algorithms: </p>
+<h2 id="Lambdas"><a href="#Lambdas" class="headerlink" title="Lambdas"></a>Lambdas</h2><blockquote>
+<p>Lambdas are inline functions that can know about other variables.</p>
 </blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> var = [capture-clause] (<span class="keyword">auto</span> param) -&gt; typereturn</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// your function code goes here.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>We use <code>auto</code> because type is figured out in compile time.</li>
+<li>We put outside variables your function uses into <code>[]</code></li>
+<li>We put parameters your function uses into <code>()</code>, and the type is delcared into <code>auto</code>.</li>
+<li><code>typereturn</code> is your function return</li>
+</ul>
+<p>An example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">auto</span> lambda = [num](<span class="type">int</span> arg)&#123;num += arg;&#125;;</span><br><span class="line"><span class="built_in">lambda</span>(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="How-do-functors-lambdas-and-function-pointers-relate"><a href="#How-do-functors-lambdas-and-function-pointers-relate" class="headerlink" title="How do functors, lambdas and function pointers relate?"></a>How do functors, lambdas and function pointers relate?</h2><p>A standard function, <code>std::function&lt;...&gt;</code> is the one to rule them all. It’s the overarching type for anything callable in C++. Functors, lambdas and function pointers can all be casted to standard functions.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;<span class="type">void</span>(<span class="type">int</span>, <span class="type">double</span>)&gt; func;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>void</code>: the func return type;</li>
+<li><code>int, double</code>: the func parameter types</li>
+</ul>
+<p>For example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt; func = lambda;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-STL-algorithms"><a href="#2-STL-algorithms" class="headerlink" title="2. STL algorithms"></a>2. STL algorithms</h1><blockquote>
+<p>STL algorithms: A collection of completely generic functions written by C++ devs! You need to <code>#include&lt;algorithm&gt;</code> before using these functions.</p>
+</blockquote>
+<p>STL functions allow you to accomplish all of these and more!</p>
+<ul>
+<li>effective searching</li>
+<li>efficient sorting</li>
+<li>complex and concise(简洁的) data structure usage</li>
+<li>parallelized big data manipulation(操作)</li>
+<li>arrays with abilities</li>
+<li>smart pointers that destruct memory(销毁内存) for you.</li>
+</ul>
 
     
 
@@ -427,7 +457,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Function-pointers-and-lambdas"><span class="toc-number">1.</span> <span class="toc-text">1. Function pointers and lambdas</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Predicate-Functions"><span class="toc-number">1.1.</span> <span class="toc-text">Predicate Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-pointers-for-generalization"><span class="toc-number">1.2.</span> <span class="toc-text">Function pointers for generalization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambdas"><span class="toc-number">1.3.</span> <span class="toc-text">Lambdas</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-STL-algorithms"><span class="toc-number">2.</span> <span class="toc-text">2. STL algorithms</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Function-pointers-and-lambdas"><span class="toc-number">1.</span> <span class="toc-text">1. Function pointers and lambdas</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Predicate-Functions"><span class="toc-number">1.1.</span> <span class="toc-text">Predicate Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-pointers-for-generalization"><span class="toc-number">1.2.</span> <span class="toc-text">Function pointers for generalization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambdas"><span class="toc-number">1.3.</span> <span class="toc-text">Lambdas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-do-functors-lambdas-and-function-pointers-relate"><span class="toc-number">1.4.</span> <span class="toc-text">How do functors, lambdas and function pointers relate?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-STL-algorithms"><span class="toc-number">2.</span> <span class="toc-text">2. STL algorithms</span></a></li></ol>
                     </div>
                 </span>
             </div>
