@@ -293,6 +293,14 @@
 <p>What if <code>back()</code> returned an optional?</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">std::optional&lt;valueType&gt; vector&lt;valueType&gt;::<span class="built_in">back</span>()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *(<span class="built_in">begin</span>() + <span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">removeOddsFromEnd</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vec)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(vec.<span class="built_in">back</span>().<span class="built_in">has_value</span>() &amp;&amp; vec.<span class="built_in">back</span>().<span class="built_in">value</span>()%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">        vec.<span class="built_in">pop_back</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>Why <code>std::vector::back()</code> doesn’t return an optional(and probably never will)?? Let’s recall the design philosophy of C++</p>
+<ul>
+<li>Programmers should be free to choose their own style.</li>
+<li>All the programmer full control if they want it.</li>
+<li>Don’t sacrifice performance except as a last resort.</li>
+<li>Enforce safety at compile time whenever possible.</li>
+</ul>
+
     
 
     
