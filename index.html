@@ -237,6 +237,178 @@
             
 
   
+    <article id="post-cs106l-14-RAII-Smart-Pointers-and-C-Project-Building" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/07/27/cs106l-14-RAII-Smart-Pointers-and-C-Project-Building/">cs106l-14.RAII, Smart Pointers, and C++ Project Building</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/07/27/cs106l-14-RAII-Smart-Pointers-and-C-Project-Building/" class="archive-article-date">
+        <time datetime="2022-07-27T05:56:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-Hint-Exceptions"><a href="#1-Hint-Exceptions" class="headerlink" title="1. Hint: Exceptions"></a>1. Hint: Exceptions</h1><blockquote>
+<p>Exceptions are ways to signal that something has gone wrong during run-time. Exceptions are “thrown” and can crash the program, but can be “caught” to avoid this.</p>
+</blockquote>
+<p>Takeaway, there are often more code paths than meets the eye! When writing production code, be sure to have test cases that cover all possible paths(or catch errors that would produce more paths)!</p>
+<h1 id="2-RAII"><a href="#2-RAII" class="headerlink" title="2. RAII"></a>2. RAII</h1><p>Recoutces that need to be returned after use:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Acquire</th>
+<th>Release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Heap memory</td>
+<td>new</td>
+<td>delete</td>
+</tr>
+<tr>
+<td>Files</td>
+<td>open</td>
+<td>close</td>
+</tr>
+<tr>
+<td>Locks</td>
+<td>try_lock</td>
+<td>unlock</td>
+</tr>
+<tr>
+<td>Sockets</td>
+<td>socket</td>
+<td>close</td>
+</tr>
+</tbody></table>
+<p>How do we guarantee resources get released even if there are exceptions?</p>
+<blockquote>
+<p>RAII: Resource Acquisition Is Initialization.</p>
+</blockquote>
+<ul>
+<li>All resources used by a class should be acquired in the constructor.</li>
+<li>All resources used by a class should be released in the destructor.</li>
+</ul>
+<p>Why? Objects should be usable immediately after creation. There should never be a “half-valid” state of an object, where it exists in memory but is not accessible to&#x2F;used by the program. The destructor is always called(when the object goes out of scope), so the resource is always freed!</p>
+<p>However, ifstream and ofstream are not follow RAII.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::ofstream ofs;</span><br><span class="line">  ofs &lt;&lt; <span class="string">&quot;Can&#x27;t do this!\n&quot;</span>; <span class="comment">// XXX</span></span><br><span class="line">  ofs.<span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Safe access requires explicit checking after open().</span></span><br><span class="line">  <span class="keyword">if</span> (ofs) &#123;</span><br><span class="line">    <span class="comment">// Other calls still need checks but must be shielded by an initial one.</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ofs.<span class="built_in">close</span>();</span><br><span class="line">  ofs &lt;&lt; <span class="string">&quot;Whoops!\n&quot;</span>; <span class="comment">// XXX</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-Smart-Pointers-RAII-safe-pointers"><a href="#3-Smart-Pointers-RAII-safe-pointers" class="headerlink" title="3. Smart Pointers(RAII-safe pointers)"></a>3. Smart Pointers(RAII-safe pointers)</h2><p>Three types of smart pointers in C++ that automatically free underlying memory when destructed.</p>
+<ul>
+<li><code>std::unique_ptr</code>: Uniquely owns its resource, can’t be copied.</li>
+<li><code>std::shared_ptr</code>: Can make copies, destructed when underlying memory goes out of scope.</li>
+<li><code>std::weak_ptr</code>: Models temporary ownership: when an object only needs to be accessed if it exists(convert to shared_ptr to access).<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::unique_ptr&lt;T&gt; up = std::<span class="built_in">make_unique</span>&lt;T&gt;();</span><br><span class="line">std::shared_ptr&lt;T&gt; sp = std::<span class="built_in">make_shared</span>&lt;T&gt;();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-How-are-projects-built-in-C"><a href="#4-How-are-projects-built-in-C" class="headerlink" title="4. How are projects built in C++?"></a>4. How are projects built in C++?</h2><p>What do make and Makefiles do?</p>
+<ul>
+<li>make is a “build system”</li>
+<li>uses g++ as its main engine</li>
+<li>serveral stages to the compiler system</li>
+<li>can be utilized through a Makefile</li>
+</ul>
+<p>So why do we use cmake in our assignments?</p>
+<ul>
+<li>cmake is a cross-platform make</li>
+<li>cmake creates build systems!</li>
+<li>It takes in an even higher-level config file, ties in external libraries, and outputs a Makefile, which is then run.</li>
+</ul>
+<p>Components of C++’s compilation system.</p>
+<ul>
+<li>Preprocessing: The C&#x2F;C++ preprocessor handles preprocessor directives, replaces includes(#include) and expands any macros(#define)<ul>
+<li>in: cpp files</li>
+<li>out: full cpp files</li>
+</ul>
+</li>
+<li>Compiling: Preformed on output of the preprocessor. Structure of a compiler includes (1)Lexical(词汇) Analysis; (2)Parsing; (3)Semantic Analysis; (4)Optimization; (5)Code Generation(assembly code).<ul>
+<li>in: full cpp files</li>
+<li>out: .s files</li>
+</ul>
+</li>
+<li>Assembling: Runs on the assembly code as outputted by the compiler. Converts assembly code to binary machine code. Assumes that all functions are defined somewhere without checking.<ul>
+<li>in: .s files</li>
+<li>out: .o files</li>
+</ul>
+</li>
+<li>Linking: Creates a single executable file from multiple object files by combining the pieces of a program, figuring out a memory organization so that all the pieces can fit together, resolving references so that the program can run under the new memory organization.<ul>
+<li>in: .o files</li>
+<li>out: executable</li>
+</ul>
+</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/07/27/cs106l-14-RAII-Smart-Pointers-and-C-Project-Building/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cs106l-13-std-optional-and-type-safety" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1020,96 +1192,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/07/24/cs106l-5-Containers/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cs106l-4-Initialization-and-References" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/07/24/cs106l-4-Initialization-and-References/">cs106l-4.Initialization and References</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/07/24/cs106l-4-Initialization-and-References/" class="archive-article-date">
-        <time datetime="2022-07-24T01:48:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="1-Initialization"><a href="#1-Initialization" class="headerlink" title="1. Initialization"></a>1. Initialization</h1><blockquote>
-<p>Initialization means providing initial values to variables.</p>
-</blockquote>
-    
-    <a class="article-more-a" href="/2022/07/24/cs106l-4-Initialization-and-References/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/07/24/cs106l-4-Initialization-and-References/">展开全文 >></a>
     </p>
     
 
