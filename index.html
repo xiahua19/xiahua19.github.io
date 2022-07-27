@@ -269,38 +269,9 @@
     <blockquote>
 <p>How can we use c++’s type system to prevent errors at compile time?</p>
 </blockquote>
-<p>We pass big pieces of data by reference into helper functions by to avoid making copied of that data. If this function accidentally or sneakily changes that piece of data, it can lead to hard to find bugs! The soultion is marking those reference parameters <code>const</code> to guarantee they won’t be changed in the function!</p>
-<p>How does the compiler know when it’s safe to call member functions of const variables?</p>
-<blockquote>
-<p>Const-interface: All member functions marked <code>const</code> in a class definition. Objects of type const className may only use the const-interface.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">ValueType</span>&gt; <span class="keyword">class</span> <span class="title class_">RealVector</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> const_iterator = <span class="type">const</span> ValueType*;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">const_iterator <span class="title">cbegin</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function">const_iterator <span class="title">cend</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Technically, adding a const-interface only limits what RealVector objects marked const can do.</li>
-<li>Using types to enforce assumptions we make about function calls help us prevent programmer errors!</li>
-</ul>
-<blockquote>
-<p>Type safety: The extent to which a function signature guarantees the behavior of a function.</p>
-</blockquote>
-<p>What’s <code>std::optional&lt;T&gt;</code>? <code>std::optional</code> is a template class which will either contain a value of type T or certain nothing(expressed as nullopt).</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::optional&lt;<span class="type">int</span>&gt; num1 = &#123;&#125;; <span class="comment">// num1 does not have a value</span></span><br><span class="line">    num1 = <span class="number">1</span>; <span class="comment">// now it does</span></span><br><span class="line">    num1 = std::<span class="literal">nullopt</span>; <span class="comment">// now it doesn&#x27;t anymore.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>std::optional</code> interface</p>
-<ul>
-<li><code>.value()</code>: returns the contained value or throws <code>bad_optional_access</code> error.</li>
-<li><code>.value_or(valueType val)</code>: returns the contained value or default value, parameter val.</li>
-<li><code>.has_value()</code>: returns true if contained value exists, false otherwise.</li>
-</ul>
-<p>What if <code>back()</code> returned an optional?</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">std::optional&lt;valueType&gt; vector&lt;valueType&gt;::<span class="built_in">back</span>()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *(<span class="built_in">begin</span>() + <span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">removeOddsFromEnd</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vec)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(vec.<span class="built_in">back</span>().<span class="built_in">has_value</span>() &amp;&amp; vec.<span class="built_in">back</span>().<span class="built_in">value</span>()%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">        vec.<span class="built_in">pop_back</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Why <code>std::vector::back()</code> doesn’t return an optional(and probably never will)?? Let’s recall the design philosophy of C++</p>
-<ul>
-<li>Programmers should be free to choose their own style.</li>
-<li>All the programmer full control if they want it.</li>
-<li>Don’t sacrifice performance except as a last resort.</li>
-<li>Enforce safety at compile time whenever possible.</li>
-</ul>
-
+    
+    <a class="article-more-a" href="/2022/07/26/cs106l-13-std-optional-and-type-safety/#more">more >></a>
+    
     
 
     

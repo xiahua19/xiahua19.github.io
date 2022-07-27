@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="How can we use c++’s type system to prevent errors at compile time?  We pass big pieces of data by reference into helper functions by to avoid making copied of that data. If this function accidentall">
+  <meta name="description" content="How can we use c++’s type system to prevent errors at compile time?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cs106l-13.std::optional and type safety">
 <meta property="og:url" content="http://xiahua19.github.io/2022/07/26/cs106l-13-std-optional-and-type-safety/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="How can we use c++’s type system to prevent errors at compile time?  We pass big pieces of data by reference into helper functions by to avoid making copied of that data. If this function accidentall">
+<meta property="og:description" content="How can we use c++’s type system to prevent errors at compile time?">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-26T13:49:08.000Z">
-<meta property="article:modified_time" content="2022-07-27T05:51:49.117Z">
+<meta property="article:modified_time" content="2022-07-27T05:53:12.017Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS106L">
 <meta name="twitter:card" content="summary">
@@ -284,6 +284,7 @@
     <blockquote>
 <p>How can we use c++’s type system to prevent errors at compile time?</p>
 </blockquote>
+<span id="more"></span>
 <p>We pass big pieces of data by reference into helper functions by to avoid making copied of that data. If this function accidentally or sneakily changes that piece of data, it can lead to hard to find bugs! The soultion is marking those reference parameters <code>const</code> to guarantee they won’t be changed in the function!</p>
 <p>How does the compiler know when it’s safe to call member functions of const variables?</p>
 <blockquote>
