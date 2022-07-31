@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>cs106l-1.Welcome | 夏花的博客小站</title>
+  <title>cs142-1.Introduction, HTML and CSS | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. Why CS106L Focus is on code: what makes it good, what powerful and elegent code looks like. The real deal: No Standford libraries, only STL. Understand how and why C++ was made.">
+  <meta name="description" content="1. IntroductionFull Stack Web Application ArchitectureWeb Browser &lt;--(HTTP, Internet)--&gt; Web Server&#x2F;Application Server &lt;--(LAN)--&gt; Stroage System  Web Browser: chrome, firefox, safaxi, edg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs106l-1.Welcome">
-<meta property="og:url" content="http://xiahua19.github.io/2022/07/23/cs106l-1-Welcome/index.html">
+<meta property="og:title" content="cs142-1.Introduction, HTML and CSS">
+<meta property="og:url" content="http://xiahua19.github.io/2022/07/27/cs142-1-Introduction-HTML-and-CSS/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="1. Why CS106L Focus is on code: what makes it good, what powerful and elegent code looks like. The real deal: No Standford libraries, only STL. Understand how and why C++ was made.">
+<meta property="og:description" content="1. IntroductionFull Stack Web Application ArchitectureWeb Browser &lt;--(HTTP, Internet)--&gt; Web Server&#x2F;Application Server &lt;--(LAN)--&gt; Stroage System  Web Browser: chrome, firefox, safaxi, edg">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-23T08:44:32.000Z">
-<meta property="article:modified_time" content="2022-07-24T13:00:31.276Z">
+<meta property="article:published_time" content="2022-07-27T07:55:44.000Z">
+<meta property="article:modified_time" content="2022-07-31T07:39:11.448Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="CS106L">
+<meta property="article:tag" content="CS142">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
@@ -233,22 +233,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cs106l-1-Welcome" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cs142-1-Introduction-HTML-and-CSS" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      cs106l-1.Welcome
+      cs142-1.Introduction, HTML and CSS
     </h1>
   
 
 
   
   
-<a href="/2022/07/23/cs106l-1-Welcome/" class="archive-article-date">
-        <time datetime="2022-07-23T08:44:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-23</time>
+<a href="/2022/07/27/cs142-1-Introduction-HTML-and-CSS/" class="archive-article-date">
+        <time datetime="2022-07-27T07:55:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-27</time>
 </a>
 
   
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">245字</span>
+      <span class="post-count">1k字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -281,66 +281,177 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-Why-CS106L"><a href="#1-Why-CS106L" class="headerlink" title="1. Why CS106L"></a>1. Why CS106L</h1><ul>
-<li>Focus is on code: what makes it good, what powerful and elegent code looks like.</li>
-<li>The real deal: No Standford libraries, only STL.</li>
-<li>Understand how and why C++ was made.</li>
-</ul>
-<span id="more"></span>
-
-<h1 id="2-Why-C"><a href="#2-Why-C" class="headerlink" title="2. Why C++"></a>2. Why C++</h1><h2 id="Assembly-Drawbacks"><a href="#Assembly-Drawbacks" class="headerlink" title="Assembly Drawbacks"></a>Assembly Drawbacks</h2><ul>
-<li>A lot of code to do simple tasks.</li>
-<li>Very hard to understand.</li>
-<li>Extermely unportable(hard to make work across all systems).</li>
-</ul>
-<h2 id="Invention-of-C"><a href="#Invention-of-C" class="headerlink" title="Invention of C"></a>Invention of C</h2><p>Idea:</p>
+    <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><h2 id="Full-Stack-Web-Application-Architecture"><a href="#Full-Stack-Web-Application-Architecture" class="headerlink" title="Full Stack Web Application Architecture"></a>Full Stack Web Application Architecture</h2><p><code>Web Browser &lt;--(HTTP, Internet)--&gt; Web Server/Application Server &lt;--(LAN)--&gt; Stroage System</code></p>
 <ul>
-<li>Source code can be written in a more intuitive(直观的)language, and need a program called complier to convert it into assembly.</li>
+<li>Web Browser: chrome, firefox, safaxi, edge</li>
+<li>Web&#x2F;Application Server: node.js, apache, rails</li>
+<li>Storage System: mongoDB, MySQL<span id="more"></span></li>
 </ul>
-<p>Advantage:</p>
+<h2 id="Technologies-and-Concepts"><a href="#Technologies-and-Concepts" class="headerlink" title="Technologies and Concepts"></a>Technologies and Concepts</h2><p>Browser environment</p>
 <ul>
-<li>Fast</li>
-<li>Simple</li>
-<li>Cross-platform</li>
+<li>HTML&#x2F;CSS&#x2F;JavaScript: Markup, sparation of content &amp; style, reuse, scripting.</li>
+<li>Document Object Model(DOM): Document structure.</li>
 </ul>
-<p>Weakness:</p>
+<p>Browser software</p>
 <ul>
-<li>No objects or classes</li>
-<li>Difficult to write generic(通用的) code.</li>
-<li>Tedious(冗长乏味的) when writing large programs.</li>
+<li>Model View Controller, Single page applications, Responsive design —— React.js</li>
 </ul>
-<h2 id="Welcome-to-C"><a href="#Welcome-to-C" class="headerlink" title="Welcome to C++"></a>Welcome to C++</h2><p>Evolution of C++:</p>
+<p>Backend communication</p>
 <ul>
-<li>C with classes(1979)</li>
-<li>C++(1983)</li>
-<li>C++98(1998)</li>
-<li>C++03(2003)</li>
-<li>C++11(2011)</li>
-<li>C++17(2017)</li>
-<li>C++20(2020), we are here</li>
+<li>API Design: HTTP&#x2F;AJAX&#x2F;REST&#x2F;GraphQL</li>
+<li>Cookies&#x2F;Sessions&#x2F;State management: Storage&#x2F;Trust</li>
 </ul>
-<p>Design Philosophy of C++</p>
+<p>Backend implementation</p>
 <ul>
-<li>Only add features if they solve an actual problem.</li>
-<li>Programmers should be free to choose their own style.</li>
-<li>Compartmentalization(分类) is key.</li>
-<li>Allow the programmer full control if they want it.</li>
-<li>Don’t sacrifice performance except as a last resort(最终办法).</li>
-<li>Enforce safety at compile time whenever possible.</li>
+<li>Web Server: HTTP request processing - Node.js</li>
+<li>DBMS: Schema, Objects, CRUD, indexes, transactions - MongoDB</li>
+<li>End-to-End: Scale and Security</li>
 </ul>
-<h2 id="What’s-C"><a href="#What’s-C" class="headerlink" title="What’s C++"></a>What’s C++</h2><p>C++ &#x3D; Basic Syntax + the STL</p>
-<p>Basis Syntax</p>
+<h1 id="2-HTML-HyperText-Markup-Language"><a href="#2-HTML-HyperText-Markup-Language" class="headerlink" title="2. HTML(HyperText Markup Language)"></a>2. HTML(HyperText Markup Language)</h1><p>Browser environment is different from traditional app(GUIs based on pixels). Web browser display documents described in HTML. Until HTML5’s canvas region, you couldn’t write pixels. So, how to make applications out of documents? Currently, use JavaScript to dynamically generate and update documents.</p>
+<blockquote>
+<p>Markup Language: include directives(指令) with content. Directives can dictate presentation or describe content.</p>
+</blockquote>
+<p>Approach(方法)</p>
 <ul>
-<li>Semicolons(分号) at EOL(end of file).</li>
-<li>Primitive types(ints, doubles, etc).</li>
-<li>Basic grammar rules.</li>
+<li>Start with content to be displayed.</li>
+<li>Annotate it with tags(HTML uses <code>&lt;&gt;</code> to denote tags)</li>
 </ul>
-<p>The STL</p>
+<h2 id="HTML-tags"><a href="#HTML-tags" class="headerlink" title="HTML tags"></a>HTML tags</h2><p>Tags can provide the meaning of text(e.g. <code>&lt;h1&gt;</code> means top-level heading, <code>&lt;p&gt;</code> means paragraph, <code>&lt;ul&gt;&lt;li&gt;</code> for unordered list), formatting information(e.g. <code>&lt;i&gt;</code> for italic(斜体)) and additional information(e.g. <code>&lt;img&gt;</code>) to display.</p>
+<h2 id="HTML-Evolution"><a href="#HTML-Evolution" class="headerlink" title="HTML Evolution"></a>HTML Evolution</h2><p>Influenced by browser implementation quirks(怪癖). What to do if you see<code>&lt;p&gt; some text</code> which missing closing<code>&lt;/P&gt;</code>? Is just complain bitterly about malformed(畸形的) HTML or figure out where was a missing <code>&lt;/p&gt;</code> and add it?</p>
+<p>Depending on different choices, it’s forked into(分支为) HTML and XHTML(XML-based HTML). XHTML is more strict about adhering(坚持) to proper syntax.</p>
+<h2 id="Basic-Syntax-rules-for-XHTML"><a href="#Basic-Syntax-rules-for-XHTML" class="headerlink" title="Basic Syntax rules for XHTML"></a>Basic Syntax rules for XHTML</h2><blockquote>
+<p>Document: hierarchical collection of elements, starting with <code>&lt;html&gt;</code></p>
+</blockquote>
+<blockquote>
+<p>Element: start tag, contents, end tag. Elements may be nested(嵌套的).</p>
+</blockquote>
+<p>Every element must have an explicit start and end. Start tags can contain attributes, such as <code>src</code>, <code>type</code>, <code>name</code>, etc.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC <span class="string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span></span></span><br><span class="line"><span class="meta">    <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;html xmlns=<span class="string">&quot;http://www.w3.org/1999/xhtml&quot;</span> xml:lang=<span class="string">&quot;en&quot;</span> lang=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">    &lt;head&gt;</span></span><br><span class="line"><span class="meta">        &lt;title&gt;Hello World&lt;/title&gt;    </span></span><br><span class="line"><span class="meta">    &lt;/head&gt;</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">    &lt;body&gt;</span></span><br><span class="line"><span class="meta">        &lt;p&gt; Hello World&lt;/p&gt;    </span></span><br><span class="line"><span class="meta">    &lt;/body&gt;</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">    &lt;img src=<span class="string">&quot;face.jpg&quot;</span>&gt;&lt;/img&gt;</span></span><br><span class="line"><span class="meta">    &lt;input type=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;94301&quot;</span> name=<span class="string">&quot;zip&quot;</span>&gt;&lt;/input&gt;</span></span><br><span class="line"><span class="meta">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Handle-markup-characters-in-content"><a href="#Handle-markup-characters-in-content" class="headerlink" title="Handle markup characters in content"></a>Handle markup characters in content</h2><table>
+<thead>
+<tr>
+<th>Character</th>
+<th>How to disply</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;</code></td>
+<td><code>&amp;lt</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td><code>&amp;gt</code></td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td><code>&amp;amp</code></td>
+</tr>
+<tr>
+<td><code>&quot;</code></td>
+<td><code>&amp;quot</code></td>
+</tr>
+<tr>
+<td><code> </code></td>
+<td><code>&amp;nbsp</code></td>
+</tr>
+</tbody></table>
+<h2 id="Common-used-XHTML-tags"><a href="#Common-used-XHTML-tags" class="headerlink" title="Common used XHTML tags"></a>Common used XHTML tags</h2><table>
+<thead>
+<tr>
+<th>Character</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;p&gt;</code></td>
+<td>New paragraph</td>
+</tr>
+<tr>
+<td><code>&lt;br&gt;</code></td>
+<td>Force a line break within the same paragraph</td>
+</tr>
+<tr>
+<td><code>&lt;h1&gt;&lt;h2&gt;</code></td>
+<td>Headings</td>
+</tr>
+<tr>
+<td><code>&lt;b&gt;, &lt;i&gt;</code></td>
+<td>Boldface and italic</td>
+</tr>
+<tr>
+<td><code>&lt;pre&gt;</code></td>
+<td>Typically used fot code: indented(缩进) with a fixed-width font, spaces are significant(e.g. newlines are preserved)</td>
+</tr>
+<tr>
+<td><code>&lt;img&gt;</code></td>
+<td>Images</td>
+</tr>
+<tr>
+<td><code>&lt;a href=&quot;...&quot;&gt;</code></td>
+<td>Hyperlink to another Web page</td>
+</tr>
+<tr>
+<td><code>&lt;!--comments--&gt;</code></td>
+<td>Comment tags</td>
+</tr>
+<tr>
+<td><code>&lt;table&gt;,&lt;tr&gt;,&lt;ld&gt;</code></td>
+<td>Tables</td>
+</tr>
+<tr>
+<td><code>&lt;ul&gt; &lt;li&gt;</code></td>
+<td>Unordered list(with bullets)</td>
+</tr>
+<tr>
+<td><code>&lt;ol&gt; &lt;li&gt;</code></td>
+<td>Ordered list(numbered)</td>
+</tr>
+<tr>
+<td><code>&lt;div&gt;</code></td>
+<td>Used for grouping related elements, where the group occupies entire lines(forces a line break before and after)</td>
+</tr>
+<tr>
+<td><code>&lt;span&gt;</code></td>
+<td>Used for grouping related elements, where the group is within a single line(no forced line breaks)</td>
+</tr>
+<tr>
+<td><code>&lt;form&gt;,&lt;input&gt;,&lt;textarea&gt;,&lt;select&gt;</code></td>
+<td>Used to created forms where users can input data</td>
+</tr>
+<tr>
+<td><code>&lt;title&gt;</code></td>
+<td>Specify a title fot the page, which will appear in the title bar for the browser window</td>
+</tr>
+<tr>
+<td><code>&lt;link&gt;</code></td>
+<td>Include CSS stylesheets</td>
+</tr>
+<tr>
+<td><code>&lt;script&gt;</code></td>
+<td>Used to add JavaScript to a page(can be used in body as weel)</td>
+</tr>
+</tbody></table>
+<h2 id="HTML-differences-from-XHTML"><a href="#HTML-differences-from-XHTML" class="headerlink" title="HTML differences from XHTML"></a>HTML differences from XHTML</h2><p>HTML supports the same tags, same features, but allows quirkier syntax:</p>
 <ul>
-<li>Tons of general functionality.</li>
-<li>Built in classes like maps, sets, vectors.</li>
-<li>Accessed through the namespace std::.</li>
+<li>Can skip some end tags, such as <code>&lt;br&gt;, &lt;p&gt;</code></li>
+<li>Not all attributes have to have values, such as <code>&lt;select multiple&gt;</code></li>
+<li>Elements can overlap: <code>&lt;p&gt;&lt;b&gt;first&lt;/p&gt;&lt;p&gt;second&lt;/b&gt;third&lt;/p&gt;</code></li>
 </ul>
+<p>Early browsers tried to “do the right thing” even in the face of incorrect HTML:</p>
+<ul>
+<li>Ignore unknown tags</li>
+<li>Carry on even with obvious syntax errors such missing <code>&lt;body&gt;</code> or <code>&lt;html&gt;</code></li>
+<li>Infer the position of missing close tags</li>
+<li>Guess that some <code>&lt;</code> characters are literal, as in “What if x &lt; 0?”</li>
+<li>Not obvious how to interpret some documents(and browsers differed)</li>
+</ul>
+<h2 id="Newer-HTML-HTML5"><a href="#Newer-HTML-HTML5" class="headerlink" title="Newer HTML - HTML5"></a>Newer HTML - HTML5</h2><ul>
+<li>Additional tags to allow content definition, such as <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>…</li>
+<li>Drawing: <code>&lt;svg&gt;</code> can draw shapes(scalable vector graphics), <code>&lt;canvas&gt;</code> can draw from JavaScript - 3D with WebGL</li>
+<li>Timed media playback: <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code></li>
+</ul>
+<h1 id="3-CSS-Cascading-级联-Style-Sheets"><a href="#3-CSS-Cascading-级联-Style-Sheets" class="headerlink" title="3. CSS(Cascading(级联) Style Sheets)"></a>3. CSS(Cascading(级联) Style Sheets)</h1><p>What font type and size does <code>&lt;h1&gt;</code> generate? For early HTML, you can override defaults with attributes. Also, style sheets can specify style to use rather than browser default, and not have to code styling on every element.</p>
+<h2 id="Key-concept-Separate-style-from-content"><a href="#Key-concept-Separate-style-from-content" class="headerlink" title="Key concept: Separate style from content"></a>Key concept: Separate style from content</h2><p>Content(what to display) is in HTML files. Formatting information(how to display) is in separate style sheet(.css files). Use an element attribute names <code>class</code> to link. So, you can define style information once, and use it in many places.</p>
 
     
 
@@ -355,7 +466,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/07/23/cs106l-1-Welcome/" title="cs106l-1.Welcome" target="_blank">http://xiahua19.github.io/2022/07/23/cs106l-1-Welcome/</a>
+          <a href="http://xiahua19.github.io/2022/07/27/cs142-1-Introduction-HTML-and-CSS/" title="cs142-1.Introduction, HTML and CSS" target="_blank">http://xiahua19.github.io/2022/07/27/cs142-1-Introduction-HTML-and-CSS/</a>
         </li>
         
         <li>
@@ -377,7 +488,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CS142</a>
         		</li>
       		
 		</ul>
@@ -433,7 +544,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/23/cs106l-1-Welcome/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/27/cs142-1-Introduction-HTML-and-CSS/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -448,18 +559,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/07/23/cs106l-2-Types-and-Structs/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          cs106l-2.Types and Structs
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/16/latex/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Latex使用指北</div>
+    <a href="/2022/07/27/cs106l-14-RAII-Smart-Pointers-and-C-Project-Building/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cs106l-14.RAII, Smart Pointers, and C++ Project Building</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -486,7 +588,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Why-CS106L"><span class="toc-number">1.</span> <span class="toc-text">1. Why CS106L</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Why-C"><span class="toc-number">2.</span> <span class="toc-text">2. Why C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Assembly-Drawbacks"><span class="toc-number">2.1.</span> <span class="toc-text">Assembly Drawbacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Invention-of-C"><span class="toc-number">2.2.</span> <span class="toc-text">Invention of C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Welcome-to-C"><span class="toc-number">2.3.</span> <span class="toc-text">Welcome to C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-C"><span class="toc-number">2.4.</span> <span class="toc-text">What’s C++</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Full-Stack-Web-Application-Architecture"><span class="toc-number">1.1.</span> <span class="toc-text">Full Stack Web Application Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Technologies-and-Concepts"><span class="toc-number">1.2.</span> <span class="toc-text">Technologies and Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTML-HyperText-Markup-Language"><span class="toc-number">2.</span> <span class="toc-text">2. HTML(HyperText Markup Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-tags"><span class="toc-number">2.1.</span> <span class="toc-text">HTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-Evolution"><span class="toc-number">2.2.</span> <span class="toc-text">HTML Evolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Syntax-rules-for-XHTML"><span class="toc-number">2.3.</span> <span class="toc-text">Basic Syntax rules for XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handle-markup-characters-in-content"><span class="toc-number">2.4.</span> <span class="toc-text">Handle markup characters in content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-used-XHTML-tags"><span class="toc-number">2.5.</span> <span class="toc-text">Common used XHTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-differences-from-XHTML"><span class="toc-number">2.6.</span> <span class="toc-text">HTML differences from XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Newer-HTML-HTML5"><span class="toc-number">2.7.</span> <span class="toc-text">Newer HTML - HTML5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-CSS-Cascading-%E7%BA%A7%E8%81%94-Style-Sheets"><span class="toc-number">3.</span> <span class="toc-text">3. CSS(Cascading(级联) Style Sheets)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-concept-Separate-style-from-content"><span class="toc-number">3.1.</span> <span class="toc-text">Key concept: Separate style from content</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
