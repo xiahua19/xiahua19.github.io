@@ -18,8 +18,10 @@
 <meta property="og:description" content="1. IntroductionFull Stack Web Application ArchitectureWeb Browser &lt;--(HTTP, Internet)--&gt; Web Server&#x2F;Application Server &lt;--(LAN)--&gt; Stroage System  Web Browser: chrome, firefox, safaxi, edg">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://xiahua19.github.io/img/css.png">
+<meta property="og:image" content="http://xiahua19.github.io/img/css_box_model.png">
+<meta property="og:image" content="http://xiahua19.github.io/img/css_distance_units.png">
 <meta property="article:published_time" content="2022-07-27T07:55:44.000Z">
-<meta property="article:modified_time" content="2022-07-31T07:49:33.988Z">
+<meta property="article:modified_time" content="2022-07-31T08:12:11.188Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CS142">
 <meta name="twitter:card" content="summary">
@@ -263,7 +265,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1k字</span>
+      <span class="post-count">1.2k字</span>
     </span>
   </span>
 
@@ -272,7 +274,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">7分</span>
     </span>
   </span>
 </div>
@@ -456,6 +458,63 @@
 <h2 id="Key-concept-Separate-style-from-content"><a href="#Key-concept-Separate-style-from-content" class="headerlink" title="Key concept: Separate style from content"></a>Key concept: Separate style from content</h2><p>Content(what to display) is in HTML files. Formatting information(how to display) is in separate style sheet(.css files). Use an element attribute names <code>class</code> to link. So, you can define style information once, and use it in many places.</p>
 <p>Style sheet contain one or more CSS Rules. </p>
 <p><img src="/../img/css.png"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSS Selector</td>
+<td>CSS</td>
+<td>HTML</td>
+</tr>
+<tr>
+<td>Tag name</td>
+<td><code>h1 &#123;color: red;&#125;</code></td>
+<td><code>&lt;h1&gt;Today&#39;s Specials&lt;/h1&gt;</code></td>
+</tr>
+<tr>
+<td>Class attribute</td>
+<td><code>.large&#123;font-size: 16pt;&#125;</code></td>
+<td><code>&lt;p class=&quot;large&quot;&gt;...</code></td>
+</tr>
+<tr>
+<td>Tag and Class</td>
+<td><code>p.large&#123;...&#125;</code></td>
+<td><code>&lt;p class=&quot;large&quot;&gt;...</code></td>
+</tr>
+<tr>
+<td>Element id</td>
+<td><code>#p20&#123;font-weight: bold;&#125;</code></td>
+<td><code>&lt;p id=&quot;p20&quot;&gt;...</code></td>
+</tr>
+</tbody></table>
+<h2 id="CSS-Pseudo-伪-Selectors"><a href="#CSS-Pseudo-伪-Selectors" class="headerlink" title="CSS Pseudo(伪) Selectors"></a>CSS Pseudo(伪) Selectors</h2><p><code>hover</code> - Apply rule when mouse is over element</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:hover</span>, <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>a:link, a:visited</code> - Apply rule when link has visited or not visited(link)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS-Properties"><a href="#CSS-Properties" class="headerlink" title="CSS Properties"></a>CSS Properties</h2><p>Control many style properties of an element:</p>
+<ul>
+<li>Coloring</li>
+<li>Size</li>
+<li>Position</li>
+<li>Visibility</li>
+<li>Many more…</li>
+<li>Also used in animation.</li>
+</ul>
+<h3 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h3><p>Must ultimately turn into red, green and blue intensities between 0 and 255.</p>
+<ul>
+<li>Predefined names: red, blue, green, white, etc.</li>
+<li>8-bit hexadecimal numbers for red, green, blue: ·#ff0000&#96;.</li>
+<li>0-255 decimal intensities: rgb(255, 255, 0)</li>
+<li>Percentage intensities: rgb(80%, 80%, 100%)</li>
+</ul>
+<h3 id="CSS-Box-Model"><a href="#CSS-Box-Model" class="headerlink" title="CSS Box Model"></a>CSS Box Model</h3><p><img src="/../img/css_box_model.png"></p>
+<h3 id="CSS-distance-units"><a href="#CSS-distance-units" class="headerlink" title="CSS distance units"></a>CSS distance units</h3><p><img src="/../img/css_distance_units.png"></p>
 
     
 
@@ -592,7 +651,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Full-Stack-Web-Application-Architecture"><span class="toc-number">1.1.</span> <span class="toc-text">Full Stack Web Application Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Technologies-and-Concepts"><span class="toc-number">1.2.</span> <span class="toc-text">Technologies and Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTML-HyperText-Markup-Language"><span class="toc-number">2.</span> <span class="toc-text">2. HTML(HyperText Markup Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-tags"><span class="toc-number">2.1.</span> <span class="toc-text">HTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-Evolution"><span class="toc-number">2.2.</span> <span class="toc-text">HTML Evolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Syntax-rules-for-XHTML"><span class="toc-number">2.3.</span> <span class="toc-text">Basic Syntax rules for XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handle-markup-characters-in-content"><span class="toc-number">2.4.</span> <span class="toc-text">Handle markup characters in content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-used-XHTML-tags"><span class="toc-number">2.5.</span> <span class="toc-text">Common used XHTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-differences-from-XHTML"><span class="toc-number">2.6.</span> <span class="toc-text">HTML differences from XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Newer-HTML-HTML5"><span class="toc-number">2.7.</span> <span class="toc-text">Newer HTML - HTML5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-CSS-Cascading-%E7%BA%A7%E8%81%94-Style-Sheets"><span class="toc-number">3.</span> <span class="toc-text">3. CSS(Cascading(级联) Style Sheets)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-concept-Separate-style-from-content"><span class="toc-number">3.1.</span> <span class="toc-text">Key concept: Separate style from content</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Full-Stack-Web-Application-Architecture"><span class="toc-number">1.1.</span> <span class="toc-text">Full Stack Web Application Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Technologies-and-Concepts"><span class="toc-number">1.2.</span> <span class="toc-text">Technologies and Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTML-HyperText-Markup-Language"><span class="toc-number">2.</span> <span class="toc-text">2. HTML(HyperText Markup Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-tags"><span class="toc-number">2.1.</span> <span class="toc-text">HTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-Evolution"><span class="toc-number">2.2.</span> <span class="toc-text">HTML Evolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Syntax-rules-for-XHTML"><span class="toc-number">2.3.</span> <span class="toc-text">Basic Syntax rules for XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handle-markup-characters-in-content"><span class="toc-number">2.4.</span> <span class="toc-text">Handle markup characters in content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-used-XHTML-tags"><span class="toc-number">2.5.</span> <span class="toc-text">Common used XHTML tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML-differences-from-XHTML"><span class="toc-number">2.6.</span> <span class="toc-text">HTML differences from XHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Newer-HTML-HTML5"><span class="toc-number">2.7.</span> <span class="toc-text">Newer HTML - HTML5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-CSS-Cascading-%E7%BA%A7%E8%81%94-Style-Sheets"><span class="toc-number">3.</span> <span class="toc-text">3. CSS(Cascading(级联) Style Sheets)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-concept-Separate-style-from-content"><span class="toc-number">3.1.</span> <span class="toc-text">Key concept: Separate style from content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-Pseudo-%E4%BC%AA-Selectors"><span class="toc-number">3.2.</span> <span class="toc-text">CSS Pseudo(伪) Selectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-Properties"><span class="toc-number">3.3.</span> <span class="toc-text">CSS Properties</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Color"><span class="toc-number">3.3.1.</span> <span class="toc-text">Color</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-Box-Model"><span class="toc-number">3.3.2.</span> <span class="toc-text">CSS Box Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-distance-units"><span class="toc-number">3.3.3.</span> <span class="toc-text">CSS distance units</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
