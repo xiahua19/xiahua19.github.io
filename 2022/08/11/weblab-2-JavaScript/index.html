@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>cs106l-3.Streams | 夏花的博客小站</title>
+  <title>weblab-2-JavaScript | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.">
+  <meta name="description" content="JavaScript is a programming language that manipulates(操纵) the content of a web page.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs106l-3.Streams">
-<meta property="og:url" content="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/index.html">
+<meta property="og:title" content="weblab-2-JavaScript">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-2-JavaScript/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.">
+<meta property="og:description" content="JavaScript is a programming language that manipulates(操纵) the content of a web page.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-23T11:28:22.000Z">
-<meta property="article:modified_time" content="2022-07-24T11:47:51.956Z">
+<meta property="article:published_time" content="2022-08-11T10:07:05.000Z">
+<meta property="article:modified_time" content="2022-08-11T10:07:41.949Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="CS106L">
+<meta property="article:tag" content="WebLab">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
@@ -233,22 +233,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cs106l-3-Streams" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-weblab-2-JavaScript" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      cs106l-3.Streams
+      weblab-2-JavaScript
     </h1>
   
 
 
   
   
-<a href="/2022/07/23/cs106l-3-Streams/" class="archive-article-date">
-        <time datetime="2022-07-23T11:28:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-23</time>
+<a href="/2022/08/11/weblab-2-JavaScript/" class="archive-article-date">
+        <time datetime="2022-08-11T10:07:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
 </a>
 
   
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">582字</span>
+      <span class="post-count">912字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -282,47 +282,67 @@
   <div class="article-entry" itemprop="articleBody">
     
     <blockquote>
-<p>Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.</p>
+<p>JavaScript is a programming language that manipulates(操纵) the content of a web page.</p>
 </blockquote>
 <span id="more"></span>
+<h1 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h1><p>JavaScript has 5 primitive data types:</p>
+<ul>
+<li>Boolean(true, false)</li>
+<li>Number(12, 1.618, -46.7, etc.)</li>
+<li>String(“hello”, “12”, etc.)</li>
+<li>Null</li>
+<li>Undenfined</li>
+</ul>
+<h1 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h1><ul>
+<li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>…</li>
+<li><code>===</code>: triple equals sign</li>
+<li><code>!==</code>: not equals sign</li>
+</ul>
+<h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">greatestCommonDivisor</span> = (<span class="params">a,b</span>) =&gt;&#123;</span><br><span class="line">    <span class="keyword">while</span>(b !== <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> temp = b;</span><br><span class="line">        b = a % b;</span><br><span class="line">        a = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> x = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">const</span> y = <span class="number">15</span>;</span><br><span class="line"><span class="keyword">const</span> gcd = <span class="title function_">greatestCommonDivisor</span>(x,y); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="1-Output-streams"><a href="#1-Output-streams" class="headerlink" title="1. Output streams"></a>1. Output streams</h1><h2 id="output-stream"><a href="#output-stream" class="headerlink" title="output stream"></a>output stream</h2><blockquote>
-<p><code>std::cout</code> is an output stream. It has type <code>std::ostream</code>, which can only send data using <code>&lt;&lt;</code> operator to convert any type into string and sends it to the stream. </p>
-</blockquote>
-<p>So <code>std::cout</code> is the output stream that goes to the console, and it’s a global constant object that you can get from <code>#include&lt;iostream&gt;</code>. To use any other output stream, you must first initialize it.</p>
-<h2 id="output-file-stream"><a href="#output-file-stream" class="headerlink" title="output file stream"></a>output file stream</h2><blockquote>
-<p><code>std::ofstream</code> only uses the <code>&lt;&lt;</code> operator to convert data of any type into a string and sends it to the file stream. </p>
-</blockquote>
-<p>Before sending data, you must initialize your own ofstream object linked to your file.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ofstram <span class="title">out</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;</span><br><span class="line">out&lt;&lt;<span class="string">&quot;Some thing you want to write into out.txt&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="Defining-variables"><a href="#Defining-variables" class="headerlink" title="Defining variables"></a>Defining variables</h1><p>JavaScript convention is to name variables using camelCase.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myBoolean = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> myNumber = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">let</span> myString = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> answerToLife = <span class="number">6.148</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-Input-streams"><a href="#2-Input-streams" class="headerlink" title="2. Input streams"></a>2. Input streams</h1><h2 id="Input-stream"><a href="#Input-stream" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
-<p><code>std::cin</code> is an input stream. It has type <code>std::istream</code>, which can only use the <code>&gt;&gt;</code> operator to  receive strings from the stream and converts it to data. </p>
-</blockquote>
-<p>First call to <code>std::cin&gt;&gt;</code> creates a command line prompt(提示) that allows the user to type until they hit <code>enter</code>.</p>
-<p>Each <code>&gt;&gt;</code> only reads until the next <code>whitespace</code>(include tab, space, neline…). Everything after the first whitespace gets saved into a buffer and used the next time <code>std::cin&gt;&gt;</code> is called. If there iis nothing waiting in the buffer, <code>std::cin&gt;&gt;</code> creates a new command line prompt. So, don’t show up a whitespace in output.</p>
-<p>Once an error(such you input an string, while cin can only get an int), the input stream’s fail bit is set, and it will no longer accept any input.</p>
-<p><code>std::cin</code> is dangerous to use on its own, it uses <code>&gt;&gt;</code> to extract a single word or type including for strings. If you want to read a whole line, just use <code>std::getline(istream&amp; stream, string&amp; line)</code>, it takes in both parameters by reference and reads up to the next delimiter(by default, ‘\n’) and does go past that delimiter.</p>
-<p><code>std::cin</code> is a global constant object that you get from <code>#include&lt;iostream&gt;</code>. To use any other input stream, you must first initialize it!</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::string line;</span><br><span class="line">std::<span class="built_in">getline</span>(cin, line);</span><br></pre></td></tr></table></figure>
+<p><code>null</code> v.s. <code>undefined</code>: undefined means “declared but not yet assigned a value”, while null means “no value”.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> firstName; <span class="comment">// currently, firstName is undefined.</span></span><br><span class="line">firstName = <span class="string">&quot;Albert&quot;</span>; <span class="comment">// firstName has now been assigned to a value.</span></span><br><span class="line">firstName = <span class="literal">null</span>; <span class="comment">// we can explicitly </span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Input-file-stream"><a href="#Input-file-stream" class="headerlink" title="Input file stream"></a>Input file stream</h2><blockquote>
-<p>Input file stream have type <code>std::ifstream</code>. It only receives strings using the <code>&gt;&gt;</code> operator which receives strings from a file and converts it to data of any type.</p>
-</blockquote>
-<p>You must initialize your own ofstream object linked to your file.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ifstream <span class="title">in</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;<span class="comment">// in is now an iftream that reads from out.txt</span></span><br><span class="line">string str;</span><br><span class="line">in&gt;&gt;str; <span class="comment">// first word in out.txt goes into str.</span></span><br></pre></td></tr></table></figure>
+<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><p><code>console.log()</code> writes to the JavaScript console.</p>
+<p><code>alert()</code> generates a pop-up notification with the given content.</p>
+<h1 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h1><p>For when you want to store a sequence of(ideally similar) items:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pets = [<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;guinea pig&quot;</span>, <span class="string">&quot;bird&quot;</span>]; <span class="comment">// initialize</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pets[<span class="number">3</span>]); <span class="comment">// access</span></span><br><span class="line">pets[<span class="number">2</span>] = <span class="string">&quot;hamster&quot;</span>; <span class="comment">// replace</span></span><br><span class="line">pets.<span class="title function_">pop</span>(); <span class="comment">// remove from end</span></span><br><span class="line">pets.<span class="title function_">push</span>(<span class="string">&quot;rabbit&quot;</span>); <span class="comment">// add to end</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-String-streams"><a href="#3-String-streams" class="headerlink" title="3. String streams"></a>3. String streams</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sstream&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="Conditionals"><a href="#Conditionals" class="headerlink" title="Conditionals"></a>Conditionals</h1><p>We often want to perform different actions in response to different conditions. For whis, we use the conditional operators <code>if</code>, <code>else</code> and <code>else if</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (hour &lt; <span class="number">12</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Good morning!&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (hour &lt; <span class="number">16</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Good afternoon!&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (hour &lt; <span class="number">20</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Good evening!&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Good night!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
-<p>Input stream <code>std::istringstream</code>. Give any data type to the istringstream, it’ll store it as a string.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get from instream</span></span><br><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter1;</span><br><span class="line">converter1&gt;&gt;name&gt;&gt;age;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get from a variable.</span></span><br><span class="line">string some_str = <span class="string">&quot;13&quot;</span>;</span><br><span class="line"><span class="function">std::istringstream <span class="title">converter2</span><span class="params">(some_str)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> some_int</span><br><span class="line">converter2&gt;&gt;some_int;<span class="comment">// parse a int from string.</span></span><br></pre></td></tr></table></figure>
+<h1 id="While-Loops"><a href="#While-Loops" class="headerlink" title="While Loops"></a>While Loops</h1><p>What if we want to repeat an action as long as some condition is satisfied?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> z = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (z &lt; <span class="number">1000</span>) &#123;</span><br><span class="line">    z = z * <span class="number">2</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="For…of…"><a href="#For…of…" class="headerlink" title="For…of…"></a>For…of…</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pets = [<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;guinea pig&quot;</span>, <span class="string">&quot;bird&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> animal <span class="keyword">of</span> pets)&#123;</span><br><span class="line">    <span class="keyword">const</span> phrase = <span class="string">&quot;I love my &quot;</span> + animal;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(phrase);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>Output stream <code>std::ostringstream</code>. Make an ostringstream out of a string, read from it word&#x2F;type by word&#x2F;type.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::ostringstream formatter;</span><br><span class="line">formatter&lt;&lt;<span class="string">&quot;age: &quot;</span>&lt;&lt; <span class="number">100</span>&lt;&lt;;</span><br><span class="line">string result = formatter.<span class="built_in">str</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><p>A function is a compartmentalized block of code which can be given input and asked to perform a set of instructions on that input.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">celsiusToFaherheit</span> = tempC =&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> tempF = tempC * <span class="number">1.8</span> + <span class="number">32</span>;</span><br><span class="line">    <span class="keyword">return</span> tempF;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">celsiusToFaherheit</span>(<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="Callback-Function"><a href="#Callback-Function" class="headerlink" title="Callback Function"></a>Callback Function</h2><p>In JavaScript, functions can be passed around like any other variable. This means we can give a “callback” function as an argument to another function!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">addTwo</span> = x =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">modifyArray</span> = (<span class="params">array, callback</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; ++i) &#123;</span><br><span class="line">        array[i] = <span class="title function_">callback</span>(array[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myArray = [<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>];</span><br><span class="line"><span class="title function_">modifyArray</span>(myArray, addTwo);</span><br></pre></td></tr></table></figure>
+<h2 id="Anonymous-functions"><a href="#Anonymous-functions" class="headerlink" title="Anonymous functions"></a>Anonymous functions</h2><p>If your function is simple enough, you can use the following shorthand.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">modifyArray</span> = (<span class="params">array, callback</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; ++i) &#123;</span><br><span class="line">        array[i] = <span class="title function_">callback</span>(array[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myArray = [<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>];</span><br><span class="line"><span class="title function_">modifyArray</span>(myArray, <span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Other-built-in-array-functions"><a href="#Other-built-in-array-functions" class="headerlink" title="Other built-in array functions"></a>Other built-in array functions</h2><p>If it seems common enough, there’s probably a built-in function for it. For arrays, we’ve seen <code>push</code> and <code>pop</code>, which mutate the target array in-place. We also have <code>map</code> and <code>filter</code>, which produce a new array based on some instructions(which is going to be a callback function).</p>
+<h3 id="map"><a href="#map" class="headerlink" title="map(...)"></a><code>map(...)</code></h3><p>Creates a new array by applying the callback function to every element of the starting array.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> modifiedArray = myArray.<span class="title function_">map</span>(<span class="function"><span class="params">x</span> =&gt;</span> x * <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter(...)"></a><code>filter(...)</code></h2><p>Creates a new array by selecting the elements in the starting array which pass the given “test” (i.e. filtering out the ‘bad’ elements and keeping the ‘good’ ones).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">3</span>, -<span class="number">6</span>, <span class="number">2</span>, <span class="number">0</span>, -<span class="number">9</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> positiveValues = values.<span class="title function_">filter</span>(<span class="function"><span class="params">x</span> =&gt;</span> x &gt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h1><p>A JavaScript object is a collection of <code>name:value</code> pairs. We can just treat objects like any other variable, such as map and filiter. But for equality, it doesn’t.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myCar = &#123;</span><br><span class="line">    make  : <span class="string">&quot;Ford&quot;</span>,</span><br><span class="line">    model : <span class="string">&quot;Mustang&quot;</span>,</span><br><span class="line">    year  : <span class="number">2005</span>,</span><br><span class="line">    color : <span class="string">&quot;red&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>There are two ways to access object properties. If you know the property name, then you can call <code>myCar.model</code> or <code>myCar[&quot;color&quot;]</code> to access it.</p>
+<p>Object destructuring(解构) is a shorthand to obtain multiple properties at once.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; make, model &#125; = myCar;</span><br></pre></td></tr></table></figure>
+
+<p>Object variables are references, they point to where the data is actually stored. So, <code>===</code> checks if the references are equal. Two objects created separately are stored separately, so their references are different! Same goes to arrays, two arrays created sepatately have different references.</p>
+<p>One way to copy arrays and objects is to use the spread operator(…) like so:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> copyArr = [...arr];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">&quot;Bill Gates&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> copyObj = &#123; ...obj &#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h1><p>If you want to multiple entities that are guaranteeed to have shared behavior, use classes! Every class has a constructor which tells it how to create a specific instance of that entity.</p>
+<p>Classes may also contain methods(functions) which can access and manipulate instance properties. The same methods exist in every instance of the class.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">width, height</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">width</span> = width;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">height</span> = height;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getArea = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">width</span> * <span class="variable language_">this</span>.<span class="property">height</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> smallRect = <span class="keyword">new</span> <span class="title class_">Rectangle</span>(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="keyword">const</span> bigRect = <span class="keyword">new</span> <span class="title class_">Rectangle</span>(<span class="number">15</span>, <span class="number">11</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(smallRect.<span class="property">width</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bigRect.<span class="property">height</span>);</span><br></pre></td></tr></table></figure>
+
     
 
     
@@ -336,7 +356,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/" title="cs106l-3.Streams" target="_blank">http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/</a>
+          <a href="http://xiahua19.github.io/2022/08/11/weblab-2-JavaScript/" title="weblab-2-JavaScript" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-2-JavaScript/</a>
         </li>
         
         <li>
@@ -358,7 +378,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
         		</li>
       		
 		</ul>
@@ -414,7 +434,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-2-JavaScript/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -429,18 +449,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/07/24/cs106l-4-Initialization-and-References/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/08/11/weblab-3-ReactJS/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          cs106l-4.Initialization and References
+          weblab-3-ReactJS
         
       </div>
     </a>
   
   
-    <a href="/2022/07/23/cs106l-2-Types-and-Structs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cs106l-2.Types and Structs</div>
+    <a href="/2022/08/11/weblab-1-HTML-and-CSS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">weblab-1-HTML and CSS</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -467,7 +487,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Output-streams"><span class="toc-number">1.</span> <span class="toc-text">1. Output streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#output-stream"><span class="toc-number">1.1.</span> <span class="toc-text">output stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output-file-stream"><span class="toc-number">1.2.</span> <span class="toc-text">output file stream</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Input-streams"><span class="toc-number">2.</span> <span class="toc-text">2. Input streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-stream"><span class="toc-number">2.1.</span> <span class="toc-text">Input stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-file-stream"><span class="toc-number">2.2.</span> <span class="toc-text">Input file stream</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-streams"><span class="toc-number">3.</span> <span class="toc-text">3. String streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-stream-1"><span class="toc-number">3.1.</span> <span class="toc-text">Input stream</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Types"><span class="toc-number">1.</span> <span class="toc-text">Types</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Operators"><span class="toc-number">2.</span> <span class="toc-text">Operators</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Syntax"><span class="toc-number">3.</span> <span class="toc-text">Syntax</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Defining-variables"><span class="toc-number">4.</span> <span class="toc-text">Defining variables</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output"><span class="toc-number">5.</span> <span class="toc-text">Output</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Arrays"><span class="toc-number">6.</span> <span class="toc-text">Arrays</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conditionals"><span class="toc-number">7.</span> <span class="toc-text">Conditionals</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#While-Loops"><span class="toc-number">8.</span> <span class="toc-text">While Loops</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#For%E2%80%A6of%E2%80%A6"><span class="toc-number">9.</span> <span class="toc-text">For…of…</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Functions"><span class="toc-number">10.</span> <span class="toc-text">Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Callback-Function"><span class="toc-number">10.1.</span> <span class="toc-text">Callback Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Anonymous-functions"><span class="toc-number">10.2.</span> <span class="toc-text">Anonymous functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-built-in-array-functions"><span class="toc-number">10.3.</span> <span class="toc-text">Other built-in array functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-number">10.3.1.</span> <span class="toc-text">map(...)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#filter"><span class="toc-number">10.4.</span> <span class="toc-text">filter(...)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Objects"><span class="toc-number">11.</span> <span class="toc-text">Objects</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Classes"><span class="toc-number">12.</span> <span class="toc-text">Classes</span></a></li></ol>
                     </div>
                 </span>
             </div>

@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>cs106l-3.Streams | 夏花的博客小站</title>
+  <title>weblab-3-ReactJS | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.">
+  <meta name="description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs106l-3.Streams">
-<meta property="og:url" content="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/index.html">
+<meta property="og:title" content="weblab-3-ReactJS">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.">
+<meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-23T11:28:22.000Z">
-<meta property="article:modified_time" content="2022-07-24T11:47:51.956Z">
+<meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
+<meta property="article:modified_time" content="2022-08-11T10:08:24.839Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="CS106L">
+<meta property="article:tag" content="WebLab">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
@@ -233,22 +233,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cs106l-3-Streams" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-weblab-3-ReactJS" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      cs106l-3.Streams
+      weblab-3-ReactJS
     </h1>
   
 
 
   
   
-<a href="/2022/07/23/cs106l-3-Streams/" class="archive-article-date">
-        <time datetime="2022-07-23T11:28:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-23</time>
+<a href="/2022/08/11/weblab-3-ReactJS/" class="archive-article-date">
+        <time datetime="2022-08-11T10:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
 </a>
 
   
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">582字</span>
+      <span class="post-count">753字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -281,48 +281,58 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <blockquote>
-<p>Stream is an abstration for input&#x2F;output. Streams convert between data and the string representation of data.</p>
+    <h1 id="What’s-ReactJS"><a href="#What’s-ReactJS" class="headerlink" title="What’s ReactJS"></a>What’s ReactJS</h1><blockquote>
+<p>React is a JavaScript library for building user interfaces. It’s modular, fast and readable.</p>
 </blockquote>
 <span id="more"></span>
+<p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
+<p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="1-Output-streams"><a href="#1-Output-streams" class="headerlink" title="1. Output streams"></a>1. Output streams</h1><h2 id="output-stream"><a href="#output-stream" class="headerlink" title="output stream"></a>output stream</h2><blockquote>
-<p><code>std::cout</code> is an output stream. It has type <code>std::ostream</code>, which can only send data using <code>&lt;&lt;</code> operator to convert any type into string and sends it to the stream. </p>
-</blockquote>
-<p>So <code>std::cout</code> is the output stream that goes to the console, and it’s a global constant object that you can get from <code>#include&lt;iostream&gt;</code>. To use any other output stream, you must first initialize it.</p>
-<h2 id="output-file-stream"><a href="#output-file-stream" class="headerlink" title="output file stream"></a>output file stream</h2><blockquote>
-<p><code>std::ofstream</code> only uses the <code>&lt;&lt;</code> operator to convert data of any type into a string and sends it to the file stream. </p>
-</blockquote>
-<p>Before sending data, you must initialize your own ofstream object linked to your file.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ofstram <span class="title">out</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;</span><br><span class="line">out&lt;&lt;<span class="string">&quot;Some thing you want to write into out.txt&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-Input-streams"><a href="#2-Input-streams" class="headerlink" title="2. Input streams"></a>2. Input streams</h1><h2 id="Input-stream"><a href="#Input-stream" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
-<p><code>std::cin</code> is an input stream. It has type <code>std::istream</code>, which can only use the <code>&gt;&gt;</code> operator to  receive strings from the stream and converts it to data. </p>
-</blockquote>
-<p>First call to <code>std::cin&gt;&gt;</code> creates a command line prompt(提示) that allows the user to type until they hit <code>enter</code>.</p>
-<p>Each <code>&gt;&gt;</code> only reads until the next <code>whitespace</code>(include tab, space, neline…). Everything after the first whitespace gets saved into a buffer and used the next time <code>std::cin&gt;&gt;</code> is called. If there iis nothing waiting in the buffer, <code>std::cin&gt;&gt;</code> creates a new command line prompt. So, don’t show up a whitespace in output.</p>
-<p>Once an error(such you input an string, while cin can only get an int), the input stream’s fail bit is set, and it will no longer accept any input.</p>
-<p><code>std::cin</code> is dangerous to use on its own, it uses <code>&gt;&gt;</code> to extract a single word or type including for strings. If you want to read a whole line, just use <code>std::getline(istream&amp; stream, string&amp; line)</code>, it takes in both parameters by reference and reads up to the next delimiter(by default, ‘\n’) and does go past that delimiter.</p>
-<p><code>std::cin</code> is a global constant object that you get from <code>#include&lt;iostream&gt;</code>. To use any other input stream, you must first initialize it!</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::string line;</span><br><span class="line">std::<span class="built_in">getline</span>(cin, line);</span><br></pre></td></tr></table></figure>
+<p>Now we have our reuasble comment component:</p>
+<ul>
+<li>We pass props in from parent to child.</li>
+<li>Allows out skeleton to render comments with content.</li>
+<li>State keeps track of private information that can be changed and influence how your app renders.</li>
+</ul>
+<h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
+<ul>
+<li>APP<ul>
+<li>Post<ul>
+<li>Comment</li>
+<li>Comment</li>
+<li>Comment</li>
+<li>Comment</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>For post, the postContent, isLiked is <code>State</code>. For comment, the commentContent is <code>Props</code>, while isLiked is <code>State</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment component is a function that takes in props as an input.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Comment</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1. Set initial states. Declares isLiked to False, and specifies &quot;setIsLiked&quot; as the function to update the state.</span></span><br><span class="line">    <span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Expects a return type of HTML like code. () allows us to write HTML code inside JavaScript.</span></span><br><span class="line">    <span class="comment">// What you return will describe how the component appears.</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// Return a div. style it appropriately. &#123;&#125; allows us to return to JavaScript inside the HTML environment inside the JavaScript class.</span></span><br><span class="line">        <span class="comment">// Note: we use className to access CSS classes.</span></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;claireComment&quot;</span> <span class="attr">className</span>=<span class="string">&quot;comment-text&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; props.content &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Comment</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Input-file-stream"><a href="#Input-file-stream" class="headerlink" title="Input file stream"></a>Input file stream</h2><blockquote>
-<p>Input file stream have type <code>std::ifstream</code>. It only receives strings using the <code>&gt;&gt;</code> operator which receives strings from a file and converts it to data of any type.</p>
-</blockquote>
-<p>You must initialize your own ofstream object linked to your file.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::ifstream <span class="title">in</span><span class="params">(<span class="string">&quot;out.txt&quot;</span>)</span></span>;<span class="comment">// in is now an iftream that reads from out.txt</span></span><br><span class="line">string str;</span><br><span class="line">in&gt;&gt;str; <span class="comment">// first word in out.txt goes into str.</span></span><br></pre></td></tr></table></figure>
+<h1 id="React-Guide-1"><a href="#React-Guide-1" class="headerlink" title="React-Guide-1"></a>React-Guide-1</h1><h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&quot;./NavBar.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Intro</span> <span class="keyword">from</span> <span class="string">&quot;./Intro.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Photos</span> <span class="keyword">from</span> <span class="string">&quot;./Photos.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Intro</span> <span class="attr">city</span>=<span class="string">&quot;Fairfax, Virginia&quot;</span> <span class="attr">pronunciation</span>=<span class="string">&quot;AHKS-hahj...&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Photos</span> <span class="attr">links</span>=<span class="string">&#123;[</span>&quot;<span class="attr">firstpic.jpg</span>&quot;, &quot;<span class="attr">dancepic.jpg</span>&quot;, &quot;<span class="attr">funnypic.jpg</span>&quot;]&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj Kadaveru&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Sign up for web lab!&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-String-streams"><a href="#3-String-streams" class="headerlink" title="3. String streams"></a>3. String streams</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sstream&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="Intro-js"><a href="#Intro-js" class="headerlink" title="Intro.js"></a>Intro.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Intro</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lives in <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123; props.city &#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pronounces name &#123; props.pronunciation &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit Details<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Hobbies<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Featured<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Intro</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Input-stream-1"><a href="#Input-stream-1" class="headerlink" title="Input stream"></a>Input stream</h2><blockquote>
-<p>Input stream <code>std::istringstream</code>. Give any data type to the istringstream, it’ll store it as a string.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get from instream</span></span><br><span class="line"><span class="type">int</span> age; string name;</span><br><span class="line">std::istringstream converter1;</span><br><span class="line">converter1&gt;&gt;name&gt;&gt;age;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get from a variable.</span></span><br><span class="line">string some_str = <span class="string">&quot;13&quot;</span>;</span><br><span class="line"><span class="function">std::istringstream <span class="title">converter2</span><span class="params">(some_str)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> some_int</span><br><span class="line">converter2&gt;&gt;some_int;<span class="comment">// parse a int from string.</span></span><br></pre></td></tr></table></figure>
+<h3 id="Photos-js"><a href="#Photos-js" class="headerlink" title="Photos.js"></a>Photos.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Photos</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> myImageTags = props.<span class="property">links</span>.<span class="title function_">map</span>(</span><br><span class="line">        <span class="function">(<span class="params">photolink</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">&#123;photolink&#125;</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Photos<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; myImageTags &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Photos</span>;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>Output stream <code>std::ostringstream</code>. Make an ostringstream out of a string, read from it word&#x2F;type by word&#x2F;type.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::ostringstream formatter;</span><br><span class="line">formatter&lt;&lt;<span class="string">&quot;age: &quot;</span>&lt;&lt; <span class="number">100</span>&lt;&lt;;</span><br><span class="line">string result = formatter.<span class="built_in">str</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="Post-js"><a href="#Post-js" class="headerlink" title="Post.js"></a>Post.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> &#123; useState &#125;<span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [numLikes, setNumLikes] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123; props.name &#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; props.text &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">onClick</span> = <span class="string">&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                    () =&gt;</span> &#123; setNumLinks(numLikes + 1); &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;likeIcon.jpg&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123; numLikes &#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Recap-Writing-Components"><a href="#Recap-Writing-Components" class="headerlink" title="Recap: Writing Components"></a>Recap: Writing Components</h1><ul>
+<li>We divide our app into components, and put one in each file.</li>
+<li>Each component is a function with props as the input, and returns HTML-like code.</li>
+<li>() allow us to enter an HTML environment.</li>
+<li>Inside the HTML environment, {} allows us to create a mini JS environment.</li>
+<li>We pass in props with HTML tags.</li>
+<li>We read in those props with <code>.</code> function.</li>
+<li>We declare state variavles with <code>const [something, setSomething] = useState(initialValue)</code>.</li>
+<li>React uses <code>className</code> instead of class for css style.</li>
+</ul>
+
     
 
     
@@ -336,7 +346,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/" title="cs106l-3.Streams" target="_blank">http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/</a>
+          <a href="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" title="weblab-3-ReactJS" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/</a>
         </li>
         
         <li>
@@ -358,7 +368,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS106L</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
         		</li>
       		
 		</ul>
@@ -414,7 +424,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/07/23/cs106l-3-Streams/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -429,18 +439,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/07/24/cs106l-4-Initialization-and-References/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          cs106l-4.Initialization and References
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/23/cs106l-2-Types-and-Structs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cs106l-2.Types and Structs</div>
+    <a href="/2022/08/11/weblab-2-JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">weblab-2-JavaScript</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -467,7 +468,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Output-streams"><span class="toc-number">1.</span> <span class="toc-text">1. Output streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#output-stream"><span class="toc-number">1.1.</span> <span class="toc-text">output stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output-file-stream"><span class="toc-number">1.2.</span> <span class="toc-text">output file stream</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Input-streams"><span class="toc-number">2.</span> <span class="toc-text">2. Input streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-stream"><span class="toc-number">2.1.</span> <span class="toc-text">Input stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-file-stream"><span class="toc-number">2.2.</span> <span class="toc-text">Input file stream</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-streams"><span class="toc-number">3.</span> <span class="toc-text">3. String streams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-stream-1"><span class="toc-number">3.1.</span> <span class="toc-text">Input stream</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">2.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">3.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">3.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">3.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">3.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">3.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">4.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
                     </div>
                 </span>
             </div>
