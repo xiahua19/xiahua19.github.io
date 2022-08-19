@@ -17,11 +17,13 @@
 <meta property="og:site_name" content="夏花的博客小站">
 <meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
 <meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
-<meta property="article:modified_time" content="2022-08-11T10:08:24.839Z">
+<meta property="article:modified_time" content="2022-08-19T06:32:50.368Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="WebLab">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
   
@@ -267,7 +269,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">753字</span>
+      <span class="post-count">1.1k字</span>
     </span>
   </span>
 
@@ -276,7 +278,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -292,18 +294,41 @@
 </blockquote>
 <span id="more"></span>
 <p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
-<p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Now we have our reuasble comment component:</p>
+<h1 id="Props-amp-States"><a href="#Props-amp-States" class="headerlink" title="Props &amp; States"></a>Props &amp; States</h1><p>Now we have our reuasble comment component:</p>
 <ul>
 <li>We pass props in from parent to child.</li>
 <li>Allows out skeleton to render comments with content.</li>
 <li>State keeps track of private information that can be changed and influence how your app renders.</li>
 </ul>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="States"><a href="#States" class="headerlink" title="States"></a>States</h2><p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. </p>
+<h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>We can’t directly edit a component’s state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParentComponent</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeCatHappiness</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setCatHappiness</span>(catHappiness + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">updateFunction</span>=<span class="string">&#123;changeCatHappiness&#125;</span> /&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ChildComponent</span></span><br><span class="line">props.<span class="title function_">updateFunction</span>();</span><br></pre></td></tr></table></figure>
+<p>But note that this is a WORKAROUND(解决办法). You shouldn’t be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.</p>
+<h3 id="useEffect-hook"><a href="#useEffect-hook" class="headerlink" title="useEffect hook"></a>useEffect hook</h3><p>What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!</p>
+<div align="center">
+<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
+</div>
+
+<p>useEffect hook runs after specific variables change:</p>
+<ul>
+<li>Can think of as response to state change.</li>
+<li>Commonly used to load data into state.</li>
+<li>Call an API&#x2F;perform some computation&#x2F;etc. as specific times.</li>
+</ul>
+<p>syntax: <code>useEffect(function, optional dependency array)</code>, runs function every time a variable in dependency array changes. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add &quot;me&quot; to persons array.</span></span><br><span class="line">testingStuff = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setPerson</span>([...persons, <span class="string">&quot;me&quot;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call log function whenever the persons array changes.</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(persons);</span><br><span class="line">&#125;, [persons])</span><br></pre></td></tr></table></figure>
+<p>Dependency array examples:</p>
+<ul>
+<li>useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.</li>
+<li>useEffect(function, []) runs function once, immediately after initialization.</li>
+<li>useEffect(function) runs every time any state variable changes.</li>
+</ul>
+<h2 id="Make-states-stay-make-props-pass"><a href="#Make-states-stay-make-props-pass" class="headerlink" title="Make states stay, make props pass"></a>Make states stay, make props pass</h2><p>PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it’s relevant, and be passed to every other part of the site via props.</p>
 <h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
 <ul>
 <li>APP<ul>
@@ -483,7 +508,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">2.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">3.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">3.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">3.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">3.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">3.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">4.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.</span> <span class="toc-text">Props &amp; States</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Props"><span class="toc-number">2.1.</span> <span class="toc-text">Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#States"><span class="toc-number">2.2.</span> <span class="toc-text">States</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Callback-Functions"><span class="toc-number">2.2.1.</span> <span class="toc-text">Callback Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect-hook"><span class="toc-number">2.2.2.</span> <span class="toc-text">useEffect hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-states-stay-make-props-pass"><span class="toc-number">2.3.</span> <span class="toc-text">Make states stay, make props pass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">3.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">4.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">4.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">4.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">4.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">4.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">5.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -636,6 +661,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">lyric</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Weblab</a>
               </li>
             
             <div class="clearfix"></div>
