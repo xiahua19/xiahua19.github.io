@@ -273,69 +273,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="Hash-Tables"><a href="#Hash-Tables" class="headerlink" title="Hash Tables"></a>Hash Tables</h1><h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><p>A DBMS uses various data structures for many different parts of the system internals. Some examples include:</p>
-<ul>
-<li>Internal Meta-Data: This is data that keeps track of information about the database and the system state. Ex: Page tables, page directories.</li>
-<li>Core Data Storage: Data structures are used as the base storage for tuples in the databse.</li>
-<li>Temporary Data Structures: The DBMS can build data structures on the fly while processing a query to speed up execution (e.g. hash tables for joins).</li>
-<li>Table indices: Auxiliary(辅助的) data structures can be used to make it easier to find specific tuples.</li>
-</ul>
-<p>There are two main design decisions to consider when implementing data structures for the DBMS:</p>
-<ul>
-<li>Data organization: We need to figure out how to layout memory and what information to store inside the data structure in order to support the efficient access.</li>
-<li>Concurrency: We also need to think about how to enable multiple therads to access the data structure without causing problems.</li>
-</ul>
-<h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h2><p>A hash table implements an associative array abstract data type that maps keys to values. It provides on average O(1) operation complexity (O(n) is the worst-case) and O(n) storage complexity. Note that even with O(1) operation complexity on average, there are constant factor optimizations which are important to consider in the real world.</p>
-<p>A hash table implementation is comprised of two parts</p>
-<ul>
-<li>Hash Function: This tells us how to map a large key space into a smaller domain. It is used to compute an index into an array of buckets or slots. We need to consider the trade-off between fast execution and collision rate. On one extreme, we have a hash function that always returns a constant (very fast, but everything is a collision). On the other extreme, we have a “perfect” hashing function where there are no collisions, but would take extremely long to compute. The ideal design is somewhere in the middle.</li>
-<li>Hashing Scheme: This tells us how to handle key collisions after hashing. Here, we need to consider the trade-off between allocating a large hash table to reduce collisions and having to execute additional instructions when a collision occurs.</li>
-</ul>
-<h2 id="Hash-Functions"><a href="#Hash-Functions" class="headerlink" title="Hash Functions"></a>Hash Functions</h2><p>A hash function takes in any key as its input. It then returns an integer representation of that key (i.e. the “hash”). The function’s output is deterministic (i.e. the same key should always generate the same hash output).</p>
-<p>The DBMS need not use a cryptographically(加密的) secure hash function (e.g., SHA-256) because we do not need to worry about protecting the contents of keys. These hash functions are primarily used internally by the DBMS and thus information is not leaked outside of the system. In general, we only care about the hash function’s speed and collision rate.</p>
-<p>The current state-of-the-art hash function is Facebook XXHash3.</p>
-<h2 id="Static-Hashing-Schemes"><a href="#Static-Hashing-Schemes" class="headerlink" title="Static Hashing Schemes"></a>Static Hashing Schemes</h2><p>A static hashing scheme is one where the size of the hash table is fixed. This means that if the DBMS runs out of storage space in the hash table, then it has to rebuild a larger hash table from scratch, which is very expensive. Typically the new hash table is twice the size of the original hash table.</p>
-<p>To reduce the number of wasteful comparisons, it is important to avoid collisions of hashed key. Typically, we use twice the number of slots as the number of expected elements.</p>
-<p>The following assumptions usually do not hold in reality:</p>
-<ul>
-<li>The number of elements is known ahead of time.</li>
-<li>Keys are unique.</li>
-<li>There exists a perfect hash function.</li>
-</ul>
-<p>Therefore, we need to choose the hash function and hashing scheme appropriately.</p>
-<h3 id="Linear-Probe-Hashing"><a href="#Linear-Probe-Hashing" class="headerlink" title="Linear Probe Hashing"></a>Linear Probe Hashing</h3><p>This is the most basic hashing scheme. It is also typically the fastest. It uses a circular buffer of array slots. The hash function maps keys to slots. When a collision occurs, we linearly search the adjacent slots until an open one is found. For lookups, we can check the slot the key hashes to, and search linearly until we find the desired entry (or an empty slot, in which case the key is not in the table). Note that this means we have to store the key in the slot as well so that we can check if an entry is the derired one. </p>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%231.png?raw=true"></p>
-<p>Deletions are more tricky. We have to be careful about just removing the entry from the slot, as this may prevent future lookups from the finding entries that have been put below the now empty slot. There are two solutions to this problem:</p>
-<ul>
-<li>The most common approach is to use “tombstones”. Instead of deleting the entry, we replace it with a “tombstone” which tells future lookups to keep scanning.</li>
-<li>The other option is to shift the adjacent data after deleting an entry to fill the now empty slot. However, we must be careful to only move the entries which were originally shifted.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%232.png?raw=true"></li>
-</ul>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%233.png?raw=true"></p>
-<p>Non-unique Keys: In the case where the same key may be associated with multiple different values or tuples, there are two approaches.</p>
-<ul>
-<li>Seperate Linked List: Instead of sorting the values with the keys, we store a pointer to a seperate storage area which contains a linked list of all the values.</li>
-<li>Redundant Keys: The more common approach is to simply store the same key multiple times in the table. Everything with linear probing still works even if we do this.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%234.png?raw=true"></li>
-</ul>
-<h3 id="Robin-Hood-Hashing"><a href="#Robin-Hood-Hashing" class="headerlink" title="Robin Hood Hashing"></a>Robin Hood Hashing</h3><p>This is an extension of linear probe hashing that seeks to reduce the maximum distance of each key from their optimal position (i.e. the original slot they were hashed to) in the hash table. This strategy steals slots from “rich” keys and gives them to “poor” keys.</p>
-<p>In this variant, each entry also records the “distance” they are from their optimal position. Then, on each insert, if the key being inserted would be farther away from their optimal position at the current slot than the current entry’s distance, we replace the current entry and continue trying to insert the old entry farther down the table.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%235.png?raw=true"></p>
-<h3 id="Cuckoo-Hashing"><a href="#Cuckoo-Hashing" class="headerlink" title="Cuckoo Hashing"></a>Cuckoo Hashing</h3><p>Instead of using a single hash table, this approach maintains multiple has tables with different hash functions. The hash functions are the same algorithm (e.g. XXHash, CityHash); they generate different hashes for the same key by using seed values.</p>
-<p>When we insert, we check every table and choose one that has a free slot (if multiple have one, we can compare things like load factor, or more commonly, just choose a random table). If no table has a free slot, we choose (typically a random one) and evict the old entry. We then rehash the old entry into a different table. In rare cases, we may end up in a cycle. If this happens, we can rebuild all of the hash tables with new hash function seeds (less common) or rebuild the hash tables using larger tables (more common).</p>
-<p>Cuckoo hashing guarantees O(1) lookups and deletions, but insertions may be more expensive.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%236.png?raw=true"></p>
-<h2 id="Dynamic-Hashing-Schemes"><a href="#Dynamic-Hashing-Schemes" class="headerlink" title="Dynamic Hashing Schemes"></a>Dynamic Hashing Schemes</h2><p>The static hashing schemes require the DBMS to know the number of elements it wants to store. Otherwise, it has to rebuild the table if it needs to grow&#x2F;shrink in size.</p>
-<p>Dynamic hashing schemes are able to resize the hash table on demand without needing to rebuild the entire table. The schemes perform this resizing in different ways that can either maximize reads ot writes.</p>
-<h3 id="Chained-Hashing"><a href="#Chained-Hashing" class="headerlink" title="Chained Hashing"></a>Chained Hashing</h3><p>This is the most common dynamic hashing scheme. The DBMS maintains a linked list of buckets for each slot in the hash table. Keys which hash to the same slot are simply inserted into the linked list for that slot.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%237.png?raw=true"></p>
-<h3 id="Extendible-Hashing"><a href="#Extendible-Hashing" class="headerlink" title="Extendible Hashing"></a>Extendible Hashing</h3><p>Improved variant of chained hashing that splits buckets instead of letting chains to grow forever. This approach allows multiple slot locations in the hash table to point to the same bucket chain.</p>
-<p>The core idea behind re-balancing the hash table is to move bucket entries on split and increase the number of bits to examine to find entries in the hash table. This means that the DBMS only has to move data within the buckets of the split chain; all other buckets are left untouched.</p>
-<ul>
-<li>The DBMS maintains a global and local depth bit counts that determine the number bits needed to find buckets in the slot array.</li>
-<li>When a bucket is full, the DBMS splits the bucket and reshuffle its elements. If the local depth of the split bucket is less than the global depth, then the new bucket is just added to the exiting slot array. Otherwise, the DBMS doubles the size of the slot array to accommodate the new bucket and increments the global depth counter.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%239.png?raw=true"></li>
-</ul>
-<h3 id="Linear-Hashing"><a href="#Linear-Hashing" class="headerlink" title="Linear Hashing"></a>Linear Hashing</h3><p>Instead of immediately splitting a bucket when it overflows, this scheme maintains a split pointer that keeps track of the next bucket to split. No matter whether this pointer is pointing to a bucket that overflowed, the DBMS always splits. The overflow criterion is left up to the implementation.</p>
-<ul>
-<li>When any bucket overflows, split the bucket at the pointer location by adding a new slot entry, and create a new hash function.</li>
-<li>If the hash function maps to slot that has previously been pointed to by pointer, apply the new hash function.</li>
-<li>When the pointer reaches last slot, delete original hash function and replace it with a new hash function.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%2310.png?raw=true"></li>
-</ul>
-
+    
+    <a class="article-more-a" href="/2022/08/30/cmu15-5-Hash-Tables/#more">more >></a>
+    
     
 
     
@@ -420,77 +360,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be able to efficiently move data respresented as file on its disk into memory so that it can be used. A diagram of this interaction is shown in the below figure. A obstacle that DBMS’s face is the problem of minimizing the slowdown of moving data around. Ideally, it should “appear” as if the data is all in the memory already.</p>
-<p>Another way to think of this problem is in terms of spatial and temporal control. </p>
-<ul>
-<li>Spatial Control refers to where pages are physically written on disk. The goal of spatial control is to keep pages that are used together often as physically close together as possible on disk.</li>
-<li>Temporal Control refers to when to read pages into memory and when to write them to disk. Temporal control aims to minimize the number of stalls from having to read data from disk.</li>
-</ul>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DiskOrientedDBMS.png?raw=true"></p>
-<h2 id="Locks-vs-Latches"><a href="#Locks-vs-Latches" class="headerlink" title="Locks vs. Latches"></a>Locks vs. Latches</h2><p>We need to make a distinction between locks and latches when discussing how the DBMS protects its internal elements.</p>
-<ul>
-<li>Locks: A lock is a higher-level, logical primitive that protects the contents of a database (e.g. tuples, tables, databses) from other transactions. Transactions will hold a lock for its entire duration. Database systems can expose to the user which locks are being held as queries are run. Locks need to be able to rollback changes.</li>
-<li>Latches: A latch is a low-level protection primitive that the DBMS uses for the critical sections in its internal data structures (e.g. hash tables, regions of memory). Latches are held for only the duration for the operation being made. Latches do not need to be able to rollback changes.</li>
-</ul>
-<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p>The buffer pool is an in-memory cache of pages read from disk. It is essentially a large memory region allocated inside of the database to store pages that are fetched from disk.</p>
-<p>The buffer pool’s region of memory organized as array of fixed size pages. Each array entry is called a <strong>frame</strong>.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool.png?raw=true"></p>
-<p>When the DBMS requests a page, an exact copy is placed into one of the frames of the buffer pool. Then, the database system can search the buffer pool first when a page is requested. If the page is not found, then the system fetches a copy of the page from the disk. See below figure for a diagram of the buffer pool’s memory organization.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool2.png?raw=true"></p>
-<h3 id="Buffer-Pool-Meta-data"><a href="#Buffer-Pool-Meta-data" class="headerlink" title="Buffer Pool Meta-data"></a>Buffer Pool Meta-data</h3><p>The buffer pool must maintain certain meta-data in order to be used efficiently and correctly.</p>
-<p>Firstly, the <strong>page table</strong> is an in-memory hash table that keeps track of pages that are currently in memory. It maps <em>page ids</em> to <em>frame locations</em> in the buffer pool. Since the order of pages in the buffer pool does not necessarily reflect the order on the disk, this extra indirection layer allows for the identification of page locations in the pool. Note that the page table is not to be confused with the <strong>page directory</strong>, which is the mapping from <em>page ids</em> to <em>page locations</em> in the databse files.</p>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/pagetable.png?raw=true"></p>
-<p>The page table also maintains additional meta-data per page, a <strong>dirty-flag</strong> and a <strong>pin&#x2F;reference counter</strong>.</p>
-<ul>
-<li>The <strong>dirty-flag</strong> is set by a thread whenever it modifies a page. This indicates to storage manager that the page must be written back to disk.</li>
-<li>The <strong>pin&#x2F;reference counter</strong> tracks the number of threads that are currently accessing that page (either reading or modifying it). A thread has to increment the counter before they access the page. If a page’s count is greater than zero, then the storage manager is note allowed to evict that page from memory.</li>
-</ul>
-<h2 id="Memory-Allocation-Policies"><a href="#Memory-Allocation-Policies" class="headerlink" title="Memory Allocation Policies"></a>Memory Allocation Policies</h2><p>Memory in the database is allocated for the buffer pool according to two policies.</p>
-<ul>
-<li>Global policies deal with decisions that the DBMS should make to benefit the entire workload that is being executed. It considers all active transactions to find an optimal decision for allocating memory.</li>
-<li>An alternative is local policies makes decisions that will make a single query or transaction run faster, even if it isn’t good for the entire workload. Local policies allocate frames to a specific transactions without considering the behavior of concurrent transactions.</li>
-</ul>
-<p>Most systems use a combination of both global and local views.</p>
-<h2 id="Buffer-Pool-Optimizations"><a href="#Buffer-Pool-Optimizations" class="headerlink" title="Buffer Pool Optimizations"></a>Buffer Pool Optimizations</h2><p>There are a number of ways to optimize a buffer pool to tailor it to the application’s workload.</p>
-<h3 id="Multiple-Buffer-Pools"><a href="#Multiple-Buffer-Pools" class="headerlink" title="Multiple Buffer Pools"></a>Multiple Buffer Pools</h3><p>The DBMS can maintain multiple buffer pools for different purposes (i.e per-database buffer pool, per-page type buffer pool). Then, each buffer pool can adopt local policies tailored for the data stored inside of it. This method can help reduce latch contention and improves locality.</p>
-<p>Two approaches to mapping desired pages to a buffer pool are object IDs and hashing.</p>
-<ul>
-<li>Object IDs involve extending the record IDs to include meta-data about what database objects each buffer pool is managing. Then through the object identifier, a mapping from objects to specific buffer pools can be maintained.</li>
-<li>Another approach is hashing where the DBMS hases the page id to select which buffer pool to access.</li>
-</ul>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/multibufferpool.png?raw=true"></p>
-<h3 id="Pre-fetching"><a href="#Pre-fetching" class="headerlink" title="Pre-fetching"></a>Pre-fetching</h3><p>The DBMS can also optimize by pre-fetching pages based on query plan. Then, while the first set of pages is being processed, the second can be pre-fetched into the buffer pool. This method is commonly used by DBMS’s when accessing many pages sequentially.</p>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/prefetching.png?raw=true"></p>
-<h3 id="Scan-Sharing"><a href="#Scan-Sharing" class="headerlink" title="Scan Sharing"></a>Scan Sharing</h3><p>Query cursors can reuse data retrieved from storage or operator computations. This allows queries to attach to a single cursor that scans a table. If a query starts a scan and if there one already doing this, then the DBMS will attach to the second query’s cursor. The DBMS keeps track of where the second query joined with the first so that it can finish the scan when it reached the end of the data structure.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/scansharing.png?raw=true"></p>
-<h3 id="Buffer-Pool-Bypass"><a href="#Buffer-Pool-Bypass" class="headerlink" title="Buffer Pool Bypass"></a>Buffer Pool Bypass</h3><p>The sequential scan operator will not store fetched pages in the buffer pool to avoid overhead. Instead, memory is local to the running query. This works well if operator needs to read a large sequence of pages that are ontiguous on disk. Buffer Pool Bypass can also be used for temporary data (sorting, joins).</p>
-<h2 id="OS-Page-Cache"><a href="#OS-Page-Cache" class="headerlink" title="OS Page Cache"></a>OS Page Cache</h2><p>Most disk operations go through the OS API. Unless explicitly told otherwise, the OS maintains its own filesystem cache.</p>
-<p>Most DBMS use direct I&#x2F;O to bypass the OS’s cache inorder to avoid redundant copies of pages and having to manage different eviction policies.</p>
-<p>Postgres is an example of a database system that uses the OS’s Page Cache.</p>
-<h2 id="Buffer-Replacement-Policies"><a href="#Buffer-Replacement-Policies" class="headerlink" title="Buffer Replacement Policies"></a>Buffer Replacement Policies</h2><p>When the DBMS needs to free up a frame to make room for a new page, it must decide which page to evict from the buffer pool.</p>
-<p>A replacement policy is an algorithm that the DBMS implements that makes a decision on which pages to evict from buffer pool when it needs space.</p>
-<p>Implementation goals of replacement policies are improved correctness, accuracy, speed, and meta-data overhead.</p>
-<h3 id="Latest-Recently-Used-LRU"><a href="#Latest-Recently-Used-LRU" class="headerlink" title="Latest Recently Used(LRU)"></a>Latest Recently Used(LRU)</h3><p>The Least Recently Used replacement policy maintains a timestamp of when each page was last accessed. This timestamp can be stored in a separate data structure, such as a queue, to allow for sorting and improve effiency. The DBMS picks to evict the page with the oldest timestamp. Additionally, pages are kept in sorted order to reduce sort time on eviction.</p>
-<h3 id="CLOCK"><a href="#CLOCK" class="headerlink" title="CLOCK"></a>CLOCK</h3><p>The CLOCK policy is an approximation of LRU without needing a separate timestamp per page. In the CLOCK policy, each page is given a reference bit. When a page is access set to 1.</p>
-<p>To visiualize this, organize the pages in a circular buffer with a “clock hand”. Upon sweeping check if a page’s bit is set to 1. If yes, set it to zero, if no, then evict it. In this way, the clock hand remembers position between evictions.</p>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/clock.png?raw=true"></p>
-<h3 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h3><p>There a number of problems with LRU and CLOCK replacement policies.</p>
-<p>Namely, LRU and CLOCK are susceptible to sequential flooding, where the buffer pool’s contents are corrupted due to a sequential scan. Since sequential scans read every page, the timestamps of pages read may not reflect which pages we actually want. In other words, the most recently used page is actually the most unneeded page.</p>
-<p>There are three solutions to address the shortcomings of LRU and CLOCK policies.</p>
-<ul>
-<li>One solution is LRU-K which tracks the history the last K reference as timestamps and computes the interval between subsequent accesses. This history is used to predict the next time a page is going to be accessed.</li>
-<li>Another optimization is localization per query. The DBMS chooses which pages to evict on a per transaction&#x2F;query basis. This minimizes the pollution of the buffer pool from each query.</li>
-<li>Lastly, priority hints allow transactions to tell the buffer pool whether page is important or not based on the context of each page during query execution.</li>
-</ul>
-<h3 id="Dirty-Pages"><a href="#Dirty-Pages" class="headerlink" title="Dirty Pages"></a>Dirty Pages</h3><p>There are two methods to handling pages with dirty bits. The fastest option is to drop any page in the buffer pool that is not dirty. A slower method is to write back dirty pages to disk to ensure that its changes are presisted.</p>
-<p>These two methods illustrate the trade-off between fast evictions versus dirty writing pages that will not be read again in the future.</p>
-<p>One way to avoid the problem of having to write out pages unnecessarily is background writing. Through background writing, the DBMS can periodically walk through the page table and write dirty pages to disk. When a dirty page is safely written, the DBMS can either evict the page or just unset the dirty flag.</p>
-<h2 id="Other-Memory-Pools"><a href="#Other-Memory-Pools" class="headerlink" title="Other Memory Pools"></a>Other Memory Pools</h2><p>The DBMS needs memory for things other than just tuples and indexes. These other memory pools may not always backed by disk depending on implementation.</p>
-<ul>
-<li>Sorting + Join Buffers</li>
-<li>Query Caches</li>
-<li>Maintenance Buffers</li>
-<li>Log Buffers</li>
-<li>Dictionary Caches</li>
-</ul>
-
+    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The DBMS is responsible for mapping its memory and moving data back-and-forth from the disk.
+    
+    <a class="article-more-a" href="/2022/08/30/cmu15-4-Buffer-Pools/#more">more >></a>
+    
     
 
     
@@ -575,148 +448,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>We will focus on a “disk-oriented” DBMS architecture that assumes that primary storage location of the database is on non-volatile disk. At the top of the storage hierarchy, you have the divices that are closest to the CPU. This is the fastest storage, but it is also the smallest and most expensive. The further you get away from the CPU, the larger but slower the storage devices get. These devices also get cheaper per GB.</p>
-<p>Volatile Devices:</p>
-<ul>
-<li>Volatile means that if you pull the power from the machine, then the data is lost.</li>
-<li>Volatile storage supports fast random access with byte-addressable locations. This means that the program can jump to any byte address and get the data that is there.</li>
-<li>For our purpose, we will always refer to this storage class as “memory”.</li>
-</ul>
-<p>Non-Volatile Devices:</p>
-<ul>
-<li>Non-volatile means that the storage device does not need to be provided continuous power in order for the device to retain the bits that it is storing.</li>
-<li>It is also block&#x2F;page addressable. This means that in order to read a value at a particular offset, the program first has to load the 4KB page into memory that holds the value the program wants to read.</li>
-<li>Non-volatile storage is traditionally better at sequential access (reading mutiple continguous chunks of data at the same time).</li>
-<li>We will refer to this as “disk”. We will not make a (major) distinction between solid-state storage(SSD) and spinning hard devices(HDD).</li>
-</ul>
-<p>There is also a new class of storage devices that are becoming more popular called persistant memory. These devices are designed to be the best of both worlds: almost as fast as DRAM with the persistence of disk. We will not cover these devices in this course.</p>
-<p>Since the system assumes that the databse is stored on disk, the components of the DBMS are responsible for figuring out how to move data between non-volatile disk and volatile memory since the system cannot operate on the data directly on disk.</p>
-<p>We will focus on how we can hide the latency(隐藏) of the disk rather than focusing on optimizations with registers and caches since getting data from disk is so slow. If reading data from the L1 cache reference took half a second, reading from an SSD would take 1.7 days, and reading from an HHD would take 16.5 weeks.</p>
-<h2 id="Disk-Oriented-DBMS-Overview"><a href="#Disk-Oriented-DBMS-Overview" class="headerlink" title="Disk-Oriented DBMS Overview"></a>Disk-Oriented DBMS Overview</h2><p>The database is all on disk, and the data in database files is organized into pages, with the first page being the directory page. In order to operate on the data, the DBMS needs to bring the data into memory. It does this by having buffer pool that manages the movement of data back and forth between disk and memory. The DBMS also has an execution engine that will execute queries.The execution engine will ask the buffer pool for a specific page, and the buffer pool will take care of bringing that page into memory and giving the execution engine a pointer to that page in memory. The buffer pool mamager will ensure that the page is there while the execution engine is operating on thar part of memory.</p>
-<h2 id="DBMS-vs-OS"><a href="#DBMS-vs-OS" class="headerlink" title="DBMS vs. OS"></a>DBMS vs. OS</h2><p>A high-level design goal of the DBMS is to support databases that exceed the amount of memory available. Since reading&#x2F;writing to disk is expensive, it must be managed carefully. We do not want large stalls from fetching something from disk to slow down everything else. We want the DBMS to be able to process other queries while it is waiting to get the data from disk.</p>
-<p>This high-level design goal is like virtual memory, where there is a large address space and a place for the OS to bring in pages from disk.</p>
-<p>One way to achieve this virtual memory is by using <code>mmap</code> to map the contents of a file in a process’ address space, which makes the OS responsible for moving pages back and forth between disk and memory. Unfortunately, this means that if <code>mmap</code> hits a page fault, the process will be blocked.</p>
-<ul>
-<li>You never want to use <code>mmap</code> in your DBMS if you need to write.</li>
-<li>The DBMS(almost) always wants to control things itself and can do a better job at it since it knows more about the data being accessed and the queries being processed.</li>
-<li>The operating system is not your friend.</li>
-</ul>
-<p>It is possible to use the OS by using:</p>
-<ul>
-<li><code>madvise</code>: Tells the OS know when you are planning on reading certain pages.</li>
-<li><code>mlock</code>: Tells the OS to not swap memory ranges out to disk.</li>
-<li><code>msync</code>: Tells the OS to flush memory ranges out to disk.</li>
-</ul>
-<p>We do not advise using <code>mmap</code> in a DBMS for correctness and performance reasons. </p>
-<p>Even though the system will have functionalities that seem like something the OS can provide, having the DBMS implement these procedures itself gives it better control and performance.</p>
-<h2 id="File-Storage"><a href="#File-Storage" class="headerlink" title="File Storage"></a>File Storage</h2><p>In its most basic form, a DBMS stores a database as files on disk. Some may use a file hierarchy, others may use a single file(e.g., SQLite).</p>
-<p>The OS does not know anything about the contents of these files. Only the DBMS knows how to decipher their contents, since it is encoded in a way specific to the DBMS.</p>
-<p>The DBMS’s storage manager is responsible for managing a database’s files. It represents the files as a collection of pages. It also keeps track of what data has been read and written to pages as well how much free space there is in these pages.</p>
-<h2 id="Database-Pages"><a href="#Database-Pages" class="headerlink" title="Database Pages"></a>Database Pages</h2><p>The DBMS organizes the database across one or more files in fixed-size blocks of data called pages. Pages can contain different kinds of data (tuples, indexes, etc). Most systems will not mix these types within pages. Some systems will require that pages are self-contained, meaning that all the information needed to read each page is on the page itself.</p>
-<p>Each page is given a unique identifier. If the database is a single file, then the page id can just be the file offset. Most DBMSs have an indirection layer that maps s page id to a file path and offset. The upper levels of the system will ask for a specific page number. Then, the storage manager will have to turn that page number into a file and an offset to find the page.</p>
-<p>Most DBMSs use fixed-size pages to avoid the engineering overhead needed to support variable-sized pages. For example, with variable-size pages, deleting a page could create a hole in file that the DBMS cannot easily fill with new pages.</p>
-<p>There are three concepts of pages in DBMS:</p>
-<ul>
-<li>Hardware page (usually 4KB)</li>
-<li>OS page (4KB)</li>
-<li>Database page (1-16KB)</li>
-</ul>
-<p>The storage device guarantees an atomic write of the size of the hardware page. If the hardware page is 4KB and the system tries to write 4KB to the disk, either all 4KB will be written, or none of it will. This means that if our database page is larger than our hardware page, the DBMS will have to take extra measures to ensure that the data gets written out safely since the program can get partway through writing a database page to disk when the system crashes.</p>
-<h2 id="Database-Heap"><a href="#Database-Heap" class="headerlink" title="Database Heap"></a>Database Heap</h2><p>There are a couple ways to find the location of the page a DBMS wants on the disk, and a heap file organization is one of those ways.</p>
-<p>A heap file is an unordered collection of pages where tuples are stored in random order.</p>
-<p>The DBMS can locate a page on disk given a <code>page_id</code> by using a linked list of pages or a page directory.</p>
-<ul>
-<li>Linked List: Header page holds pointers to a list of free pages and a list of data pages. However, if the DBMS is looking for a specific page, it has to do s sequential scan on the data page list until it finds the page it is looking for.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/LinkedList.png?raw=true"></li>
-<li>Page Directory: DBMS maintains special pages that track locations of data pages along with the amount of free space on each page.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/PageDirectory.png?raw=true"></li>
-</ul>
-<h2 id="Page-Layout"><a href="#Page-Layout" class="headerlink" title="Page Layout"></a>Page Layout</h2><p>Every page includes a header that records meta-data about the page’s contents:</p>
-<ul>
-<li>Page size.</li>
-<li>Checknum.</li>
-<li>DBMS version.</li>
-<li>Transcation visibility.</li>
-<li>Self-containment. (Some systems like Oracle require this.)</li>
-</ul>
-<p>A strawman approach to laying out data is to keep track of how many tuples the DBMS has stored in a page and then append to the end every time a new tuple is added. However, problems arise when tuples are deleted or when tuples have variable-length attributes.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/StrawmanIdea.png?raw=true"></p>
-<p>There are two main approaches to laying out data in pages: (1) slotted-pages; (2) log-structured.</p>
-<p>Slotted Pages: Page maps slots to offsets.</p>
-<ul>
-<li>Most common approach used in DBMSs today.</li>
-<li>Header keeps track of the number of used slots, the offset of the starting location of the last used slot, and a slot array, which keeps track of the location of the start of each tuple.</li>
-<li>To add a tuple, the slot array will grow from the beginning to the end, and the data of the tuples will grow from end to the beginning. The page is considered full when the slot array and the tuple data meet.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/SlottedPages.png?raw=true"></li>
-</ul>
-<p>Log-Structured: Instead of storing tuples, the DBMS only stores log records.</p>
-<ul>
-<li>Stores records to file of how the database was modified(insert, update, delete).</li>
-<li>To read a record, the DBMS scans the log file backwards and “recreates” the tuple.</li>
-<li>Fast writes, potentially slow reads.</li>
-<li>Works well on append-only storage because the DBMS cannot go back and update the data.</li>
-<li>To avoid long reads, the DBMS can have indexes to allow it to jump to specific locations in the log. It can also periodically compact the log. (If it had a tuple and then made an update to it, it could compact it down to just inserting the updated tuple.) The issue with compaction is that the DBMS ends up with write amplification. (It re-writes the same data over and over again.)</li>
-</ul>
-<h2 id="Tuple-Layout"><a href="#Tuple-Layout" class="headerlink" title="Tuple Layout"></a>Tuple Layout</h2><p>A tuple is essentially a sequence of bytes. It is the DBMS’s job to interpret those bytes into attribute types and values.</p>
-<p>Tuple Header: Contains meta-data about the tuple.</p>
-<ul>
-<li>Visibility information for DBMS’s concurrency control protocol(i.e. information about which transcation created&#x2F;modified that tuple).</li>
-<li>Bit Map for NULL values.</li>
-<li>Note that the DBMS does not need to store meta-data about the schema for the database here.</li>
-</ul>
-<p>Tuple Data: Actual data for attributes.</p>
-<ul>
-<li>Attributes are typically stored in the order that you specify them when you create the table.</li>
-<li>Most DBMSs do not allow a tuple to exceed the size of a page.</li>
-</ul>
-<p>Unique Identifier:</p>
-<ul>
-<li>Each tuple in the database is assigned a unique identifier.</li>
-<li>Most common: page_id + (offset or slot).</li>
-<li>An application cannot rely on these ids to mean anything.</li>
-</ul>
-<p>Denormalized Tuple Data: If two tables are related, the DBMS can “pre-join” them, so the tables end up on the same page. This makes reads faster since the DBMS only has to load in one page rather two separate pages. However, it makes updates more expensive since the DBMS needs more space for each tuple.</p>
-<h2 id="Data-Representation"><a href="#Data-Representation" class="headerlink" title="Data Representation"></a>Data Representation</h2><p>The data in a tuple is essentially just byte arrays. It is up to the DBMS to know how to interpret those bytes to derive the values for attributes. A data represenetation scheme is how a DBMS stores the bytes for a value.</p>
-<p>There are five high level datatypes that can be stored in tuples: integers, variable-precision numbers, fixed-point precision numbers, variable length values, and dates&#x2F;times.</p>
-<p><strong>Intergers</strong>: Most DBMSs store integers using their “native” C&#x2F;C++ types as specified by the IEEE-754 standard. These values are fixed length. (Example: INTERGER, BIGINT, SMALLINT, TINYINT).</p>
-<p><strong>Variable Precision Numbers</strong>: These are inexact, variable-precision numeric types that use the “native” C&#x2F;C++ types specified by IEEE-754 standard. These values are also fixed length.</p>
-<p>Operations on variable-precision numbers are faster to compute than arbitrary precision numbers because the CPU can execute instructions on them directly. However, there may be rounding errors when performing computations due to the fact that some numbers cannot be represented precisely. (Example: FLOAT, REAL)</p>
-<p><strong>Fixed-Point Precision Numbers</strong>: These are numberic data types with arbitrary precision and scale. They are typically stored in exact, variable-length binary representation (almost like a string) with additional meta-data that will tell the system things like the length of the data and where the decimal should be.</p>
-<p>These data types are used when rounding errors are unacceptable, but the DBMS pays a performance penalty to get this accuracy. (Example: NUMERIC, DECIMAL)</p>
-<p><strong>Variable-Length data</strong>: These represent data types of arbitrary length. They are typically stored with a header that keeps track of the length of the string to make it easy to jump to the next value. It may also contain a checksum for the data.</p>
-<p>Most DBMSs do not allow a tuple to exceed the size of a single page. The ones that do store the data on a special “overflow” page and have the tuple contain a reference to that page. These overflow pages can contain pointers to additional overflow pages until all the data can be stored.</p>
-<p>Some systems will let you store these large values in an external file, and then the tuple will contain a pointer to that file. For example, if the database is storing photo information, the DBMS can store thr photos in the external files rather than having them take up large amounts of space in the DBMS. One downside of this is that the DBMS cannot manipulate the contents of this file. Thus, there are no durability or transaction protections. (Example: VARCHAR, VARBINARY, TEXT, BLOB)</p>
-<p><strong>Dates and Times</strong>: Representations for date&#x2F;time vary for different systems. Typically, these are represented as some unit time (micro&#x2F;milli) seconds since the unix epoch. (Example: TIME, DATE, TIMESTAMP)</p>
-<p><strong>System Catalogs</strong>: In order for the DBMS to be able to deciphter the contents of tuples, it maintains an internal catalog to tell it meta-data about the databases. The meta-data will contain information about what tables and columns the databases have along with their types and the orderings for the values.</p>
-<p>Most DBMSs store their catalog inside of themselves in the format that they use for their tables. They use special code to “bootstrap” these catalog tables.</p>
-<h2 id="Workloads"><a href="#Workloads" class="headerlink" title="Workloads"></a>Workloads</h2><p>There are many different workloads for database systems. By workload, we are referring to the general nature of requests a system will have to handle. This course will focus on two types: Online Transaction Processing and Online Analytical Processing.</p>
-<p><strong>OLTP: Online Transaction Processing</strong><br>An OLTP workload is characterized by fast, short running operations, simple queries that operate on single entity at a time, and repetitive opertations. An OLTP workload will typically handle more writes than reads. </p>
-<p>An example of an OLTP workload is the Amazon sotrefront. User can add things to their cart, they can make purchases, but the action only affect their account.</p>
-<p><strong>OLAP: Online Analytical Processing</strong><br>An OLAP workload is characterized by long running, complex queries, reads on large portions of the database. In OLAP workloads, the database system is analyzing and deriving new data from existing data collected on the OLTP side. </p>
-<p>An example of an OLAP workload would be Amazon computing the five most bought items over a one month period for these geographical locations.</p>
-<p><strong>HTAP: Hybrid Transaction + Analytical Processing</strong><br>A new type of workload which has become popular recently is HTAP, which is like a combination which tries to do OLTP and OLAP together on the same database.</p>
-<h2 id="Storage-Models"><a href="#Storage-Models" class="headerlink" title="Storage Models"></a>Storage Models</h2><p>There are different ways to store tuples in pages. We have assumed the n-ary storage model so far.</p>
-<h3 id="N-Ary-Storage-Model-NSM"><a href="#N-Ary-Storage-Model-NSM" class="headerlink" title="N-Ary Storage Model(NSM)"></a>N-Ary Storage Model(NSM)</h3><p>In the n-ary storage model, the DBMS stores all of the attributes for a single tuple contiguously in a single page, so NSM is also known as a “row store”. This approach is ideal for OLTP workloads where requests are insert-heavy and transactions tend to operate only an individual entity. It is ideal because it takes only one fetch to be able to get all of the attributes for a single tuple.</p>
-<p>Advantages</p>
-<ul>
-<li>Fast inserts, updates, and deletes.</li>
-<li>Good for queries that need the entire tuple.</li>
-</ul>
-<p>Disadvantages</p>
-<ul>
-<li>Not good for scanning large portions of the table and&#x2F;or a subset of the attributes. This is because it pollutes the buffer pool by fetching data that is not needed for processing the query.</li>
-</ul>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/NSM.png?raw=true"></p>
-<h3 id="Decomposition-Storage-Model-DSM"><a href="#Decomposition-Storage-Model-DSM" class="headerlink" title="Decomposition Storage Model(DSM)"></a>Decomposition Storage Model(DSM)</h3><p>In the decomposition storage model, the DBMS stores a single attribute (column) for all tuples contiguously in a block of data. Thus, it is also known as a “column store”. This model is ideal for OLAP workloads with many read-only queries that perform large scans over a subset of the table’s attributes.</p>
-<p>Advantages</p>
-<ul>
-<li>Reduces the amount of wasted work during query execution because the DBMS only read the data that it needs for that query.</li>
-<li>Enables better compresion because all of the values for the same attributes are stored contiguously.</li>
-</ul>
-<p>Disadvantages</p>
-<ul>
-<li>Slow for point queries, inserts, updates, and deletes because of tuple splitting&#x2F;stitching.</li>
-</ul>
-<p>To put the tuples back together when using a column store, there are two common approaches: The most commonly used approach is fixed-length offsets. Assuming the attributes are all fixed-length, the DBMS can compute the offset of the attributes for each tuple. Then when the system wants the attribute for a specific tuple, it knows how to jump to that spot in the file from the offset. To accommodate the variable-length fields, the system can either pad fields so that they are all the same length or use a dictionary that takes a fixed-size integer and maps the integer to the value.</p>
-<p>A less common approach is to use embedded tuple ids. Here, for every attribute in the columns, the DBMS stores a tuple id (ex: a primary key) with it. The system the would also store a mapping to tell it how to jump to every attribute that has that id. Note that this method has a large storage overhead because it needs to store a tuple id for every attribute entry.</p>
-<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DSM.png?raw=true"></p>
-
+    <h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>We will focus on a “disk-oriented” DBMS architecture that assumes that primary storage location of the database is on non-volatile disk.
+    
+    <a class="article-more-a" href="/2022/08/30/cmu15-3-Database-Storage/#more">more >></a>
+    
     
 
     
@@ -802,92 +537,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="Relational-Languages"><a href="#Relational-Languages" class="headerlink" title="Relational Languages"></a>Relational Languages</h2><p>Edgar Codd published a major paper on relational models in the early 1970s. Originally, he only defined the mathematical notation(符号) for how a DBMS could execute queries on a relational model DBMS.</p>
-<p>The user only needs to specify the result that they want using a declarative language(i.e. SQL). The DBMS is responsible fot determining the most efficient plan to produce that answer.</p>
-<p>Relational algebra is based on sets(unordered, no duplicates). SQL is based on bags(unordered, allows duplicates).</p>
-<h2 id="SQL-History"><a href="#SQL-History" class="headerlink" title="SQL History"></a>SQL History</h2><p>SQL is a declarative query language for relational databases. It was originally developed in the 1970s as part of the IBM System R project. IBM originally called it “SEQUEL” (Structured English Query Language). The name changed in the 1980s to just “SQL”(Structured Query Language).</p>
-<p>The language is comprised of different classes of commands.</p>
-<ul>
-<li>Data Manipulation Language(DML): SELECT, INSERT, UPDATE, and DELETE statements.</li>
-<li>Data Definition Language(DDL): Schema definitions for tables, indexes, views, and other objects.</li>
-<li>Data Control Language(DCL): Security, access controls.</li>
-</ul>
-<p>SQL is not a dead language. It is being update with new features every couple years. SQL-92 is the minimum that a DBMS has to support to claim they support SQL. Each follows the standard to a certain degree but there are many proprietary extensions.</p>
-<h2 id="Aggregates"><a href="#Aggregates" class="headerlink" title="Aggregates"></a>Aggregates</h2><p>An aggregation function takes in a bag of tuples as its input and then produces a single scalar value as its output. Aggregate functions can only be used in SELECT output list. <code>SELECT AVG(gpa), COUNT(*) FROM student WHRER login LIKE &#39;%@cs&#39;</code></p>
-<p>Output of other columns outside of an aggregate is undefined. Thus, other columns outside aggregate must be aggregated or used in a GROUP BY command.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(s.gpa), e.cid</span><br><span class="line">    <span class="keyword">FROM</span> enrolled <span class="keyword">AS</span> e, student <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">WHERE</span> e.sid <span class="operator">=</span> s.sid</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> e.cid;</span><br></pre></td></tr></table></figure>
-<p>HAVING is a filter output results after aggregation. Like a WHERE clause for a GROUP BY.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(s.gpa) <span class="keyword">AS</span> avg_gpa, e.cid</span><br><span class="line">    <span class="keyword">FROM</span> enrolled <span class="keyword">AS</span> e, student <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">WHERE</span> e.sid <span class="operator">=</span> s.sid</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> e.cid;</span><br><span class="line"><span class="keyword">HAVING</span> avg_gpa <span class="operator">&gt;</span> <span class="number">3.9</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="String-Operations"><a href="#String-Operations" class="headerlink" title="String Operations"></a>String Operations</h2><p>The SQL standard says that strings are case sensitive and single-quotes only. There are functions to manipulate strings that can be used in any part of a query.</p>
-<p>Pattern Matching: The LIKE keyword is used for string matching in predicates.</p>
-<ul>
-<li>“%” matches any substrings(including empty)</li>
-<li>“-“ matches any one character.</li>
-</ul>
-<p>Concatenation: Two vertical bars(“||”) will concatenate two or more strings together into a single string.</p>
-<h2 id="Output-Redirection"><a href="#Output-Redirection" class="headerlink" title="Output Redirection"></a>Output Redirection</h2><p>Instead of having the result a query returned to the client(e.g. terminal), you can tell the DBMS to store the results into another table. You can then access this data in subsequent queries.</p>
-<ul>
-<li>New Table: Store the output if the query into a new (parmanent) table. <code>SELECT DISTINCT cid INTO CourseIds FROM enrolled</code></li>
-<li>Existing Table: Store the output of the query into a table that already exists in the database. The target table must have the same number of columns with the same types as the target table, but the names of the columns in the ouput query do not have to match.<code>INSERT INTO CourseIds (SELECT DISTINCT cid FROM enrolled)</code></li>
-</ul>
-<h2 id="Output-Control"><a href="#Output-Control" class="headerlink" title="Output Control"></a>Output Control</h2><p>Since the results SQL are unordered, you have to use the ORDER BY clause to impose a sort on tuples.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> grade <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
-<p>You can use multiple ORDER BY clauses to break ties or do more complex sorting.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> grade <span class="keyword">DESC</span>, sid <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
-<p>You can also use any arbitrary expression in the ORDER BY clause.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">UPPER</span>(grade) <span class="keyword">DESC</span>, sid <span class="operator">+</span> <span class="number">1</span> <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
-<p>By default, the DBMS will return all of the tuples produced by the query. You can use the LIMIT clause to restrict the number of result tuples.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid, name, <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> login <span class="keyword">LIKE</span> <span class="string">&#x27;%@cs&#x27;</span> LIMIT <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<p>Can also provide an offset to return a range in the results:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid, name <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> login <span class="keyword">LIKE</span>  <span class="string">&#x27;%@cs&#x27;</span> LIMIT <span class="number">20</span> <span class="keyword">OFFSET</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<p>Unless you use an ORDER BY clause with a LIMIT, the DBMS could produce different tuples in the result on each invocation of the query because the relational model dose not impose an ordering.</p>
-<h2 id="Nested-Queries"><a href="#Nested-Queries" class="headerlink" title="Nested Queries"></a>Nested Queries</h2><p>Invoke(调用) queries inside of other queries to execute more complex logic within a single query. The scope of outer query is included in inner query(i.e. inner query can access attributes from outer query), but not the other way around. </p>
-<p>Inner queries can appear in almost any part of a query:</p>
-<ul>
-<li>SELECT Output Targets: <ul>
-<li><code>SELECT (SELECT 1) AS one FROM student</code></li>
-</ul>
-</li>
-<li>FROM Clause:<ul>
-<li><code>SELECT name FROM student AS s, (SELECT sid FROM enrolled) AS e WHERE s.sid = e.sid</code></li>
-</ul>
-</li>
-<li>WHERE Clause:<ul>
-<li><code>SELECT name FROM student WHERE sid IN (SELECT sid FROM enrolled)</code></li>
-</ul>
-</li>
-</ul>
-<p>Nest Query Results Expression</p>
-<ul>
-<li>ALL: Must satisfy expression for all rows in sub-query.</li>
-<li>ANY: Must satisfy expression for at least one row in sub-query.</li>
-<li>IN: Equivalent to &#x3D;ANY().</li>
-<li>EXISTS: At least one row is returned.</li>
-</ul>
-<h2 id="Window-Functions"><a href="#Window-Functions" class="headerlink" title="Window Functions"></a>Window Functions</h2><p>Performs “moving” caculation across set of tuples. Like an aggregation but it still returns the original tuples. The window function can be any of the aggregation functions that we discussed above. There are also special window functions:</p>
-<ul>
-<li>ROW_NUMBER: The number of the current row.</li>
-<li>RANK: The order position of the current row.</li>
-</ul>
-<p>Grouping: The OVER clause specifies how to group together tuples when computing the window function. Use PARTITION BY to specify group.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cid, sid, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cid)</span><br><span class="line"><span class="keyword">FROM</span> enrolled <span class="keyword">ORDER</span> <span class="keyword">BY</span> cid;</span><br></pre></td></tr></table></figure>
-
-<p>You can also put an ORDER BY within OVER to ensure a deterministic ordering of results even if database changes internally.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> cid)</span><br><span class="line"><span class="keyword">FROM</span> enrolled <span class="keyword">ORDER</span> <span class="keyword">BY</span> cid;</span><br></pre></td></tr></table></figure>
-<p>Important: The DBMS computes RANK after the window function sorting, whereas it computes ROW_NUMBER before the sorting.</p>
-<h2 id="Common-Table-Expressions"><a href="#Common-Table-Expressions" class="headerlink" title="Common Table Expressions"></a>Common Table Expressions</h2><p>Common Table Expressions(CTEs) are an alternative to windows or nested queries to writing more complex queries. One can think of a CTE like a temporary table for just on query. The WITH clause binds the output of the inner query to a temporary result with that name.</p>
-<p>Generate a CTE called cteName that contains a single tuple with a single attribute set to “1”. The query at the bottom then just returns all the attributes from cteName.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cteName;</span><br></pre></td></tr></table></figure>
-
-<p>You can bind output columns to names before the AS:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName (col1, col2) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> col1 <span class="operator">+</span> col2 <span class="keyword">FROM</span> cteName;</span><br></pre></td></tr></table></figure>
-
-<p>A single query can contain multiple CTE declaratios:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cte1 (col1) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">), </span><br><span class="line">cte2 (col2) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cte1, cte2;</span><br></pre></td></tr></table></figure>
-
-<p>Adding the RECURSIVE keyword after WITH allows a CTE to reference itself.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> <span class="keyword">RECURSIVE</span> cteSource (counter) <span class="keyword">AS</span> (</span><br><span class="line">    (<span class="keyword">SELECT</span> <span class="number">1</span>) <span class="keyword">UNION</span></span><br><span class="line">    (<span class="keyword">SELECT</span> counter<span class="operator">+</span><span class="number">1</span> <span class="keyword">FROM</span> cteSource</span><br><span class="line">    <span class="keyword">WHERE</span> counter <span class="operator">&lt;</span> <span class="number">10</span><span class="operator">&gt;</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cteSource;</span><br></pre></td></tr></table></figure>
-
+    
+    <a class="article-more-a" href="/2022/08/30/cmu15-2-Intermediate-SQL/#more">more >></a>
+    
     
 
     
@@ -975,77 +627,9 @@
     <h2 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h2><blockquote>
 <p>A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).</p>
 </blockquote>
-<p>People often confuse “databases” with “databases management systems” (e.g. MySQL, Oracle, MongoDB). A database management system(DBMS) is the software that manages a database.</p>
-<p>Consider a database that models a digital music store(e.g. Spotify). Let the database hold information about the artists and which albums those artists have released.</p>
-<h2 id="Flat-File-Strawman"><a href="#Flat-File-Strawman" class="headerlink" title="Flat File Strawman"></a>Flat File Strawman</h2><p>Database is stored as comma-separated value(CSV) files that the DBMS manages. Each entity will be stored in its own file. The application has to parse files each time it wants to read or update records. Each entity has its own set of attributes, so in each file, different records are delimited by new lines, while each of the corresponding attributes within a record are delimited by a comma.</p>
-<p>Keeping along with the digital music store example, there would be two files: one for artist and the other for album. An artist could have a name, year, and country attributes, while an album has name, artist and year attributes.</p>
-<p>Issues with Flat File</p>
-<ul>
-<li>Data Integrity<ul>
-<li>How do we ensure that the artist is the same for each album entry?</li>
-<li>What if somebody overwrites the album year with an invalid string?</li>
-<li>How do we store theat there are multiple artists on one album?</li>
-</ul>
-</li>
-<li>Implementation<ul>
-<li>How do you find a particular record?</li>
-<li>What if we now want to create a new application that uses the same database?</li>
-<li>What if two threads try to write to the same file at the same time?</li>
-</ul>
-</li>
-<li>Durability<ul>
-<li>What if machine crashes while out program is updating a record?</li>
-<li>What if we want to replicate the database on multiple machines for high availability?</li>
-</ul>
-</li>
-</ul>
-<h2 id="Database-Management-System"><a href="#Database-Management-System" class="headerlink" title="Database Management System"></a>Database Management System</h2><blockquote>
-<p>A DBMS is a software that allows applications to store and analyze information in a database.</p>
-</blockquote>
-<p>A general-purpos DBMS is designed to allow the definition, creation, querying, updation, and administration of databases.</p>
-<p>Database applications were difficult to build and maintain because there was a tight coupling between logical and physical layers. The logical layer is which entities and attributes the database has while the physical layer is how those entities and attributes are being stored. Early on, the physical layer was defined in the application code, so if we wanted to change the physical layer the application was using, we would have to change all of the code to match the new physical layer.</p>
-<h2 id="Relational-Model"><a href="#Relational-Model" class="headerlink" title="Relational Model"></a>Relational Model</h2><p>Ted Codd noticed that people were rewriting DBMSs every time they wanted to change the physical layer, so in 1970 he proposed the relational model to avoid this. This relational model has three key points:</p>
-<ul>
-<li>Store database in simple data structures(relations).</li>
-<li>Access data through high-level language.</li>
-<li>Physical storage left up to implementation.</li>
-</ul>
-<p>A data model is a collection of concepts for describing the data in a database. The relational model is an example of a data model.</p>
-<p>A scheme is a description of a particular collection of data, using a given data model.</p>
-<p>The relational data model defines three concepts:</p>
-<ul>
-<li>Structure: The definition of relations and their contents. This is the relations have and the values that those attributes can hold.</li>
-<li>Integrity: Ensure the database’s contents satify constraints. An example constraint would be that any value for the year attribute has to be a number.</li>
-<li>Manipulation: How to access and modify a database’s contents.</li>
-</ul>
-<p>A relation is an unordered set that contains the relationship of attributes that represent entities. Since the relationships are unordered, the DBMS can store them in any way it wants, allowing for optimization.</p>
-<p>A turple is a set of attribute values(also known as its domain) in the relation. Originally, values had to be atomic or scalar, but now values can also be lists or nested(嵌套的) data structures. Every attribute can be a special value, NULL, which means for a given turple the attribute is undefined.</p>
-<p>A relation with n attributes is called an n-array relation. </p>
-<p>A relation’s primary key uniquely identifies a single tuple. Some DBMSs automatically create an internal primary key if you do not define one. A lot of DBMSs have support fot autogenerated keys so an application does not have to manually increment the keys.</p>
-<p>A foreign key specifies that an attribute from on relation has to map to a tuple in another relation.</p>
-<h2 id="Data-Manipulation-Languages-DMLs"><a href="#Data-Manipulation-Languages-DMLs" class="headerlink" title="Data Manipulation Languages(DMLs)"></a>Data Manipulation Languages(DMLs)</h2><p>A language to store and retrieve information from a database. There are two classes of languages for this.</p>
-<p><strong>Procedural</strong>: The query specifies the (high-level) strategy the DBMS should use to find the desired result. This is called <code>Relational Algebra</code>, which use fundamental operations to retrieve and manipulate tuples in s relation, based on set algebra. Each operator takes one or more relations as its inputs and outputs a new relation. So, we can chain operators together to create more complex operations.</p>
-<blockquote>
-<p>Some operators: $\sigma$ means Select, $\pi$ means Projection, $\cup$ means Union, $\cap$ means Intersection, $-$ means Difference, $\times$ means Product, $\bowtie$ means Join.</p>
-</blockquote>
-<ul>
-<li>Select: Choose a subset of the tuples from a relation that satisfies a selection predicate(谓词). $\sigma_{predicate}(R)$, <code>SELECT * FROM R WHERE predicate</code><ul>
-<li>Predicate acts as a filter to retain only tuples that fufill its qualifying requirement.</li>
-<li>Can combine multiple predicates using conjuctions(合取) &#x2F; disjunctions(析取).</li>
-</ul>
-</li>
-<li>Projection: Generate a relation with tuples that contains only the specified attributes. $\pi_{A_{1}A_{2},…,A_{n}}(R)$, <code>SELECT A1, A2,...,An FROM R</code><ul>
-<li>Can rearrange attributes’ ordering.</li>
-<li>Can manipulate the values.</li>
-</ul>
-</li>
-<li>Union: Generate a relation that contains all tuples that appear in either only one or both input relations. $R\cup S$ <code>(SELECT * FROM R) UNION ALL (SELECT * FROM S)</code></li>
-<li>Intersection: Generate a relation that contains only the turples that appear in both of the input relations. $(R \cap S)$ <code>(SELECT * FROM R) INTERSECT (SELECT * FROM S)</code></li>
-<li>Difference: Generate a relation that contains only the turples that appear in the first and not the second of the input relations. $R - S$ <code>(SELECT * FROM R) EXCEPT (SELECT * FROM S)</code></li>
-<li>Product: Generate a relation that contains all possible combinaitions of tuples from the input relations. $R \times S$ <code>SELECT * FROM R CROSS JOIN S</code>, <code>SELECT * FROM R, S</code></li>
-<li>Join: Generate a relation that contains all tuples that are a combination of two tuples(one from each input relation) with a common value(s) for one or more attributes.<br><strong>Non-Procedural</strong>: The query specifies only what data is wanted and not how to find it. This is called <code>Relational Calculus</code>.</li>
-</ul>
-
+    
+    <a class="article-more-a" href="/2022/08/30/cmu15-1-Relational-Model/#more">more >></a>
+    
     
 
     

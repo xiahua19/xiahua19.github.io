@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Databases A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).  People often confuse “">
+  <meta name="description" content="Databases A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1-Relational Model">
 <meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-1-Relational-Model/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="Databases A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).  People often confuse “">
+<meta property="og:description" content="Databases A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-30T12:08:52.000Z">
-<meta property="article:modified_time" content="2022-08-30T12:09:20.871Z">
+<meta property="article:modified_time" content="2022-08-30T12:15:01.421Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
@@ -290,6 +290,7 @@
     <h2 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h2><blockquote>
 <p>A database is an organized collection of inter-related data that models some aspect of the real-world(e.g. modeling the students in a class or a digital music store).</p>
 </blockquote>
+<span id="more"></span>
 <p>People often confuse “databases” with “databases management systems” (e.g. MySQL, Oracle, MongoDB). A database management system(DBMS) is the software that manages a database.</p>
 <p>Consider a database that models a digital music store(e.g. Spotify). Let the database hold information about the artists and which albums those artists have released.</p>
 <h2 id="Flat-File-Strawman"><a href="#Flat-File-Strawman" class="headerlink" title="Flat File Strawman"></a>Flat File Strawman</h2><p>Database is stored as comma-separated value(CSV) files that the DBMS manages. Each entity will be stored in its own file. The application has to parse files each time it wants to read or update records. Each entity has its own set of attributes, so in each file, different records are delimited by new lines, while each of the corresponding attributes within a record are delimited by a comma.</p>

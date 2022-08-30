@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be">
+  <meta name="description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4-Buffer Pools">
 <meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-4-Buffer-Pools/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be">
+<meta property="og:description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DiskOrientedDBMS.png?raw=true">
 <meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool.png?raw=true">
@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/scansharing.png?raw=true">
 <meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/clock.png?raw=true">
 <meta property="article:published_time" content="2022-08-30T12:11:31.000Z">
-<meta property="article:modified_time" content="2022-08-30T12:12:05.671Z">
+<meta property="article:modified_time" content="2022-08-30T12:15:18.531Z">
 <meta property="article:author" content="夏花">
 <meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
@@ -296,7 +296,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be able to efficiently move data respresented as file on its disk into memory so that it can be used. A diagram of this interaction is shown in the below figure. A obstacle that DBMS’s face is the problem of minimizing the slowdown of moving data around. Ideally, it should “appear” as if the data is all in the memory already.</p>
+    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. <span id="more"></span>Since, for the most part, data cannot be directly operated on in the disk, any database must be able to efficiently move data respresented as file on its disk into memory so that it can be used. A diagram of this interaction is shown in the below figure. A obstacle that DBMS’s face is the problem of minimizing the slowdown of moving data around. Ideally, it should “appear” as if the data is all in the memory already.</p>
 <p>Another way to think of this problem is in terms of spatial and temporal control. </p>
 <ul>
 <li>Spatial Control refers to where pages are physically written on disk. The goal of spatial control is to keep pages that are used together often as physically close together as possible on disk.</li>
