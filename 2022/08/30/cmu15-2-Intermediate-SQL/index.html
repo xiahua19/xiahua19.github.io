@@ -6,24 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>weblab-3-ReactJS | 夏花的博客小站</title>
+  <title>2-Intermediate SQL | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+  <meta name="description" content="Relational LanguagesEdgar Codd published a major paper on relational models in the early 1970s. Originally, he only defined the mathematical notation(符号) for how a DBMS could execute queries on a rela">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weblab-3-ReactJS">
-<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/index.html">
+<meta property="og:title" content="2-Intermediate SQL">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-2-Intermediate-SQL/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+<meta property="og:description" content="Relational LanguagesEdgar Codd published a major paper on relational models in the early 1970s. Originally, he only defined the mathematical notation(符号) for how a DBMS could execute queries on a rela">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
-<meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
-<meta property="article:modified_time" content="2022-08-19T06:32:50.368Z">
+<meta property="article:published_time" content="2022-08-30T12:09:55.000Z">
+<meta property="article:modified_time" content="2022-08-30T12:10:25.501Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="WebLab">
+<meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
   
@@ -241,22 +239,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-weblab-3-ReactJS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cmu15-2-Intermediate-SQL" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      weblab-3-ReactJS
+      2-Intermediate SQL
     </h1>
   
 
 
   
   
-<a href="/2022/08/11/weblab-3-ReactJS/" class="archive-article-date">
-        <time datetime="2022-08-11T10:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
+<a href="/2022/08/30/cmu15-2-Intermediate-SQL/" class="archive-article-date">
+        <time datetime="2022-08-30T12:09:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-30</time>
 </a>
 
   
@@ -269,7 +267,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">1.2k字</span>
     </span>
   </span>
 
@@ -278,7 +276,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">7分</span>
     </span>
   </span>
 </div>
@@ -289,80 +287,92 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="What’s-ReactJS"><a href="#What’s-ReactJS" class="headerlink" title="What’s ReactJS"></a>What’s ReactJS</h1><blockquote>
-<p>React is a JavaScript library for building user interfaces. It’s modular, fast and readable.</p>
-</blockquote>
-<span id="more"></span>
-<p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
-<h1 id="Props-amp-States"><a href="#Props-amp-States" class="headerlink" title="Props &amp; States"></a>Props &amp; States</h1><p>Now we have our reuasble comment component:</p>
+    <h2 id="Relational-Languages"><a href="#Relational-Languages" class="headerlink" title="Relational Languages"></a>Relational Languages</h2><p>Edgar Codd published a major paper on relational models in the early 1970s. Originally, he only defined the mathematical notation(符号) for how a DBMS could execute queries on a relational model DBMS.</p>
+<p>The user only needs to specify the result that they want using a declarative language(i.e. SQL). The DBMS is responsible fot determining the most efficient plan to produce that answer.</p>
+<p>Relational algebra is based on sets(unordered, no duplicates). SQL is based on bags(unordered, allows duplicates).</p>
+<h2 id="SQL-History"><a href="#SQL-History" class="headerlink" title="SQL History"></a>SQL History</h2><p>SQL is a declarative query language for relational databases. It was originally developed in the 1970s as part of the IBM System R project. IBM originally called it “SEQUEL” (Structured English Query Language). The name changed in the 1980s to just “SQL”(Structured Query Language).</p>
+<p>The language is comprised of different classes of commands.</p>
 <ul>
-<li>We pass props in from parent to child.</li>
-<li>Allows out skeleton to render comments with content.</li>
-<li>State keeps track of private information that can be changed and influence how your app renders.</li>
+<li>Data Manipulation Language(DML): SELECT, INSERT, UPDATE, and DELETE statements.</li>
+<li>Data Definition Language(DDL): Schema definitions for tables, indexes, views, and other objects.</li>
+<li>Data Control Language(DCL): Security, access controls.</li>
 </ul>
-<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>SQL is not a dead language. It is being update with new features every couple years. SQL-92 is the minimum that a DBMS has to support to claim they support SQL. Each follows the standard to a certain degree but there are many proprietary extensions.</p>
+<h2 id="Aggregates"><a href="#Aggregates" class="headerlink" title="Aggregates"></a>Aggregates</h2><p>An aggregation function takes in a bag of tuples as its input and then produces a single scalar value as its output. Aggregate functions can only be used in SELECT output list. <code>SELECT AVG(gpa), COUNT(*) FROM student WHRER login LIKE &#39;%@cs&#39;</code></p>
+<p>Output of other columns outside of an aggregate is undefined. Thus, other columns outside aggregate must be aggregated or used in a GROUP BY command.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(s.gpa), e.cid</span><br><span class="line">    <span class="keyword">FROM</span> enrolled <span class="keyword">AS</span> e, student <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">WHERE</span> e.sid <span class="operator">=</span> s.sid</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> e.cid;</span><br></pre></td></tr></table></figure>
+<p>HAVING is a filter output results after aggregation. Like a WHERE clause for a GROUP BY.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(s.gpa) <span class="keyword">AS</span> avg_gpa, e.cid</span><br><span class="line">    <span class="keyword">FROM</span> enrolled <span class="keyword">AS</span> e, student <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">WHERE</span> e.sid <span class="operator">=</span> s.sid</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> e.cid;</span><br><span class="line"><span class="keyword">HAVING</span> avg_gpa <span class="operator">&gt;</span> <span class="number">3.9</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="States"><a href="#States" class="headerlink" title="States"></a>States</h2><p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. </p>
-<h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>We can’t directly edit a component’s state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParentComponent</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeCatHappiness</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setCatHappiness</span>(catHappiness + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">updateFunction</span>=<span class="string">&#123;changeCatHappiness&#125;</span> /&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ChildComponent</span></span><br><span class="line">props.<span class="title function_">updateFunction</span>();</span><br></pre></td></tr></table></figure>
-<p>But note that this is a WORKAROUND(解决办法). You shouldn’t be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.</p>
-<h3 id="useEffect-hook"><a href="#useEffect-hook" class="headerlink" title="useEffect hook"></a>useEffect hook</h3><p>What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!</p>
-<div align="center">
-<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
-</div>
-
-<p>useEffect hook runs after specific variables change:</p>
+<h2 id="String-Operations"><a href="#String-Operations" class="headerlink" title="String Operations"></a>String Operations</h2><p>The SQL standard says that strings are case sensitive and single-quotes only. There are functions to manipulate strings that can be used in any part of a query.</p>
+<p>Pattern Matching: The LIKE keyword is used for string matching in predicates.</p>
 <ul>
-<li>Can think of as response to state change.</li>
-<li>Commonly used to load data into state.</li>
-<li>Call an API&#x2F;perform some computation&#x2F;etc. as specific times.</li>
+<li>“%” matches any substrings(including empty)</li>
+<li>“-“ matches any one character.</li>
 </ul>
-<p>syntax: <code>useEffect(function, optional dependency array)</code>, runs function every time a variable in dependency array changes. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add &quot;me&quot; to persons array.</span></span><br><span class="line">testingStuff = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setPerson</span>([...persons, <span class="string">&quot;me&quot;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call log function whenever the persons array changes.</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(persons);</span><br><span class="line">&#125;, [persons])</span><br></pre></td></tr></table></figure>
-<p>Dependency array examples:</p>
+<p>Concatenation: Two vertical bars(“||”) will concatenate two or more strings together into a single string.</p>
+<h2 id="Output-Redirection"><a href="#Output-Redirection" class="headerlink" title="Output Redirection"></a>Output Redirection</h2><p>Instead of having the result a query returned to the client(e.g. terminal), you can tell the DBMS to store the results into another table. You can then access this data in subsequent queries.</p>
 <ul>
-<li>useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.</li>
-<li>useEffect(function, []) runs function once, immediately after initialization.</li>
-<li>useEffect(function) runs every time any state variable changes.</li>
+<li>New Table: Store the output if the query into a new (parmanent) table. <code>SELECT DISTINCT cid INTO CourseIds FROM enrolled</code></li>
+<li>Existing Table: Store the output of the query into a table that already exists in the database. The target table must have the same number of columns with the same types as the target table, but the names of the columns in the ouput query do not have to match.<code>INSERT INTO CourseIds (SELECT DISTINCT cid FROM enrolled)</code></li>
 </ul>
-<h2 id="Make-states-stay-make-props-pass"><a href="#Make-states-stay-make-props-pass" class="headerlink" title="Make states stay, make props pass"></a>Make states stay, make props pass</h2><p>PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it’s relevant, and be passed to every other part of the site via props.</p>
-<h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
+<h2 id="Output-Control"><a href="#Output-Control" class="headerlink" title="Output Control"></a>Output Control</h2><p>Since the results SQL are unordered, you have to use the ORDER BY clause to impose a sort on tuples.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> grade <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<p>You can use multiple ORDER BY clauses to break ties or do more complex sorting.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> grade <span class="keyword">DESC</span>, sid <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<p>You can also use any arbitrary expression in the ORDER BY clause.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid <span class="keyword">FROM</span> enrolled <span class="keyword">WHERE</span> cid <span class="operator">=</span> <span class="string">&#x27;15-721&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">UPPER</span>(grade) <span class="keyword">DESC</span>, sid <span class="operator">+</span> <span class="number">1</span> <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<p>By default, the DBMS will return all of the tuples produced by the query. You can use the LIMIT clause to restrict the number of result tuples.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid, name, <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> login <span class="keyword">LIKE</span> <span class="string">&#x27;%@cs&#x27;</span> LIMIT <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>Can also provide an offset to return a range in the results:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sid, name <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> login <span class="keyword">LIKE</span>  <span class="string">&#x27;%@cs&#x27;</span> LIMIT <span class="number">20</span> <span class="keyword">OFFSET</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>Unless you use an ORDER BY clause with a LIMIT, the DBMS could produce different tuples in the result on each invocation of the query because the relational model dose not impose an ordering.</p>
+<h2 id="Nested-Queries"><a href="#Nested-Queries" class="headerlink" title="Nested Queries"></a>Nested Queries</h2><p>Invoke(调用) queries inside of other queries to execute more complex logic within a single query. The scope of outer query is included in inner query(i.e. inner query can access attributes from outer query), but not the other way around. </p>
+<p>Inner queries can appear in almost any part of a query:</p>
 <ul>
-<li>APP<ul>
-<li>Post<ul>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
+<li>SELECT Output Targets: <ul>
+<li><code>SELECT (SELECT 1) AS one FROM student</code></li>
+</ul>
+</li>
+<li>FROM Clause:<ul>
+<li><code>SELECT name FROM student AS s, (SELECT sid FROM enrolled) AS e WHERE s.sid = e.sid</code></li>
+</ul>
+</li>
+<li>WHERE Clause:<ul>
+<li><code>SELECT name FROM student WHERE sid IN (SELECT sid FROM enrolled)</code></li>
 </ul>
 </li>
 </ul>
-</li>
+<p>Nest Query Results Expression</p>
+<ul>
+<li>ALL: Must satisfy expression for all rows in sub-query.</li>
+<li>ANY: Must satisfy expression for at least one row in sub-query.</li>
+<li>IN: Equivalent to &#x3D;ANY().</li>
+<li>EXISTS: At least one row is returned.</li>
 </ul>
-<p>For post, the postContent, isLiked is <code>State</code>. For comment, the commentContent is <code>Props</code>, while isLiked is <code>State</code>.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment component is a function that takes in props as an input.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Comment</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1. Set initial states. Declares isLiked to False, and specifies &quot;setIsLiked&quot; as the function to update the state.</span></span><br><span class="line">    <span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Expects a return type of HTML like code. () allows us to write HTML code inside JavaScript.</span></span><br><span class="line">    <span class="comment">// What you return will describe how the component appears.</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// Return a div. style it appropriately. &#123;&#125; allows us to return to JavaScript inside the HTML environment inside the JavaScript class.</span></span><br><span class="line">        <span class="comment">// Note: we use className to access CSS classes.</span></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;claireComment&quot;</span> <span class="attr">className</span>=<span class="string">&quot;comment-text&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; props.content &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Comment</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="React-Guide-1"><a href="#React-Guide-1" class="headerlink" title="React-Guide-1"></a>React-Guide-1</h1><h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&quot;./NavBar.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Intro</span> <span class="keyword">from</span> <span class="string">&quot;./Intro.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Photos</span> <span class="keyword">from</span> <span class="string">&quot;./Photos.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Intro</span> <span class="attr">city</span>=<span class="string">&quot;Fairfax, Virginia&quot;</span> <span class="attr">pronunciation</span>=<span class="string">&quot;AHKS-hahj...&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Photos</span> <span class="attr">links</span>=<span class="string">&#123;[</span>&quot;<span class="attr">firstpic.jpg</span>&quot;, &quot;<span class="attr">dancepic.jpg</span>&quot;, &quot;<span class="attr">funnypic.jpg</span>&quot;]&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj Kadaveru&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Sign up for web lab!&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Intro-js"><a href="#Intro-js" class="headerlink" title="Intro.js"></a>Intro.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Intro</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lives in <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123; props.city &#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pronounces name &#123; props.pronunciation &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit Details<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Hobbies<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Featured<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Intro</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Photos-js"><a href="#Photos-js" class="headerlink" title="Photos.js"></a>Photos.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Photos</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> myImageTags = props.<span class="property">links</span>.<span class="title function_">map</span>(</span><br><span class="line">        <span class="function">(<span class="params">photolink</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">&#123;photolink&#125;</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Photos<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; myImageTags &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Photos</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Post-js"><a href="#Post-js" class="headerlink" title="Post.js"></a>Post.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> &#123; useState &#125;<span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [numLikes, setNumLikes] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123; props.name &#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; props.text &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">onClick</span> = <span class="string">&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                    () =&gt;</span> &#123; setNumLinks(numLikes + 1); &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;likeIcon.jpg&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123; numLikes &#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Recap-Writing-Components"><a href="#Recap-Writing-Components" class="headerlink" title="Recap: Writing Components"></a>Recap: Writing Components</h1><ul>
-<li>We divide our app into components, and put one in each file.</li>
-<li>Each component is a function with props as the input, and returns HTML-like code.</li>
-<li>() allow us to enter an HTML environment.</li>
-<li>Inside the HTML environment, {} allows us to create a mini JS environment.</li>
-<li>We pass in props with HTML tags.</li>
-<li>We read in those props with <code>.</code> function.</li>
-<li>We declare state variavles with <code>const [something, setSomething] = useState(initialValue)</code>.</li>
-<li>React uses <code>className</code> instead of class for css style.</li>
+<h2 id="Window-Functions"><a href="#Window-Functions" class="headerlink" title="Window Functions"></a>Window Functions</h2><p>Performs “moving” caculation across set of tuples. Like an aggregation but it still returns the original tuples. The window function can be any of the aggregation functions that we discussed above. There are also special window functions:</p>
+<ul>
+<li>ROW_NUMBER: The number of the current row.</li>
+<li>RANK: The order position of the current row.</li>
 </ul>
+<p>Grouping: The OVER clause specifies how to group together tuples when computing the window function. Use PARTITION BY to specify group.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cid, sid, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cid)</span><br><span class="line"><span class="keyword">FROM</span> enrolled <span class="keyword">ORDER</span> <span class="keyword">BY</span> cid;</span><br></pre></td></tr></table></figure>
+
+<p>You can also put an ORDER BY within OVER to ensure a deterministic ordering of results even if database changes internally.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> cid)</span><br><span class="line"><span class="keyword">FROM</span> enrolled <span class="keyword">ORDER</span> <span class="keyword">BY</span> cid;</span><br></pre></td></tr></table></figure>
+<p>Important: The DBMS computes RANK after the window function sorting, whereas it computes ROW_NUMBER before the sorting.</p>
+<h2 id="Common-Table-Expressions"><a href="#Common-Table-Expressions" class="headerlink" title="Common Table Expressions"></a>Common Table Expressions</h2><p>Common Table Expressions(CTEs) are an alternative to windows or nested queries to writing more complex queries. One can think of a CTE like a temporary table for just on query. The WITH clause binds the output of the inner query to a temporary result with that name.</p>
+<p>Generate a CTE called cteName that contains a single tuple with a single attribute set to “1”. The query at the bottom then just returns all the attributes from cteName.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cteName;</span><br></pre></td></tr></table></figure>
+
+<p>You can bind output columns to names before the AS:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName (col1, col2) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> col1 <span class="operator">+</span> col2 <span class="keyword">FROM</span> cteName;</span><br></pre></td></tr></table></figure>
+
+<p>A single query can contain multiple CTE declaratios:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cte1 (col1) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">), </span><br><span class="line">cte2 (col2) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cte1, cte2;</span><br></pre></td></tr></table></figure>
+
+<p>Adding the RECURSIVE keyword after WITH allows a CTE to reference itself.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> <span class="keyword">RECURSIVE</span> cteSource (counter) <span class="keyword">AS</span> (</span><br><span class="line">    (<span class="keyword">SELECT</span> <span class="number">1</span>) <span class="keyword">UNION</span></span><br><span class="line">    (<span class="keyword">SELECT</span> counter<span class="operator">+</span><span class="number">1</span> <span class="keyword">FROM</span> cteSource</span><br><span class="line">    <span class="keyword">WHERE</span> counter <span class="operator">&lt;</span> <span class="number">10</span><span class="operator">&gt;</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cteSource;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -377,7 +387,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" title="weblab-3-ReactJS" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/</a>
+          <a href="http://xiahua19.github.io/2022/08/30/cmu15-2-Intermediate-SQL/" title="2-Intermediate SQL" target="_blank">http://xiahua19.github.io/2022/08/30/cmu15-2-Intermediate-SQL/</a>
         </li>
         
         <li>
@@ -399,7 +409,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CMU15</a>
         		</li>
       		
 		</ul>
@@ -455,7 +465,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/30/cmu15-2-Intermediate-SQL/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -470,18 +480,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/08/13/music-1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/08/30/cmu15-3-Database-Storage/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          一、开篇
+          3-Database Storage
         
       </div>
     </a>
   
   
-    <a href="/2022/08/11/weblab-2-JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">weblab-2-JavaScript</div>
+    <a href="/2022/08/30/cmu15-1-Relational-Model/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1-Relational Model</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -508,7 +518,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.</span> <span class="toc-text">Props &amp; States</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Props"><span class="toc-number">2.1.</span> <span class="toc-text">Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#States"><span class="toc-number">2.2.</span> <span class="toc-text">States</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Callback-Functions"><span class="toc-number">2.2.1.</span> <span class="toc-text">Callback Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect-hook"><span class="toc-number">2.2.2.</span> <span class="toc-text">useEffect hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-states-stay-make-props-pass"><span class="toc-number">2.3.</span> <span class="toc-text">Make states stay, make props pass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">3.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">4.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">4.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">4.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">4.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">4.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">5.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Relational-Languages"><span class="toc-number">1.</span> <span class="toc-text">Relational Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-History"><span class="toc-number">2.</span> <span class="toc-text">SQL History</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aggregates"><span class="toc-number">3.</span> <span class="toc-text">Aggregates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-Operations"><span class="toc-number">4.</span> <span class="toc-text">String Operations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output-Redirection"><span class="toc-number">5.</span> <span class="toc-text">Output Redirection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output-Control"><span class="toc-number">6.</span> <span class="toc-text">Output Control</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nested-Queries"><span class="toc-number">7.</span> <span class="toc-text">Nested Queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Window-Functions"><span class="toc-number">8.</span> <span class="toc-text">Window Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-Table-Expressions"><span class="toc-number">9.</span> <span class="toc-text">Common Table Expressions</span></a></li></ol>
                     </div>
                 </span>
             </div>

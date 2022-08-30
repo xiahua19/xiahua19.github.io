@@ -6,24 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>weblab-3-ReactJS | 夏花的博客小站</title>
+  <title>5-Hash Tables | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+  <meta name="description" content="Hash TablesData StructuresA DBMS uses various data structures for many different parts of the system internals. Some examples include:  Internal Meta-Data: This is data that keeps track of information">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weblab-3-ReactJS">
-<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/index.html">
+<meta property="og:title" content="5-Hash Tables">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-5-Hash-Tables/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+<meta property="og:description" content="Hash TablesData StructuresA DBMS uses various data structures for many different parts of the system internals. Some examples include:  Internal Meta-Data: This is data that keeps track of information">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
-<meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
-<meta property="article:modified_time" content="2022-08-19T06:32:50.368Z">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%231.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%232.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%233.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%234.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%235.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%236.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%237.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%239.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%2310.png?raw=true">
+<meta property="article:published_time" content="2022-08-30T12:12:28.000Z">
+<meta property="article:modified_time" content="2022-08-30T12:12:46.711Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="WebLab">
+<meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
+<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%231.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
   
@@ -241,22 +249,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-weblab-3-ReactJS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cmu15-5-Hash-Tables" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      weblab-3-ReactJS
+      5-Hash Tables
     </h1>
   
 
 
   
   
-<a href="/2022/08/11/weblab-3-ReactJS/" class="archive-article-date">
-        <time datetime="2022-08-11T10:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
+<a href="/2022/08/30/cmu15-5-Hash-Tables/" class="archive-article-date">
+        <time datetime="2022-08-30T12:12:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-30</time>
 </a>
 
   
@@ -269,7 +277,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">1.6k字</span>
     </span>
   </span>
 
@@ -278,7 +286,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">9分</span>
     </span>
   </span>
 </div>
@@ -289,79 +297,68 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="What’s-ReactJS"><a href="#What’s-ReactJS" class="headerlink" title="What’s ReactJS"></a>What’s ReactJS</h1><blockquote>
-<p>React is a JavaScript library for building user interfaces. It’s modular, fast and readable.</p>
-</blockquote>
-<span id="more"></span>
-<p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
-<h1 id="Props-amp-States"><a href="#Props-amp-States" class="headerlink" title="Props &amp; States"></a>Props &amp; States</h1><p>Now we have our reuasble comment component:</p>
+    <h1 id="Hash-Tables"><a href="#Hash-Tables" class="headerlink" title="Hash Tables"></a>Hash Tables</h1><h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><p>A DBMS uses various data structures for many different parts of the system internals. Some examples include:</p>
 <ul>
-<li>We pass props in from parent to child.</li>
-<li>Allows out skeleton to render comments with content.</li>
-<li>State keeps track of private information that can be changed and influence how your app renders.</li>
+<li>Internal Meta-Data: This is data that keeps track of information about the database and the system state. Ex: Page tables, page directories.</li>
+<li>Core Data Storage: Data structures are used as the base storage for tuples in the databse.</li>
+<li>Temporary Data Structures: The DBMS can build data structures on the fly while processing a query to speed up execution (e.g. hash tables for joins).</li>
+<li>Table indices: Auxiliary(辅助的) data structures can be used to make it easier to find specific tuples.</li>
 </ul>
-<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="States"><a href="#States" class="headerlink" title="States"></a>States</h2><p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. </p>
-<h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>We can’t directly edit a component’s state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParentComponent</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeCatHappiness</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setCatHappiness</span>(catHappiness + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">updateFunction</span>=<span class="string">&#123;changeCatHappiness&#125;</span> /&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ChildComponent</span></span><br><span class="line">props.<span class="title function_">updateFunction</span>();</span><br></pre></td></tr></table></figure>
-<p>But note that this is a WORKAROUND(解决办法). You shouldn’t be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.</p>
-<h3 id="useEffect-hook"><a href="#useEffect-hook" class="headerlink" title="useEffect hook"></a>useEffect hook</h3><p>What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!</p>
-<div align="center">
-<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
-</div>
-
-<p>useEffect hook runs after specific variables change:</p>
+<p>There are two main design decisions to consider when implementing data structures for the DBMS:</p>
 <ul>
-<li>Can think of as response to state change.</li>
-<li>Commonly used to load data into state.</li>
-<li>Call an API&#x2F;perform some computation&#x2F;etc. as specific times.</li>
+<li>Data organization: We need to figure out how to layout memory and what information to store inside the data structure in order to support the efficient access.</li>
+<li>Concurrency: We also need to think about how to enable multiple therads to access the data structure without causing problems.</li>
 </ul>
-<p>syntax: <code>useEffect(function, optional dependency array)</code>, runs function every time a variable in dependency array changes. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add &quot;me&quot; to persons array.</span></span><br><span class="line">testingStuff = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setPerson</span>([...persons, <span class="string">&quot;me&quot;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call log function whenever the persons array changes.</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(persons);</span><br><span class="line">&#125;, [persons])</span><br></pre></td></tr></table></figure>
-<p>Dependency array examples:</p>
+<h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h2><p>A hash table implements an associative array abstract data type that maps keys to values. It provides on average O(1) operation complexity (O(n) is the worst-case) and O(n) storage complexity. Note that even with O(1) operation complexity on average, there are constant factor optimizations which are important to consider in the real world.</p>
+<p>A hash table implementation is comprised of two parts</p>
 <ul>
-<li>useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.</li>
-<li>useEffect(function, []) runs function once, immediately after initialization.</li>
-<li>useEffect(function) runs every time any state variable changes.</li>
+<li>Hash Function: This tells us how to map a large key space into a smaller domain. It is used to compute an index into an array of buckets or slots. We need to consider the trade-off between fast execution and collision rate. On one extreme, we have a hash function that always returns a constant (very fast, but everything is a collision). On the other extreme, we have a “perfect” hashing function where there are no collisions, but would take extremely long to compute. The ideal design is somewhere in the middle.</li>
+<li>Hashing Scheme: This tells us how to handle key collisions after hashing. Here, we need to consider the trade-off between allocating a large hash table to reduce collisions and having to execute additional instructions when a collision occurs.</li>
 </ul>
-<h2 id="Make-states-stay-make-props-pass"><a href="#Make-states-stay-make-props-pass" class="headerlink" title="Make states stay, make props pass"></a>Make states stay, make props pass</h2><p>PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it’s relevant, and be passed to every other part of the site via props.</p>
-<h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
+<h2 id="Hash-Functions"><a href="#Hash-Functions" class="headerlink" title="Hash Functions"></a>Hash Functions</h2><p>A hash function takes in any key as its input. It then returns an integer representation of that key (i.e. the “hash”). The function’s output is deterministic (i.e. the same key should always generate the same hash output).</p>
+<p>The DBMS need not use a cryptographically(加密的) secure hash function (e.g., SHA-256) because we do not need to worry about protecting the contents of keys. These hash functions are primarily used internally by the DBMS and thus information is not leaked outside of the system. In general, we only care about the hash function’s speed and collision rate.</p>
+<p>The current state-of-the-art hash function is Facebook XXHash3.</p>
+<h2 id="Static-Hashing-Schemes"><a href="#Static-Hashing-Schemes" class="headerlink" title="Static Hashing Schemes"></a>Static Hashing Schemes</h2><p>A static hashing scheme is one where the size of the hash table is fixed. This means that if the DBMS runs out of storage space in the hash table, then it has to rebuild a larger hash table from scratch, which is very expensive. Typically the new hash table is twice the size of the original hash table.</p>
+<p>To reduce the number of wasteful comparisons, it is important to avoid collisions of hashed key. Typically, we use twice the number of slots as the number of expected elements.</p>
+<p>The following assumptions usually do not hold in reality:</p>
 <ul>
-<li>APP<ul>
-<li>Post<ul>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
+<li>The number of elements is known ahead of time.</li>
+<li>Keys are unique.</li>
+<li>There exists a perfect hash function.</li>
 </ul>
-</li>
+<p>Therefore, we need to choose the hash function and hashing scheme appropriately.</p>
+<h3 id="Linear-Probe-Hashing"><a href="#Linear-Probe-Hashing" class="headerlink" title="Linear Probe Hashing"></a>Linear Probe Hashing</h3><p>This is the most basic hashing scheme. It is also typically the fastest. It uses a circular buffer of array slots. The hash function maps keys to slots. When a collision occurs, we linearly search the adjacent slots until an open one is found. For lookups, we can check the slot the key hashes to, and search linearly until we find the desired entry (or an empty slot, in which case the key is not in the table). Note that this means we have to store the key in the slot as well so that we can check if an entry is the derired one. </p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%231.png?raw=true"></p>
+<p>Deletions are more tricky. We have to be careful about just removing the entry from the slot, as this may prevent future lookups from the finding entries that have been put below the now empty slot. There are two solutions to this problem:</p>
+<ul>
+<li>The most common approach is to use “tombstones”. Instead of deleting the entry, we replace it with a “tombstone” which tells future lookups to keep scanning.</li>
+<li>The other option is to shift the adjacent data after deleting an entry to fill the now empty slot. However, we must be careful to only move the entries which were originally shifted.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%232.png?raw=true"></li>
 </ul>
-</li>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%233.png?raw=true"></p>
+<p>Non-unique Keys: In the case where the same key may be associated with multiple different values or tuples, there are two approaches.</p>
+<ul>
+<li>Seperate Linked List: Instead of sorting the values with the keys, we store a pointer to a seperate storage area which contains a linked list of all the values.</li>
+<li>Redundant Keys: The more common approach is to simply store the same key multiple times in the table. Everything with linear probing still works even if we do this.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%234.png?raw=true"></li>
 </ul>
-<p>For post, the postContent, isLiked is <code>State</code>. For comment, the commentContent is <code>Props</code>, while isLiked is <code>State</code>.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment component is a function that takes in props as an input.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Comment</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1. Set initial states. Declares isLiked to False, and specifies &quot;setIsLiked&quot; as the function to update the state.</span></span><br><span class="line">    <span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Expects a return type of HTML like code. () allows us to write HTML code inside JavaScript.</span></span><br><span class="line">    <span class="comment">// What you return will describe how the component appears.</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// Return a div. style it appropriately. &#123;&#125; allows us to return to JavaScript inside the HTML environment inside the JavaScript class.</span></span><br><span class="line">        <span class="comment">// Note: we use className to access CSS classes.</span></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;claireComment&quot;</span> <span class="attr">className</span>=<span class="string">&quot;comment-text&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; props.content &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Comment</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="React-Guide-1"><a href="#React-Guide-1" class="headerlink" title="React-Guide-1"></a>React-Guide-1</h1><h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&quot;./NavBar.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Intro</span> <span class="keyword">from</span> <span class="string">&quot;./Intro.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Photos</span> <span class="keyword">from</span> <span class="string">&quot;./Photos.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Intro</span> <span class="attr">city</span>=<span class="string">&quot;Fairfax, Virginia&quot;</span> <span class="attr">pronunciation</span>=<span class="string">&quot;AHKS-hahj...&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Photos</span> <span class="attr">links</span>=<span class="string">&#123;[</span>&quot;<span class="attr">firstpic.jpg</span>&quot;, &quot;<span class="attr">dancepic.jpg</span>&quot;, &quot;<span class="attr">funnypic.jpg</span>&quot;]&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj Kadaveru&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Sign up for web lab!&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Intro-js"><a href="#Intro-js" class="headerlink" title="Intro.js"></a>Intro.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Intro</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lives in <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123; props.city &#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pronounces name &#123; props.pronunciation &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit Details<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Hobbies<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Featured<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Intro</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Photos-js"><a href="#Photos-js" class="headerlink" title="Photos.js"></a>Photos.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Photos</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> myImageTags = props.<span class="property">links</span>.<span class="title function_">map</span>(</span><br><span class="line">        <span class="function">(<span class="params">photolink</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">&#123;photolink&#125;</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Photos<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; myImageTags &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Photos</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Post-js"><a href="#Post-js" class="headerlink" title="Post.js"></a>Post.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> &#123; useState &#125;<span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [numLikes, setNumLikes] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123; props.name &#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; props.text &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">onClick</span> = <span class="string">&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                    () =&gt;</span> &#123; setNumLinks(numLikes + 1); &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;likeIcon.jpg&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123; numLikes &#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Recap-Writing-Components"><a href="#Recap-Writing-Components" class="headerlink" title="Recap: Writing Components"></a>Recap: Writing Components</h1><ul>
-<li>We divide our app into components, and put one in each file.</li>
-<li>Each component is a function with props as the input, and returns HTML-like code.</li>
-<li>() allow us to enter an HTML environment.</li>
-<li>Inside the HTML environment, {} allows us to create a mini JS environment.</li>
-<li>We pass in props with HTML tags.</li>
-<li>We read in those props with <code>.</code> function.</li>
-<li>We declare state variavles with <code>const [something, setSomething] = useState(initialValue)</code>.</li>
-<li>React uses <code>className</code> instead of class for css style.</li>
+<h3 id="Robin-Hood-Hashing"><a href="#Robin-Hood-Hashing" class="headerlink" title="Robin Hood Hashing"></a>Robin Hood Hashing</h3><p>This is an extension of linear probe hashing that seeks to reduce the maximum distance of each key from their optimal position (i.e. the original slot they were hashed to) in the hash table. This strategy steals slots from “rich” keys and gives them to “poor” keys.</p>
+<p>In this variant, each entry also records the “distance” they are from their optimal position. Then, on each insert, if the key being inserted would be farther away from their optimal position at the current slot than the current entry’s distance, we replace the current entry and continue trying to insert the old entry farther down the table.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%235.png?raw=true"></p>
+<h3 id="Cuckoo-Hashing"><a href="#Cuckoo-Hashing" class="headerlink" title="Cuckoo Hashing"></a>Cuckoo Hashing</h3><p>Instead of using a single hash table, this approach maintains multiple has tables with different hash functions. The hash functions are the same algorithm (e.g. XXHash, CityHash); they generate different hashes for the same key by using seed values.</p>
+<p>When we insert, we check every table and choose one that has a free slot (if multiple have one, we can compare things like load factor, or more commonly, just choose a random table). If no table has a free slot, we choose (typically a random one) and evict the old entry. We then rehash the old entry into a different table. In rare cases, we may end up in a cycle. If this happens, we can rebuild all of the hash tables with new hash function seeds (less common) or rebuild the hash tables using larger tables (more common).</p>
+<p>Cuckoo hashing guarantees O(1) lookups and deletions, but insertions may be more expensive.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%236.png?raw=true"></p>
+<h2 id="Dynamic-Hashing-Schemes"><a href="#Dynamic-Hashing-Schemes" class="headerlink" title="Dynamic Hashing Schemes"></a>Dynamic Hashing Schemes</h2><p>The static hashing schemes require the DBMS to know the number of elements it wants to store. Otherwise, it has to rebuild the table if it needs to grow&#x2F;shrink in size.</p>
+<p>Dynamic hashing schemes are able to resize the hash table on demand without needing to rebuild the entire table. The schemes perform this resizing in different ways that can either maximize reads ot writes.</p>
+<h3 id="Chained-Hashing"><a href="#Chained-Hashing" class="headerlink" title="Chained Hashing"></a>Chained Hashing</h3><p>This is the most common dynamic hashing scheme. The DBMS maintains a linked list of buckets for each slot in the hash table. Keys which hash to the same slot are simply inserted into the linked list for that slot.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%237.png?raw=true"></p>
+<h3 id="Extendible-Hashing"><a href="#Extendible-Hashing" class="headerlink" title="Extendible Hashing"></a>Extendible Hashing</h3><p>Improved variant of chained hashing that splits buckets instead of letting chains to grow forever. This approach allows multiple slot locations in the hash table to point to the same bucket chain.</p>
+<p>The core idea behind re-balancing the hash table is to move bucket entries on split and increase the number of bits to examine to find entries in the hash table. This means that the DBMS only has to move data within the buckets of the split chain; all other buckets are left untouched.</p>
+<ul>
+<li>The DBMS maintains a global and local depth bit counts that determine the number bits needed to find buckets in the slot array.</li>
+<li>When a bucket is full, the DBMS splits the bucket and reshuffle its elements. If the local depth of the split bucket is less than the global depth, then the new bucket is just added to the exiting slot array. Otherwise, the DBMS doubles the size of the slot array to accommodate the new bucket and increments the global depth counter.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%239.png?raw=true"></li>
+</ul>
+<h3 id="Linear-Hashing"><a href="#Linear-Hashing" class="headerlink" title="Linear Hashing"></a>Linear Hashing</h3><p>Instead of immediately splitting a bucket when it overflows, this scheme maintains a split pointer that keeps track of the next bucket to split. No matter whether this pointer is pointing to a bucket that overflowed, the DBMS always splits. The overflow criterion is left up to the implementation.</p>
+<ul>
+<li>When any bucket overflows, split the bucket at the pointer location by adding a new slot entry, and create a new hash function.</li>
+<li>If the hash function maps to slot that has previously been pointed to by pointer, apply the new hash function.</li>
+<li>When the pointer reaches last slot, delete original hash function and replace it with a new hash function.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/L5%2310.png?raw=true"></li>
 </ul>
 
     
@@ -377,7 +374,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" title="weblab-3-ReactJS" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/</a>
+          <a href="http://xiahua19.github.io/2022/08/30/cmu15-5-Hash-Tables/" title="5-Hash Tables" target="_blank">http://xiahua19.github.io/2022/08/30/cmu15-5-Hash-Tables/</a>
         </li>
         
         <li>
@@ -399,7 +396,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CMU15</a>
         		</li>
       		
 		</ul>
@@ -455,7 +452,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/30/cmu15-5-Hash-Tables/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -470,18 +467,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/08/13/music-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          一、开篇
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/08/11/weblab-2-JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">weblab-2-JavaScript</div>
+    <a href="/2022/08/30/cmu15-4-Buffer-Pools/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">4-Buffer Pools</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -508,7 +496,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.</span> <span class="toc-text">Props &amp; States</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Props"><span class="toc-number">2.1.</span> <span class="toc-text">Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#States"><span class="toc-number">2.2.</span> <span class="toc-text">States</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Callback-Functions"><span class="toc-number">2.2.1.</span> <span class="toc-text">Callback Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect-hook"><span class="toc-number">2.2.2.</span> <span class="toc-text">useEffect hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-states-stay-make-props-pass"><span class="toc-number">2.3.</span> <span class="toc-text">Make states stay, make props pass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">3.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">4.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">4.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">4.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">4.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">4.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">5.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash-Tables"><span class="toc-number">1.</span> <span class="toc-text">Hash Tables</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Structures"><span class="toc-number">1.1.</span> <span class="toc-text">Data Structures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hash-Table"><span class="toc-number">1.2.</span> <span class="toc-text">Hash Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hash-Functions"><span class="toc-number">1.3.</span> <span class="toc-text">Hash Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Static-Hashing-Schemes"><span class="toc-number">1.4.</span> <span class="toc-text">Static Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Probe-Hashing"><span class="toc-number">1.4.1.</span> <span class="toc-text">Linear Probe Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Robin-Hood-Hashing"><span class="toc-number">1.4.2.</span> <span class="toc-text">Robin Hood Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cuckoo-Hashing"><span class="toc-number">1.4.3.</span> <span class="toc-text">Cuckoo Hashing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dynamic-Hashing-Schemes"><span class="toc-number">1.5.</span> <span class="toc-text">Dynamic Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Chained-Hashing"><span class="toc-number">1.5.1.</span> <span class="toc-text">Chained Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extendible-Hashing"><span class="toc-number">1.5.2.</span> <span class="toc-text">Extendible Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Hashing"><span class="toc-number">1.5.3.</span> <span class="toc-text">Linear Hashing</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>

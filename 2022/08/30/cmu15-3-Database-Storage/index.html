@@ -6,24 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>weblab-3-ReactJS | 夏花的博客小站</title>
+  <title>3-Database Storage | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+  <meta name="description" content="StorageWe will focus on a “disk-oriented” DBMS architecture that assumes that primary storage location of the database is on non-volatile disk. At the top of the storage hierarchy, you have the divice">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weblab-3-ReactJS">
-<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/index.html">
+<meta property="og:title" content="3-Database Storage">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-3-Database-Storage/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+<meta property="og:description" content="StorageWe will focus on a “disk-oriented” DBMS architecture that assumes that primary storage location of the database is on non-volatile disk. At the top of the storage hierarchy, you have the divice">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
-<meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
-<meta property="article:modified_time" content="2022-08-19T06:32:50.368Z">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/LinkedList.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/PageDirectory.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/StrawmanIdea.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/SlottedPages.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/NSM.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DSM.png?raw=true">
+<meta property="article:published_time" content="2022-08-30T12:10:51.000Z">
+<meta property="article:modified_time" content="2022-08-30T12:11:16.901Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="WebLab">
+<meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
+<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/LinkedList.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
   
@@ -241,22 +246,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-weblab-3-ReactJS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cmu15-3-Database-Storage" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      weblab-3-ReactJS
+      3-Database Storage
     </h1>
   
 
 
   
   
-<a href="/2022/08/11/weblab-3-ReactJS/" class="archive-article-date">
-        <time datetime="2022-08-11T10:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
+<a href="/2022/08/30/cmu15-3-Database-Storage/" class="archive-article-date">
+        <time datetime="2022-08-30T12:10:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-30</time>
 </a>
 
   
@@ -269,7 +274,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">3.1k字</span>
     </span>
   </span>
 
@@ -278,7 +283,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">19分</span>
     </span>
   </span>
 </div>
@@ -289,80 +294,147 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="What’s-ReactJS"><a href="#What’s-ReactJS" class="headerlink" title="What’s ReactJS"></a>What’s ReactJS</h1><blockquote>
-<p>React is a JavaScript library for building user interfaces. It’s modular, fast and readable.</p>
-</blockquote>
-<span id="more"></span>
-<p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
-<h1 id="Props-amp-States"><a href="#Props-amp-States" class="headerlink" title="Props &amp; States"></a>Props &amp; States</h1><p>Now we have our reuasble comment component:</p>
+    <h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>We will focus on a “disk-oriented” DBMS architecture that assumes that primary storage location of the database is on non-volatile disk. At the top of the storage hierarchy, you have the divices that are closest to the CPU. This is the fastest storage, but it is also the smallest and most expensive. The further you get away from the CPU, the larger but slower the storage devices get. These devices also get cheaper per GB.</p>
+<p>Volatile Devices:</p>
 <ul>
-<li>We pass props in from parent to child.</li>
-<li>Allows out skeleton to render comments with content.</li>
-<li>State keeps track of private information that can be changed and influence how your app renders.</li>
+<li>Volatile means that if you pull the power from the machine, then the data is lost.</li>
+<li>Volatile storage supports fast random access with byte-addressable locations. This means that the program can jump to any byte address and get the data that is there.</li>
+<li>For our purpose, we will always refer to this storage class as “memory”.</li>
 </ul>
-<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="States"><a href="#States" class="headerlink" title="States"></a>States</h2><p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. </p>
-<h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>We can’t directly edit a component’s state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParentComponent</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeCatHappiness</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setCatHappiness</span>(catHappiness + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">updateFunction</span>=<span class="string">&#123;changeCatHappiness&#125;</span> /&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ChildComponent</span></span><br><span class="line">props.<span class="title function_">updateFunction</span>();</span><br></pre></td></tr></table></figure>
-<p>But note that this is a WORKAROUND(解决办法). You shouldn’t be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.</p>
-<h3 id="useEffect-hook"><a href="#useEffect-hook" class="headerlink" title="useEffect hook"></a>useEffect hook</h3><p>What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!</p>
-<div align="center">
-<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
-</div>
-
-<p>useEffect hook runs after specific variables change:</p>
+<p>Non-Volatile Devices:</p>
 <ul>
-<li>Can think of as response to state change.</li>
-<li>Commonly used to load data into state.</li>
-<li>Call an API&#x2F;perform some computation&#x2F;etc. as specific times.</li>
+<li>Non-volatile means that the storage device does not need to be provided continuous power in order for the device to retain the bits that it is storing.</li>
+<li>It is also block&#x2F;page addressable. This means that in order to read a value at a particular offset, the program first has to load the 4KB page into memory that holds the value the program wants to read.</li>
+<li>Non-volatile storage is traditionally better at sequential access (reading mutiple continguous chunks of data at the same time).</li>
+<li>We will refer to this as “disk”. We will not make a (major) distinction between solid-state storage(SSD) and spinning hard devices(HDD).</li>
 </ul>
-<p>syntax: <code>useEffect(function, optional dependency array)</code>, runs function every time a variable in dependency array changes. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add &quot;me&quot; to persons array.</span></span><br><span class="line">testingStuff = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setPerson</span>([...persons, <span class="string">&quot;me&quot;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call log function whenever the persons array changes.</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(persons);</span><br><span class="line">&#125;, [persons])</span><br></pre></td></tr></table></figure>
-<p>Dependency array examples:</p>
+<p>There is also a new class of storage devices that are becoming more popular called persistant memory. These devices are designed to be the best of both worlds: almost as fast as DRAM with the persistence of disk. We will not cover these devices in this course.</p>
+<p>Since the system assumes that the databse is stored on disk, the components of the DBMS are responsible for figuring out how to move data between non-volatile disk and volatile memory since the system cannot operate on the data directly on disk.</p>
+<p>We will focus on how we can hide the latency(隐藏) of the disk rather than focusing on optimizations with registers and caches since getting data from disk is so slow. If reading data from the L1 cache reference took half a second, reading from an SSD would take 1.7 days, and reading from an HHD would take 16.5 weeks.</p>
+<h2 id="Disk-Oriented-DBMS-Overview"><a href="#Disk-Oriented-DBMS-Overview" class="headerlink" title="Disk-Oriented DBMS Overview"></a>Disk-Oriented DBMS Overview</h2><p>The database is all on disk, and the data in database files is organized into pages, with the first page being the directory page. In order to operate on the data, the DBMS needs to bring the data into memory. It does this by having buffer pool that manages the movement of data back and forth between disk and memory. The DBMS also has an execution engine that will execute queries.The execution engine will ask the buffer pool for a specific page, and the buffer pool will take care of bringing that page into memory and giving the execution engine a pointer to that page in memory. The buffer pool mamager will ensure that the page is there while the execution engine is operating on thar part of memory.</p>
+<h2 id="DBMS-vs-OS"><a href="#DBMS-vs-OS" class="headerlink" title="DBMS vs. OS"></a>DBMS vs. OS</h2><p>A high-level design goal of the DBMS is to support databases that exceed the amount of memory available. Since reading&#x2F;writing to disk is expensive, it must be managed carefully. We do not want large stalls from fetching something from disk to slow down everything else. We want the DBMS to be able to process other queries while it is waiting to get the data from disk.</p>
+<p>This high-level design goal is like virtual memory, where there is a large address space and a place for the OS to bring in pages from disk.</p>
+<p>One way to achieve this virtual memory is by using <code>mmap</code> to map the contents of a file in a process’ address space, which makes the OS responsible for moving pages back and forth between disk and memory. Unfortunately, this means that if <code>mmap</code> hits a page fault, the process will be blocked.</p>
 <ul>
-<li>useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.</li>
-<li>useEffect(function, []) runs function once, immediately after initialization.</li>
-<li>useEffect(function) runs every time any state variable changes.</li>
+<li>You never want to use <code>mmap</code> in your DBMS if you need to write.</li>
+<li>The DBMS(almost) always wants to control things itself and can do a better job at it since it knows more about the data being accessed and the queries being processed.</li>
+<li>The operating system is not your friend.</li>
 </ul>
-<h2 id="Make-states-stay-make-props-pass"><a href="#Make-states-stay-make-props-pass" class="headerlink" title="Make states stay, make props pass"></a>Make states stay, make props pass</h2><p>PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it’s relevant, and be passed to every other part of the site via props.</p>
-<h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
+<p>It is possible to use the OS by using:</p>
 <ul>
-<li>APP<ul>
-<li>Post<ul>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
+<li><code>madvise</code>: Tells the OS know when you are planning on reading certain pages.</li>
+<li><code>mlock</code>: Tells the OS to not swap memory ranges out to disk.</li>
+<li><code>msync</code>: Tells the OS to flush memory ranges out to disk.</li>
 </ul>
-</li>
+<p>We do not advise using <code>mmap</code> in a DBMS for correctness and performance reasons. </p>
+<p>Even though the system will have functionalities that seem like something the OS can provide, having the DBMS implement these procedures itself gives it better control and performance.</p>
+<h2 id="File-Storage"><a href="#File-Storage" class="headerlink" title="File Storage"></a>File Storage</h2><p>In its most basic form, a DBMS stores a database as files on disk. Some may use a file hierarchy, others may use a single file(e.g., SQLite).</p>
+<p>The OS does not know anything about the contents of these files. Only the DBMS knows how to decipher their contents, since it is encoded in a way specific to the DBMS.</p>
+<p>The DBMS’s storage manager is responsible for managing a database’s files. It represents the files as a collection of pages. It also keeps track of what data has been read and written to pages as well how much free space there is in these pages.</p>
+<h2 id="Database-Pages"><a href="#Database-Pages" class="headerlink" title="Database Pages"></a>Database Pages</h2><p>The DBMS organizes the database across one or more files in fixed-size blocks of data called pages. Pages can contain different kinds of data (tuples, indexes, etc). Most systems will not mix these types within pages. Some systems will require that pages are self-contained, meaning that all the information needed to read each page is on the page itself.</p>
+<p>Each page is given a unique identifier. If the database is a single file, then the page id can just be the file offset. Most DBMSs have an indirection layer that maps s page id to a file path and offset. The upper levels of the system will ask for a specific page number. Then, the storage manager will have to turn that page number into a file and an offset to find the page.</p>
+<p>Most DBMSs use fixed-size pages to avoid the engineering overhead needed to support variable-sized pages. For example, with variable-size pages, deleting a page could create a hole in file that the DBMS cannot easily fill with new pages.</p>
+<p>There are three concepts of pages in DBMS:</p>
+<ul>
+<li>Hardware page (usually 4KB)</li>
+<li>OS page (4KB)</li>
+<li>Database page (1-16KB)</li>
 </ul>
-</li>
+<p>The storage device guarantees an atomic write of the size of the hardware page. If the hardware page is 4KB and the system tries to write 4KB to the disk, either all 4KB will be written, or none of it will. This means that if our database page is larger than our hardware page, the DBMS will have to take extra measures to ensure that the data gets written out safely since the program can get partway through writing a database page to disk when the system crashes.</p>
+<h2 id="Database-Heap"><a href="#Database-Heap" class="headerlink" title="Database Heap"></a>Database Heap</h2><p>There are a couple ways to find the location of the page a DBMS wants on the disk, and a heap file organization is one of those ways.</p>
+<p>A heap file is an unordered collection of pages where tuples are stored in random order.</p>
+<p>The DBMS can locate a page on disk given a <code>page_id</code> by using a linked list of pages or a page directory.</p>
+<ul>
+<li>Linked List: Header page holds pointers to a list of free pages and a list of data pages. However, if the DBMS is looking for a specific page, it has to do s sequential scan on the data page list until it finds the page it is looking for.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/LinkedList.png?raw=true"></li>
+<li>Page Directory: DBMS maintains special pages that track locations of data pages along with the amount of free space on each page.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/PageDirectory.png?raw=true"></li>
 </ul>
-<p>For post, the postContent, isLiked is <code>State</code>. For comment, the commentContent is <code>Props</code>, while isLiked is <code>State</code>.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment component is a function that takes in props as an input.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Comment</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1. Set initial states. Declares isLiked to False, and specifies &quot;setIsLiked&quot; as the function to update the state.</span></span><br><span class="line">    <span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Expects a return type of HTML like code. () allows us to write HTML code inside JavaScript.</span></span><br><span class="line">    <span class="comment">// What you return will describe how the component appears.</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// Return a div. style it appropriately. &#123;&#125; allows us to return to JavaScript inside the HTML environment inside the JavaScript class.</span></span><br><span class="line">        <span class="comment">// Note: we use className to access CSS classes.</span></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;claireComment&quot;</span> <span class="attr">className</span>=<span class="string">&quot;comment-text&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; props.content &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Comment</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="React-Guide-1"><a href="#React-Guide-1" class="headerlink" title="React-Guide-1"></a>React-Guide-1</h1><h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&quot;./NavBar.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Intro</span> <span class="keyword">from</span> <span class="string">&quot;./Intro.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Photos</span> <span class="keyword">from</span> <span class="string">&quot;./Photos.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Intro</span> <span class="attr">city</span>=<span class="string">&quot;Fairfax, Virginia&quot;</span> <span class="attr">pronunciation</span>=<span class="string">&quot;AHKS-hahj...&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Photos</span> <span class="attr">links</span>=<span class="string">&#123;[</span>&quot;<span class="attr">firstpic.jpg</span>&quot;, &quot;<span class="attr">dancepic.jpg</span>&quot;, &quot;<span class="attr">funnypic.jpg</span>&quot;]&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj Kadaveru&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Sign up for web lab!&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Intro-js"><a href="#Intro-js" class="headerlink" title="Intro.js"></a>Intro.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Intro</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lives in <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123; props.city &#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pronounces name &#123; props.pronunciation &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit Details<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Hobbies<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Featured<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Intro</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Photos-js"><a href="#Photos-js" class="headerlink" title="Photos.js"></a>Photos.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Photos</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> myImageTags = props.<span class="property">links</span>.<span class="title function_">map</span>(</span><br><span class="line">        <span class="function">(<span class="params">photolink</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">&#123;photolink&#125;</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Photos<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; myImageTags &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Photos</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Post-js"><a href="#Post-js" class="headerlink" title="Post.js"></a>Post.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> &#123; useState &#125;<span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [numLikes, setNumLikes] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123; props.name &#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; props.text &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">onClick</span> = <span class="string">&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                    () =&gt;</span> &#123; setNumLinks(numLikes + 1); &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;likeIcon.jpg&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123; numLikes &#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Recap-Writing-Components"><a href="#Recap-Writing-Components" class="headerlink" title="Recap: Writing Components"></a>Recap: Writing Components</h1><ul>
-<li>We divide our app into components, and put one in each file.</li>
-<li>Each component is a function with props as the input, and returns HTML-like code.</li>
-<li>() allow us to enter an HTML environment.</li>
-<li>Inside the HTML environment, {} allows us to create a mini JS environment.</li>
-<li>We pass in props with HTML tags.</li>
-<li>We read in those props with <code>.</code> function.</li>
-<li>We declare state variavles with <code>const [something, setSomething] = useState(initialValue)</code>.</li>
-<li>React uses <code>className</code> instead of class for css style.</li>
+<h2 id="Page-Layout"><a href="#Page-Layout" class="headerlink" title="Page Layout"></a>Page Layout</h2><p>Every page includes a header that records meta-data about the page’s contents:</p>
+<ul>
+<li>Page size.</li>
+<li>Checknum.</li>
+<li>DBMS version.</li>
+<li>Transcation visibility.</li>
+<li>Self-containment. (Some systems like Oracle require this.)</li>
 </ul>
+<p>A strawman approach to laying out data is to keep track of how many tuples the DBMS has stored in a page and then append to the end every time a new tuple is added. However, problems arise when tuples are deleted or when tuples have variable-length attributes.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/StrawmanIdea.png?raw=true"></p>
+<p>There are two main approaches to laying out data in pages: (1) slotted-pages; (2) log-structured.</p>
+<p>Slotted Pages: Page maps slots to offsets.</p>
+<ul>
+<li>Most common approach used in DBMSs today.</li>
+<li>Header keeps track of the number of used slots, the offset of the starting location of the last used slot, and a slot array, which keeps track of the location of the start of each tuple.</li>
+<li>To add a tuple, the slot array will grow from the beginning to the end, and the data of the tuples will grow from end to the beginning. The page is considered full when the slot array and the tuple data meet.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/SlottedPages.png?raw=true"></li>
+</ul>
+<p>Log-Structured: Instead of storing tuples, the DBMS only stores log records.</p>
+<ul>
+<li>Stores records to file of how the database was modified(insert, update, delete).</li>
+<li>To read a record, the DBMS scans the log file backwards and “recreates” the tuple.</li>
+<li>Fast writes, potentially slow reads.</li>
+<li>Works well on append-only storage because the DBMS cannot go back and update the data.</li>
+<li>To avoid long reads, the DBMS can have indexes to allow it to jump to specific locations in the log. It can also periodically compact the log. (If it had a tuple and then made an update to it, it could compact it down to just inserting the updated tuple.) The issue with compaction is that the DBMS ends up with write amplification. (It re-writes the same data over and over again.)</li>
+</ul>
+<h2 id="Tuple-Layout"><a href="#Tuple-Layout" class="headerlink" title="Tuple Layout"></a>Tuple Layout</h2><p>A tuple is essentially a sequence of bytes. It is the DBMS’s job to interpret those bytes into attribute types and values.</p>
+<p>Tuple Header: Contains meta-data about the tuple.</p>
+<ul>
+<li>Visibility information for DBMS’s concurrency control protocol(i.e. information about which transcation created&#x2F;modified that tuple).</li>
+<li>Bit Map for NULL values.</li>
+<li>Note that the DBMS does not need to store meta-data about the schema for the database here.</li>
+</ul>
+<p>Tuple Data: Actual data for attributes.</p>
+<ul>
+<li>Attributes are typically stored in the order that you specify them when you create the table.</li>
+<li>Most DBMSs do not allow a tuple to exceed the size of a page.</li>
+</ul>
+<p>Unique Identifier:</p>
+<ul>
+<li>Each tuple in the database is assigned a unique identifier.</li>
+<li>Most common: page_id + (offset or slot).</li>
+<li>An application cannot rely on these ids to mean anything.</li>
+</ul>
+<p>Denormalized Tuple Data: If two tables are related, the DBMS can “pre-join” them, so the tables end up on the same page. This makes reads faster since the DBMS only has to load in one page rather two separate pages. However, it makes updates more expensive since the DBMS needs more space for each tuple.</p>
+<h2 id="Data-Representation"><a href="#Data-Representation" class="headerlink" title="Data Representation"></a>Data Representation</h2><p>The data in a tuple is essentially just byte arrays. It is up to the DBMS to know how to interpret those bytes to derive the values for attributes. A data represenetation scheme is how a DBMS stores the bytes for a value.</p>
+<p>There are five high level datatypes that can be stored in tuples: integers, variable-precision numbers, fixed-point precision numbers, variable length values, and dates&#x2F;times.</p>
+<p><strong>Intergers</strong>: Most DBMSs store integers using their “native” C&#x2F;C++ types as specified by the IEEE-754 standard. These values are fixed length. (Example: INTERGER, BIGINT, SMALLINT, TINYINT).</p>
+<p><strong>Variable Precision Numbers</strong>: These are inexact, variable-precision numeric types that use the “native” C&#x2F;C++ types specified by IEEE-754 standard. These values are also fixed length.</p>
+<p>Operations on variable-precision numbers are faster to compute than arbitrary precision numbers because the CPU can execute instructions on them directly. However, there may be rounding errors when performing computations due to the fact that some numbers cannot be represented precisely. (Example: FLOAT, REAL)</p>
+<p><strong>Fixed-Point Precision Numbers</strong>: These are numberic data types with arbitrary precision and scale. They are typically stored in exact, variable-length binary representation (almost like a string) with additional meta-data that will tell the system things like the length of the data and where the decimal should be.</p>
+<p>These data types are used when rounding errors are unacceptable, but the DBMS pays a performance penalty to get this accuracy. (Example: NUMERIC, DECIMAL)</p>
+<p><strong>Variable-Length data</strong>: These represent data types of arbitrary length. They are typically stored with a header that keeps track of the length of the string to make it easy to jump to the next value. It may also contain a checksum for the data.</p>
+<p>Most DBMSs do not allow a tuple to exceed the size of a single page. The ones that do store the data on a special “overflow” page and have the tuple contain a reference to that page. These overflow pages can contain pointers to additional overflow pages until all the data can be stored.</p>
+<p>Some systems will let you store these large values in an external file, and then the tuple will contain a pointer to that file. For example, if the database is storing photo information, the DBMS can store thr photos in the external files rather than having them take up large amounts of space in the DBMS. One downside of this is that the DBMS cannot manipulate the contents of this file. Thus, there are no durability or transaction protections. (Example: VARCHAR, VARBINARY, TEXT, BLOB)</p>
+<p><strong>Dates and Times</strong>: Representations for date&#x2F;time vary for different systems. Typically, these are represented as some unit time (micro&#x2F;milli) seconds since the unix epoch. (Example: TIME, DATE, TIMESTAMP)</p>
+<p><strong>System Catalogs</strong>: In order for the DBMS to be able to deciphter the contents of tuples, it maintains an internal catalog to tell it meta-data about the databases. The meta-data will contain information about what tables and columns the databases have along with their types and the orderings for the values.</p>
+<p>Most DBMSs store their catalog inside of themselves in the format that they use for their tables. They use special code to “bootstrap” these catalog tables.</p>
+<h2 id="Workloads"><a href="#Workloads" class="headerlink" title="Workloads"></a>Workloads</h2><p>There are many different workloads for database systems. By workload, we are referring to the general nature of requests a system will have to handle. This course will focus on two types: Online Transaction Processing and Online Analytical Processing.</p>
+<p><strong>OLTP: Online Transaction Processing</strong><br>An OLTP workload is characterized by fast, short running operations, simple queries that operate on single entity at a time, and repetitive opertations. An OLTP workload will typically handle more writes than reads. </p>
+<p>An example of an OLTP workload is the Amazon sotrefront. User can add things to their cart, they can make purchases, but the action only affect their account.</p>
+<p><strong>OLAP: Online Analytical Processing</strong><br>An OLAP workload is characterized by long running, complex queries, reads on large portions of the database. In OLAP workloads, the database system is analyzing and deriving new data from existing data collected on the OLTP side. </p>
+<p>An example of an OLAP workload would be Amazon computing the five most bought items over a one month period for these geographical locations.</p>
+<p><strong>HTAP: Hybrid Transaction + Analytical Processing</strong><br>A new type of workload which has become popular recently is HTAP, which is like a combination which tries to do OLTP and OLAP together on the same database.</p>
+<h2 id="Storage-Models"><a href="#Storage-Models" class="headerlink" title="Storage Models"></a>Storage Models</h2><p>There are different ways to store tuples in pages. We have assumed the n-ary storage model so far.</p>
+<h3 id="N-Ary-Storage-Model-NSM"><a href="#N-Ary-Storage-Model-NSM" class="headerlink" title="N-Ary Storage Model(NSM)"></a>N-Ary Storage Model(NSM)</h3><p>In the n-ary storage model, the DBMS stores all of the attributes for a single tuple contiguously in a single page, so NSM is also known as a “row store”. This approach is ideal for OLTP workloads where requests are insert-heavy and transactions tend to operate only an individual entity. It is ideal because it takes only one fetch to be able to get all of the attributes for a single tuple.</p>
+<p>Advantages</p>
+<ul>
+<li>Fast inserts, updates, and deletes.</li>
+<li>Good for queries that need the entire tuple.</li>
+</ul>
+<p>Disadvantages</p>
+<ul>
+<li>Not good for scanning large portions of the table and&#x2F;or a subset of the attributes. This is because it pollutes the buffer pool by fetching data that is not needed for processing the query.</li>
+</ul>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/NSM.png?raw=true"></p>
+<h3 id="Decomposition-Storage-Model-DSM"><a href="#Decomposition-Storage-Model-DSM" class="headerlink" title="Decomposition Storage Model(DSM)"></a>Decomposition Storage Model(DSM)</h3><p>In the decomposition storage model, the DBMS stores a single attribute (column) for all tuples contiguously in a block of data. Thus, it is also known as a “column store”. This model is ideal for OLAP workloads with many read-only queries that perform large scans over a subset of the table’s attributes.</p>
+<p>Advantages</p>
+<ul>
+<li>Reduces the amount of wasted work during query execution because the DBMS only read the data that it needs for that query.</li>
+<li>Enables better compresion because all of the values for the same attributes are stored contiguously.</li>
+</ul>
+<p>Disadvantages</p>
+<ul>
+<li>Slow for point queries, inserts, updates, and deletes because of tuple splitting&#x2F;stitching.</li>
+</ul>
+<p>To put the tuples back together when using a column store, there are two common approaches: The most commonly used approach is fixed-length offsets. Assuming the attributes are all fixed-length, the DBMS can compute the offset of the attributes for each tuple. Then when the system wants the attribute for a specific tuple, it knows how to jump to that spot in the file from the offset. To accommodate the variable-length fields, the system can either pad fields so that they are all the same length or use a dictionary that takes a fixed-size integer and maps the integer to the value.</p>
+<p>A less common approach is to use embedded tuple ids. Here, for every attribute in the columns, the DBMS stores a tuple id (ex: a primary key) with it. The system the would also store a mapping to tell it how to jump to every attribute that has that id. Note that this method has a large storage overhead because it needs to store a tuple id for every attribute entry.</p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DSM.png?raw=true"></p>
 
     
 
@@ -377,7 +449,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" title="weblab-3-ReactJS" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/</a>
+          <a href="http://xiahua19.github.io/2022/08/30/cmu15-3-Database-Storage/" title="3-Database Storage" target="_blank">http://xiahua19.github.io/2022/08/30/cmu15-3-Database-Storage/</a>
         </li>
         
         <li>
@@ -399,7 +471,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CMU15</a>
         		</li>
       		
 		</ul>
@@ -455,7 +527,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/30/cmu15-3-Database-Storage/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -470,18 +542,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/08/13/music-1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/08/30/cmu15-4-Buffer-Pools/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          一、开篇
+          4-Buffer Pools
         
       </div>
     </a>
   
   
-    <a href="/2022/08/11/weblab-2-JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">weblab-2-JavaScript</div>
+    <a href="/2022/08/30/cmu15-2-Intermediate-SQL/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2-Intermediate SQL</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -508,7 +580,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.</span> <span class="toc-text">Props &amp; States</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Props"><span class="toc-number">2.1.</span> <span class="toc-text">Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#States"><span class="toc-number">2.2.</span> <span class="toc-text">States</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Callback-Functions"><span class="toc-number">2.2.1.</span> <span class="toc-text">Callback Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect-hook"><span class="toc-number">2.2.2.</span> <span class="toc-text">useEffect hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-states-stay-make-props-pass"><span class="toc-number">2.3.</span> <span class="toc-text">Make states stay, make props pass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">3.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">4.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">4.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">4.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">4.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">4.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">5.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">1.</span> <span class="toc-text">Storage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disk-Oriented-DBMS-Overview"><span class="toc-number">2.</span> <span class="toc-text">Disk-Oriented DBMS Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DBMS-vs-OS"><span class="toc-number">3.</span> <span class="toc-text">DBMS vs. OS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File-Storage"><span class="toc-number">4.</span> <span class="toc-text">File Storage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-Pages"><span class="toc-number">5.</span> <span class="toc-text">Database Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-Heap"><span class="toc-number">6.</span> <span class="toc-text">Database Heap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Page-Layout"><span class="toc-number">7.</span> <span class="toc-text">Page Layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tuple-Layout"><span class="toc-number">8.</span> <span class="toc-text">Tuple Layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Representation"><span class="toc-number">9.</span> <span class="toc-text">Data Representation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workloads"><span class="toc-number">10.</span> <span class="toc-text">Workloads</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage-Models"><span class="toc-number">11.</span> <span class="toc-text">Storage Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#N-Ary-Storage-Model-NSM"><span class="toc-number">11.1.</span> <span class="toc-text">N-Ary Storage Model(NSM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decomposition-Storage-Model-DSM"><span class="toc-number">11.2.</span> <span class="toc-text">Decomposition Storage Model(DSM)</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

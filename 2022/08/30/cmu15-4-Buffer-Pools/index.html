@@ -6,24 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://xiahua19.github.io">
-  <title>weblab-3-ReactJS | 夏花的博客小站</title>
+  <title>4-Buffer Pools | 夏花的博客小站</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+  <meta name="description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weblab-3-ReactJS">
-<meta property="og:url" content="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/index.html">
+<meta property="og:title" content="4-Buffer Pools">
+<meta property="og:url" content="http://xiahua19.github.io/2022/08/30/cmu15-4-Buffer-Pools/index.html">
 <meta property="og:site_name" content="夏花的博客小站">
-<meta property="og:description" content="What’s ReactJS React is a JavaScript library for building user interfaces. It’s modular, fast and readable.">
+<meta property="og:description" content="IntroductionThe DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
-<meta property="article:published_time" content="2022-08-11T10:08:07.000Z">
-<meta property="article:modified_time" content="2022-08-19T06:32:50.368Z">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DiskOrientedDBMS.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool2.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/pagetable.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/multibufferpool.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/prefetching.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/scansharing.png?raw=true">
+<meta property="og:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/clock.png?raw=true">
+<meta property="article:published_time" content="2022-08-30T12:11:31.000Z">
+<meta property="article:modified_time" content="2022-08-30T12:12:05.671Z">
 <meta property="article:author" content="夏花">
-<meta property="article:tag" content="WebLab">
+<meta property="article:tag" content="CMU15">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true">
+<meta name="twitter:image" content="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DiskOrientedDBMS.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="夏花的博客小站" type="application/atom+xml">
   
@@ -241,22 +248,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-weblab-3-ReactJS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cmu15-4-Buffer-Pools" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      weblab-3-ReactJS
+      4-Buffer Pools
     </h1>
   
 
 
   
   
-<a href="/2022/08/11/weblab-3-ReactJS/" class="archive-article-date">
-        <time datetime="2022-08-11T10:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-11</time>
+<a href="/2022/08/30/cmu15-4-Buffer-Pools/" class="archive-article-date">
+        <time datetime="2022-08-30T12:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-30</time>
 </a>
 
   
@@ -269,7 +276,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">1.7k字</span>
     </span>
   </span>
 
@@ -278,7 +285,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">10分</span>
     </span>
   </span>
 </div>
@@ -289,79 +296,75 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="What’s-ReactJS"><a href="#What’s-ReactJS" class="headerlink" title="What’s ReactJS"></a>What’s ReactJS</h1><blockquote>
-<p>React is a JavaScript library for building user interfaces. It’s modular, fast and readable.</p>
-</blockquote>
-<span id="more"></span>
-<p>These ‘fake HTML tags’ are called COMPONENTS. React Apps are “components of components”, which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a ‘custom HTML tag’ that you define.</p>
-<h1 id="Props-amp-States"><a href="#Props-amp-States" class="headerlink" title="Props &amp; States"></a>Props &amp; States</h1><p>Now we have our reuasble comment component:</p>
+    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The DBMS is responsible for mapping its memory and moving data back-and-forth from the disk. Since, for the most part, data cannot be directly operated on in the disk, any database must be able to efficiently move data respresented as file on its disk into memory so that it can be used. A diagram of this interaction is shown in the below figure. A obstacle that DBMS’s face is the problem of minimizing the slowdown of moving data around. Ideally, it should “appear” as if the data is all in the memory already.</p>
+<p>Another way to think of this problem is in terms of spatial and temporal control. </p>
 <ul>
-<li>We pass props in from parent to child.</li>
-<li>Allows out skeleton to render comments with content.</li>
-<li>State keeps track of private information that can be changed and influence how your app renders.</li>
+<li>Spatial Control refers to where pages are physically written on disk. The goal of spatial control is to keep pages that are used together often as physically close together as possible on disk.</li>
+<li>Temporal Control refers to when to read pages into memory and when to write them to disk. Temporal control aims to minimize the number of stalls from having to read data from disk.</li>
 </ul>
-<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p><code>Props</code>: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, <code>props = &#123;name:&quot;Akshaj&quot;, text:&quot;Welcome to web lab!&quot;&#125;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Welcome to web lab!&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="States"><a href="#States" class="headerlink" title="States"></a>States</h2><p><code>State</code>: Private information(updatable pieces of information) maintained by a component.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [status, setStatus] = <span class="title function_">useState</span>(<span class="string">&quot;busy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> [isOnline, setIsOnline] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. </p>
-<h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>We can’t directly edit a component’s state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParentComponent</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeCatHappiness</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setCatHappiness</span>(catHappiness + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">updateFunction</span>=<span class="string">&#123;changeCatHappiness&#125;</span> /&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ChildComponent</span></span><br><span class="line">props.<span class="title function_">updateFunction</span>();</span><br></pre></td></tr></table></figure>
-<p>But note that this is a WORKAROUND(解决办法). You shouldn’t be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.</p>
-<h3 id="useEffect-hook"><a href="#useEffect-hook" class="headerlink" title="useEffect hook"></a>useEffect hook</h3><p>What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!</p>
-<div align="center">
-<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
-</div>
-
-<p>useEffect hook runs after specific variables change:</p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/DiskOrientedDBMS.png?raw=true"></p>
+<h2 id="Locks-vs-Latches"><a href="#Locks-vs-Latches" class="headerlink" title="Locks vs. Latches"></a>Locks vs. Latches</h2><p>We need to make a distinction between locks and latches when discussing how the DBMS protects its internal elements.</p>
 <ul>
-<li>Can think of as response to state change.</li>
-<li>Commonly used to load data into state.</li>
-<li>Call an API&#x2F;perform some computation&#x2F;etc. as specific times.</li>
+<li>Locks: A lock is a higher-level, logical primitive that protects the contents of a database (e.g. tuples, tables, databses) from other transactions. Transactions will hold a lock for its entire duration. Database systems can expose to the user which locks are being held as queries are run. Locks need to be able to rollback changes.</li>
+<li>Latches: A latch is a low-level protection primitive that the DBMS uses for the critical sections in its internal data structures (e.g. hash tables, regions of memory). Latches are held for only the duration for the operation being made. Latches do not need to be able to rollback changes.</li>
 </ul>
-<p>syntax: <code>useEffect(function, optional dependency array)</code>, runs function every time a variable in dependency array changes. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add &quot;me&quot; to persons array.</span></span><br><span class="line">testingStuff = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setPerson</span>([...persons, <span class="string">&quot;me&quot;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call log function whenever the persons array changes.</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(persons);</span><br><span class="line">&#125;, [persons])</span><br></pre></td></tr></table></figure>
-<p>Dependency array examples:</p>
+<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p>The buffer pool is an in-memory cache of pages read from disk. It is essentially a large memory region allocated inside of the database to store pages that are fetched from disk.</p>
+<p>The buffer pool’s region of memory organized as array of fixed size pages. Each array entry is called a <strong>frame</strong>.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool.png?raw=true"></p>
+<p>When the DBMS requests a page, an exact copy is placed into one of the frames of the buffer pool. Then, the database system can search the buffer pool first when a page is requested. If the page is not found, then the system fetches a copy of the page from the disk. See below figure for a diagram of the buffer pool’s memory organization.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/bufferpool2.png?raw=true"></p>
+<h3 id="Buffer-Pool-Meta-data"><a href="#Buffer-Pool-Meta-data" class="headerlink" title="Buffer Pool Meta-data"></a>Buffer Pool Meta-data</h3><p>The buffer pool must maintain certain meta-data in order to be used efficiently and correctly.</p>
+<p>Firstly, the <strong>page table</strong> is an in-memory hash table that keeps track of pages that are currently in memory. It maps <em>page ids</em> to <em>frame locations</em> in the buffer pool. Since the order of pages in the buffer pool does not necessarily reflect the order on the disk, this extra indirection layer allows for the identification of page locations in the pool. Note that the page table is not to be confused with the <strong>page directory</strong>, which is the mapping from <em>page ids</em> to <em>page locations</em> in the databse files.</p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/pagetable.png?raw=true"></p>
+<p>The page table also maintains additional meta-data per page, a <strong>dirty-flag</strong> and a <strong>pin&#x2F;reference counter</strong>.</p>
 <ul>
-<li>useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.</li>
-<li>useEffect(function, []) runs function once, immediately after initialization.</li>
-<li>useEffect(function) runs every time any state variable changes.</li>
+<li>The <strong>dirty-flag</strong> is set by a thread whenever it modifies a page. This indicates to storage manager that the page must be written back to disk.</li>
+<li>The <strong>pin&#x2F;reference counter</strong> tracks the number of threads that are currently accessing that page (either reading or modifying it). A thread has to increment the counter before they access the page. If a page’s count is greater than zero, then the storage manager is note allowed to evict that page from memory.</li>
 </ul>
-<h2 id="Make-states-stay-make-props-pass"><a href="#Make-states-stay-make-props-pass" class="headerlink" title="Make states stay, make props pass"></a>Make states stay, make props pass</h2><p>PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it’s relevant, and be passed to every other part of the site via props.</p>
-<h1 id="Writing-ReactJS-Components"><a href="#Writing-ReactJS-Components" class="headerlink" title="Writing ReactJS Components"></a>Writing ReactJS Components</h1><p>Take facebook for example, the component tree likes this:</p>
+<h2 id="Memory-Allocation-Policies"><a href="#Memory-Allocation-Policies" class="headerlink" title="Memory Allocation Policies"></a>Memory Allocation Policies</h2><p>Memory in the database is allocated for the buffer pool according to two policies.</p>
 <ul>
-<li>APP<ul>
-<li>Post<ul>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
-<li>Comment</li>
+<li>Global policies deal with decisions that the DBMS should make to benefit the entire workload that is being executed. It considers all active transactions to find an optimal decision for allocating memory.</li>
+<li>An alternative is local policies makes decisions that will make a single query or transaction run faster, even if it isn’t good for the entire workload. Local policies allocate frames to a specific transactions without considering the behavior of concurrent transactions.</li>
 </ul>
-</li>
+<p>Most systems use a combination of both global and local views.</p>
+<h2 id="Buffer-Pool-Optimizations"><a href="#Buffer-Pool-Optimizations" class="headerlink" title="Buffer Pool Optimizations"></a>Buffer Pool Optimizations</h2><p>There are a number of ways to optimize a buffer pool to tailor it to the application’s workload.</p>
+<h3 id="Multiple-Buffer-Pools"><a href="#Multiple-Buffer-Pools" class="headerlink" title="Multiple Buffer Pools"></a>Multiple Buffer Pools</h3><p>The DBMS can maintain multiple buffer pools for different purposes (i.e per-database buffer pool, per-page type buffer pool). Then, each buffer pool can adopt local policies tailored for the data stored inside of it. This method can help reduce latch contention and improves locality.</p>
+<p>Two approaches to mapping desired pages to a buffer pool are object IDs and hashing.</p>
+<ul>
+<li>Object IDs involve extending the record IDs to include meta-data about what database objects each buffer pool is managing. Then through the object identifier, a mapping from objects to specific buffer pools can be maintained.</li>
+<li>Another approach is hashing where the DBMS hases the page id to select which buffer pool to access.</li>
 </ul>
-</li>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/multibufferpool.png?raw=true"></p>
+<h3 id="Pre-fetching"><a href="#Pre-fetching" class="headerlink" title="Pre-fetching"></a>Pre-fetching</h3><p>The DBMS can also optimize by pre-fetching pages based on query plan. Then, while the first set of pages is being processed, the second can be pre-fetched into the buffer pool. This method is commonly used by DBMS’s when accessing many pages sequentially.</p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/prefetching.png?raw=true"></p>
+<h3 id="Scan-Sharing"><a href="#Scan-Sharing" class="headerlink" title="Scan Sharing"></a>Scan Sharing</h3><p>Query cursors can reuse data retrieved from storage or operator computations. This allows queries to attach to a single cursor that scans a table. If a query starts a scan and if there one already doing this, then the DBMS will attach to the second query’s cursor. The DBMS keeps track of where the second query joined with the first so that it can finish the scan when it reached the end of the data structure.<br><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/scansharing.png?raw=true"></p>
+<h3 id="Buffer-Pool-Bypass"><a href="#Buffer-Pool-Bypass" class="headerlink" title="Buffer Pool Bypass"></a>Buffer Pool Bypass</h3><p>The sequential scan operator will not store fetched pages in the buffer pool to avoid overhead. Instead, memory is local to the running query. This works well if operator needs to read a large sequence of pages that are ontiguous on disk. Buffer Pool Bypass can also be used for temporary data (sorting, joins).</p>
+<h2 id="OS-Page-Cache"><a href="#OS-Page-Cache" class="headerlink" title="OS Page Cache"></a>OS Page Cache</h2><p>Most disk operations go through the OS API. Unless explicitly told otherwise, the OS maintains its own filesystem cache.</p>
+<p>Most DBMS use direct I&#x2F;O to bypass the OS’s cache inorder to avoid redundant copies of pages and having to manage different eviction policies.</p>
+<p>Postgres is an example of a database system that uses the OS’s Page Cache.</p>
+<h2 id="Buffer-Replacement-Policies"><a href="#Buffer-Replacement-Policies" class="headerlink" title="Buffer Replacement Policies"></a>Buffer Replacement Policies</h2><p>When the DBMS needs to free up a frame to make room for a new page, it must decide which page to evict from the buffer pool.</p>
+<p>A replacement policy is an algorithm that the DBMS implements that makes a decision on which pages to evict from buffer pool when it needs space.</p>
+<p>Implementation goals of replacement policies are improved correctness, accuracy, speed, and meta-data overhead.</p>
+<h3 id="Latest-Recently-Used-LRU"><a href="#Latest-Recently-Used-LRU" class="headerlink" title="Latest Recently Used(LRU)"></a>Latest Recently Used(LRU)</h3><p>The Least Recently Used replacement policy maintains a timestamp of when each page was last accessed. This timestamp can be stored in a separate data structure, such as a queue, to allow for sorting and improve effiency. The DBMS picks to evict the page with the oldest timestamp. Additionally, pages are kept in sorted order to reduce sort time on eviction.</p>
+<h3 id="CLOCK"><a href="#CLOCK" class="headerlink" title="CLOCK"></a>CLOCK</h3><p>The CLOCK policy is an approximation of LRU without needing a separate timestamp per page. In the CLOCK policy, each page is given a reference bit. When a page is access set to 1.</p>
+<p>To visiualize this, organize the pages in a circular buffer with a “clock hand”. Upon sweeping check if a page’s bit is set to 1. If yes, set it to zero, if no, then evict it. In this way, the clock hand remembers position between evictions.</p>
+<p><img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/clock.png?raw=true"></p>
+<h3 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h3><p>There a number of problems with LRU and CLOCK replacement policies.</p>
+<p>Namely, LRU and CLOCK are susceptible to sequential flooding, where the buffer pool’s contents are corrupted due to a sequential scan. Since sequential scans read every page, the timestamps of pages read may not reflect which pages we actually want. In other words, the most recently used page is actually the most unneeded page.</p>
+<p>There are three solutions to address the shortcomings of LRU and CLOCK policies.</p>
+<ul>
+<li>One solution is LRU-K which tracks the history the last K reference as timestamps and computes the interval between subsequent accesses. This history is used to predict the next time a page is going to be accessed.</li>
+<li>Another optimization is localization per query. The DBMS chooses which pages to evict on a per transaction&#x2F;query basis. This minimizes the pollution of the buffer pool from each query.</li>
+<li>Lastly, priority hints allow transactions to tell the buffer pool whether page is important or not based on the context of each page during query execution.</li>
 </ul>
-<p>For post, the postContent, isLiked is <code>State</code>. For comment, the commentContent is <code>Props</code>, while isLiked is <code>State</code>.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Comment component is a function that takes in props as an input.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Comment</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1. Set initial states. Declares isLiked to False, and specifies &quot;setIsLiked&quot; as the function to update the state.</span></span><br><span class="line">    <span class="keyword">const</span> [isLiked, setIsLiked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Expects a return type of HTML like code. () allows us to write HTML code inside JavaScript.</span></span><br><span class="line">    <span class="comment">// What you return will describe how the component appears.</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// Return a div. style it appropriately. &#123;&#125; allows us to return to JavaScript inside the HTML environment inside the JavaScript class.</span></span><br><span class="line">        <span class="comment">// Note: we use className to access CSS classes.</span></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;claireComment&quot;</span> <span class="attr">className</span>=<span class="string">&quot;comment-text&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; props.content &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Comment</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="React-Guide-1"><a href="#React-Guide-1" class="headerlink" title="React-Guide-1"></a>React-Guide-1</h1><h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&quot;./NavBar.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Intro</span> <span class="keyword">from</span> <span class="string">&quot;./Intro.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Photos</span> <span class="keyword">from</span> <span class="string">&quot;./Photos.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Intro</span> <span class="attr">city</span>=<span class="string">&quot;Fairfax, Virginia&quot;</span> <span class="attr">pronunciation</span>=<span class="string">&quot;AHKS-hahj...&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">Photos</span> <span class="attr">links</span>=<span class="string">&#123;[</span>&quot;<span class="attr">firstpic.jpg</span>&quot;, &quot;<span class="attr">dancepic.jpg</span>&quot;, &quot;<span class="attr">funnypic.jpg</span>&quot;]&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">Post</span> <span class="attr">name</span>=<span class="string">&quot;Akshaj Kadaveru&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Sign up for web lab!&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Intro-js"><a href="#Intro-js" class="headerlink" title="Intro.js"></a>Intro.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Intro</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lives in <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123; props.city &#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pronounces name &#123; props.pronunciation &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit Details<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Hobbies<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>Add Featured<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Intro</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Photos-js"><a href="#Photos-js" class="headerlink" title="Photos.js"></a>Photos.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Photos</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> myImageTags = props.<span class="property">links</span>.<span class="title function_">map</span>(</span><br><span class="line">        <span class="function">(<span class="params">photolink</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">&#123;photolink&#125;</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Photos<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123; myImageTags &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Photos</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Post-js"><a href="#Post-js" class="headerlink" title="Post.js"></a>Post.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> &#123; useState &#125;<span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [numLikes, setNumLikes] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123; props.name &#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; props.text &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">onClick</span> = <span class="string">&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                    () =&gt;</span> &#123; setNumLinks(numLikes + 1); &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;likeIcon.jpg&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123; numLikes &#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Recap-Writing-Components"><a href="#Recap-Writing-Components" class="headerlink" title="Recap: Writing Components"></a>Recap: Writing Components</h1><ul>
-<li>We divide our app into components, and put one in each file.</li>
-<li>Each component is a function with props as the input, and returns HTML-like code.</li>
-<li>() allow us to enter an HTML environment.</li>
-<li>Inside the HTML environment, {} allows us to create a mini JS environment.</li>
-<li>We pass in props with HTML tags.</li>
-<li>We read in those props with <code>.</code> function.</li>
-<li>We declare state variavles with <code>const [something, setSomething] = useState(initialValue)</code>.</li>
-<li>React uses <code>className</code> instead of class for css style.</li>
+<h3 id="Dirty-Pages"><a href="#Dirty-Pages" class="headerlink" title="Dirty Pages"></a>Dirty Pages</h3><p>There are two methods to handling pages with dirty bits. The fastest option is to drop any page in the buffer pool that is not dirty. A slower method is to write back dirty pages to disk to ensure that its changes are presisted.</p>
+<p>These two methods illustrate the trade-off between fast evictions versus dirty writing pages that will not be read again in the future.</p>
+<p>One way to avoid the problem of having to write out pages unnecessarily is background writing. Through background writing, the DBMS can periodically walk through the page table and write dirty pages to disk. When a dirty page is safely written, the DBMS can either evict the page or just unset the dirty flag.</p>
+<h2 id="Other-Memory-Pools"><a href="#Other-Memory-Pools" class="headerlink" title="Other Memory Pools"></a>Other Memory Pools</h2><p>The DBMS needs memory for things other than just tuples and indexes. These other memory pools may not always backed by disk depending on implementation.</p>
+<ul>
+<li>Sorting + Join Buffers</li>
+<li>Query Caches</li>
+<li>Maintenance Buffers</li>
+<li>Log Buffers</li>
+<li>Dictionary Caches</li>
 </ul>
 
     
@@ -377,7 +380,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" title="weblab-3-ReactJS" target="_blank">http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/</a>
+          <a href="http://xiahua19.github.io/2022/08/30/cmu15-4-Buffer-Pools/" title="4-Buffer Pools" target="_blank">http://xiahua19.github.io/2022/08/30/cmu15-4-Buffer-Pools/</a>
         </li>
         
         <li>
@@ -399,7 +402,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WebLab</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CMU15</a>
         		</li>
       		
 		</ul>
@@ -455,7 +458,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/11/weblab-3-ReactJS/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://xiahua19.github.io/2022/08/30/cmu15-4-Buffer-Pools/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -470,18 +473,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/08/13/music-1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/08/30/cmu15-5-Hash-Tables/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          一、开篇
+          5-Hash Tables
         
       </div>
     </a>
   
   
-    <a href="/2022/08/11/weblab-2-JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">weblab-2-JavaScript</div>
+    <a href="/2022/08/30/cmu15-3-Database-Storage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3-Database Storage</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -508,7 +511,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-ReactJS"><span class="toc-number">1.</span> <span class="toc-text">What’s ReactJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.</span> <span class="toc-text">Props &amp; States</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Props"><span class="toc-number">2.1.</span> <span class="toc-text">Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#States"><span class="toc-number">2.2.</span> <span class="toc-text">States</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Callback-Functions"><span class="toc-number">2.2.1.</span> <span class="toc-text">Callback Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect-hook"><span class="toc-number">2.2.2.</span> <span class="toc-text">useEffect hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-states-stay-make-props-pass"><span class="toc-number">2.3.</span> <span class="toc-text">Make states stay, make props pass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ReactJS-Components"><span class="toc-number">3.</span> <span class="toc-text">Writing ReactJS Components</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Guide-1"><span class="toc-number">4.</span> <span class="toc-text">React-Guide-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-js"><span class="toc-number">4.0.1.</span> <span class="toc-text">App.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro-js"><span class="toc-number">4.0.2.</span> <span class="toc-text">Intro.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Photos-js"><span class="toc-number">4.0.3.</span> <span class="toc-text">Photos.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-js"><span class="toc-number">4.0.4.</span> <span class="toc-text">Post.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recap-Writing-Components"><span class="toc-number">5.</span> <span class="toc-text">Recap: Writing Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">4.</span> <span class="toc-text">Memory Allocation Policies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer-Pool-Optimizations"><span class="toc-number">5.</span> <span class="toc-text">Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">5.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">5.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing"><span class="toc-number">5.3.</span> <span class="toc-text">Scan Sharing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">5.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OS-Page-Cache"><span class="toc-number">6.</span> <span class="toc-text">OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer-Replacement-Policies"><span class="toc-number">7.</span> <span class="toc-text">Buffer Replacement Policies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Latest-Recently-Used-LRU"><span class="toc-number">7.1.</span> <span class="toc-text">Latest Recently Used(LRU)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CLOCK"><span class="toc-number">7.2.</span> <span class="toc-text">CLOCK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternatives"><span class="toc-number">7.3.</span> <span class="toc-text">Alternatives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dirty-Pages"><span class="toc-number">7.4.</span> <span class="toc-text">Dirty Pages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-Memory-Pools"><span class="toc-number">8.</span> <span class="toc-text">Other Memory Pools</span></a></li></ol>
                     </div>
                 </span>
             </div>
